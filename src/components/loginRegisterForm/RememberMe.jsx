@@ -1,21 +1,19 @@
 import styled from "styled-components";
 import React from "react";
 
-export default function RememberMe() {
+export default function RememberMe(props) {
   return (
     <>
       <StyledContainer>
         <StyledLabel>
-          <StyledCheckbox type="checkbox" />
+          <StyledCheckbox type="checkbox" onClick={props.onClick} />
           <StyledSpan></StyledSpan>
+          Remember Me
         </StyledLabel>
-        <StyledRememberLabel>dfsfsfdfsfsd</StyledRememberLabel>
       </StyledContainer>
     </>
   );
 }
-
-const StyledRememberLabel = styled.label``;
 
 const StyledContainer = styled.div`
   display: inline-flex;
@@ -60,7 +58,7 @@ const StyledLabel = styled.label`
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 16px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

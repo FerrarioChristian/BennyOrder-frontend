@@ -1,14 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import PersonIcon from "@mui/icons-material/Person";
+import PasswordIcon from "@mui/icons-material/Password";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
-export default function LoginRegisterInput() {
+export default function LoginRegisterInput(props) {
   return (
     <>
-      <StyledLable>Username:</StyledLable>
+      <StyledLable>{props.label}</StyledLable>
       <StyledDiv>
-        <PersonIcon sx={{ color: "#7d2ae7" }} />
-        <StyledInput />
+        {(() => {
+          if (props.label === "Username") {
+            return <PersonIcon sx={{ color: "#7d2ae7" }} />;
+          } else if (props.label === "Password") {
+            return <PasswordIcon sx={{ color: "#7d2ae7" }} />;
+          } else if (props.label === "Email") {
+            return <AlternateEmailIcon sx={{ color: "#7d2ae7" }} />;
+          }
+        })()}
+
+        <StyledInput type={props.type} onChange={props.onChange} />
       </StyledDiv>
     </>
   );
