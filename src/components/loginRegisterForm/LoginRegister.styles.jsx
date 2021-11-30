@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const LoginRegisterButton = styled.button`
   height: 3rem;
@@ -10,14 +11,19 @@ export const LoginRegisterButton = styled.button`
   border-radius: 15px;
   font-size: 24px;
   text-transform: uppercase;
+  cursor: pointer;
 `;
 
-export const RegisterButton = styled.button`
+export const RegisterButton = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #7d2ae7;
-  text-decoration: none;
+  //text-decoration: none;
+  text-underline-offset: 2px;
   height: 3rem;
   flex: 1;
-  border: 2px solid #7d2ae7;
+  //border: 2px solid #7d2ae7;
   border-radius: 15px;
   font-size: 20px;
   text-transform: uppercase;
@@ -64,8 +70,18 @@ export const Background = styled.div`
   width: 100vw;
   height: 100vh;
   background-image: url("/assets/bar.png");
+  background-color: #7d2ae8;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const ErrorLabel = styled.label`
+  color: red;
+  font-size: small;
+`;
+
+export const ErrorContainer = styled.div`
+  display: inline-flex;
 `;

@@ -12,7 +12,10 @@ export default function LoginRegisterInput(props) {
         {(() => {
           if (props.label === "Username") {
             return <PersonIcon sx={{ color: "#7d2ae7" }} />;
-          } else if (props.label === "Password") {
+          } else if (
+            props.label === "Password" ||
+            props.label === "Conferma Password"
+          ) {
             return <PasswordIcon sx={{ color: "#7d2ae7" }} />;
           } else if (props.label === "Email") {
             return <AlternateEmailIcon sx={{ color: "#7d2ae7" }} />;
