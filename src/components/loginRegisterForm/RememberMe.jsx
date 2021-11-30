@@ -8,7 +8,7 @@ export default function RememberMe(props) {
         <StyledLabel>
           <StyledCheckbox type="checkbox" onClick={props.onClick} />
           <StyledSpan></StyledSpan>
-          Remember Me
+          Mantienimi autenticato
         </StyledLabel>
       </StyledContainer>
     </>

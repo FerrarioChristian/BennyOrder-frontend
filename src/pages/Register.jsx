@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
-//import RememberMe from "components/loginRegisterForm/RememberMe";
 import axios from "axios";
 
 import {
@@ -10,25 +9,28 @@ import {
   ButtonContainer,
   LoginRegisterButton,
   RegisterButton,
+  ErrorLabel,
 } from "../components/loginRegisterForm/LoginRegister.styles";
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  //const [remember, setRemember] = useState(undefined);
 
   const sumbitRegister = () => {
-    axios.post("https://www.vivailduce.it:64000/login.php", {
-      username: username,
-      password: password,
-      email: email,
-    });
+    axios
+      .post("https://www.vivailduce.it:64000/register.php", {
+        username: username,
+        password: password,
+        email: email,
+      })
+      .then()
+      .catch((err) => {
+        if ((err.response.status = 401)) {
+          document.getElementById("errore").innerHTML = err.response.data.msg;
+        }
+      });
   };
-
-  /* const setRememberValue = () => {
-    !remember ? setRemember(true) : setRemember(undefined);
-  }; */
 
   return (
     <>
@@ -52,16 +54,20 @@ export default function Register() {
             />
             <LoginRegisterInput
               type="password"
-              label="Password"
+              label="Conferma Password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputContainer>
+          <ErrorLabel id="errore"></ErrorLabel>
+
           {/* <RememberMe onClick={setRememberValue}></RememberMe> */}
           <ButtonContainer>
             <LoginRegisterButton type="button" onClick={sumbitRegister}>
               Register
             </LoginRegisterButton>
-            <RegisterButton type="button">Login</RegisterButton>
+            <RegisterButton type="button" to="/login">
+              Login
+            </RegisterButton>
           </ButtonContainer>
         </FormContainer>
       </Background>
