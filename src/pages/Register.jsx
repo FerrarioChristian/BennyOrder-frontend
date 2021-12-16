@@ -13,14 +13,14 @@ import {
 } from "../components/loginRegisterForm/LoginRegister.styles";
 
 export default function Register() {
-  const [username, setUsername] = useState("");
+  const [clubname, setClubname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const sumbitRegister = () => {
     axios
-      .post("https://www.vivailduce.it:64000/register.php", {
-        username: username,
+      .post("https://bennyorder.com:64443/register.php", {
+        clubname: clubname,
         password: password,
         email: email,
       })
@@ -40,7 +40,7 @@ export default function Register() {
             <LoginRegisterInput
               type="text"
               label="Username"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setClubname(e.target.value)}
             />
             <LoginRegisterInput
               type="email"
