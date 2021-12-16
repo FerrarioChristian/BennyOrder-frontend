@@ -23,3 +23,12 @@
 [ ] - Purchases
 [ ] - Homepage
 [ ] - About Us
+[ ] - FAQ
+
+## Activities
+
+[ ] - Confirm Account mail body (HTML + CSS only)
+[ ] - Temi React
+[ ] - Acess Right Management
+[ ] - Login and Register Data Convalidation
+[ ] - Dashboard Design
