@@ -1,6 +1,6 @@
 {
-  "short_name": "Click&Eat",
-  "name": "Click&Eat App",
+  "short_name": "Bar Project",
+  "name": "Bar Project App",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
