@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import AccountConfirmed from "components/accountValidation/AccountConfirmed";
+import InvalidConfirmation from "components/accountValidation/InvalidConfirmation";
 
 export default function ValidateAccount() {
+  const [valid, setValid] = useState(false);
+
   const { confirm_code } = useParams();
 
   useEffect(() => {
     validateAccount();
-  });
+  }, []);
 
   const validateAccount = () => {
     axios
@@ -15,14 +19,20 @@ export default function ValidateAccount() {
         confirm_code: confirm_code,
       })
       .then((res) => {
-        console.log("Account Verificato");
+        if (res.status === 200) {
+          setValid(true);
+        }
       })
       .catch((err) => {
         if (err.response.status === 406) {
-          console.log("Link Disabile");
+          setValid(false);
         }
       });
   };
 
-  return <div></div>;
+  if (valid) {
+    return <AccountConfirmed />;
+  } else {
+    return <InvalidConfirmation />;
+  }
 }
