@@ -17,15 +17,15 @@ import {
 } from "../components/loginRegisterForm/LoginRegister.styles";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [clubname, setClubname] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(undefined);
   let navigate = useNavigate();
 
   const sumbitLogin = async () => {
     await axios
-      .post("https://www.vivailduce.it:64000/login.php", {
-        username: username,
+      .post("https://bennyorder.com:64443/login.php", {
+        clubname: clubname,
         password: password,
         remember: remember,
       })
@@ -51,8 +51,8 @@ export default function Login() {
           <InputContainer>
             <LoginRegisterInput
               type="text"
-              label="Username"
-              onChange={(e) => setUsername(e.target.value)}
+              label="Clubname"
+              onChange={(e) => setClubname(e.target.value)}
             />
             <LoginRegisterInput
               type="password"
