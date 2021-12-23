@@ -4,6 +4,7 @@ import React from "react";
 import { GlobalStyles } from "./GlobalStyles.style";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ValidateAccount from "pages/ValidateAccount";
+import NotFound from "pages/NotFound";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           path="/validateaccount/:confirm_code"
           element={<ValidateAccount />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
