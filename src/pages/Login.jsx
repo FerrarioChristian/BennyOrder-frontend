@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
 import RememberMe from "components/loginRegisterForm/RememberMe";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   Background,
@@ -16,8 +16,8 @@ import {
   ErrorContainer,
 } from "../components/loginRegisterForm/LoginRegister.styles";
 
-export default function Login() {
-  const [clubname, setClubname] = useState("");
+export default function Login({ authenticate }) {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(undefined);
   let navigate = useNavigate();
@@ -25,12 +25,13 @@ export default function Login() {
   const sumbitLogin = async () => {
     await axios
       .post("https://bennyorder.com:64443/login.php", {
-        clubname: clubname,
+        email: email,
         password: password,
         remember: remember,
       })
       .then(() => {
-        navigate(`/home`);
+        authenticate();
+        navigate(`/dashboard`);
       })
       .catch((err) => {
         if ((err.response.status = 401)) {
@@ -48,11 +49,13 @@ export default function Login() {
     <>
       <Background>
         <FormContainer>
+          <Link to="/dashboard">Back to dashboard</Link>
+
           <InputContainer>
             <LoginRegisterInput
               type="text"
-              label="Clubname"
-              onChange={(e) => setClubname(e.target.value)}
+              label="Email"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <LoginRegisterInput
               type="password"

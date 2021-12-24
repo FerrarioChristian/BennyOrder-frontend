@@ -69,7 +69,7 @@ export const ButtonContainer = styled.div`
 export const Background = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url("/assets/bar.png");
+  //background-image: url("/assets/bar.png");
   background-color: #7d2ae8;
   background-size: cover;
   display: flex;
