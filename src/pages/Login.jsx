@@ -9,15 +9,14 @@ import {
   FormContainer,
   InputContainer,
   ForgotPassword,
-  ButtonContainer,
   LoginRegisterButton,
-  RegisterButton,
   ErrorLabel,
   ErrorContainer,
+  LoginRegisterSwitch,
 } from "../components/loginRegisterForm/LoginRegister.styles";
 
 export default function Login() {
-  const [clubname, setClubname] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(undefined);
   let navigate = useNavigate();
@@ -25,7 +24,7 @@ export default function Login() {
   const sumbitLogin = async () => {
     await axios
       .post("https://bennyorder.com:64443/login.php", {
-        clubname: clubname,
+        email: email,
         password: password,
         remember: remember,
       })
@@ -35,7 +34,7 @@ export default function Login() {
       .catch((err) => {
         if ((err.response.status = 401)) {
           document.getElementById("errore").innerHTML =
-            "Username o password disabili";
+            "Username o password invalidi";
         }
       });
   };
@@ -50,11 +49,13 @@ export default function Login() {
         <FormContainer>
           <InputContainer>
             <LoginRegisterInput
+              placeholder="me@example.com"
               type="text"
-              label="Clubname"
-              onChange={(e) => setClubname(e.target.value)}
+              label="Email"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <LoginRegisterInput
+              placeholder="Password"
               type="password"
               label="Password"
               onChange={(e) => setPassword(e.target.value)}
@@ -68,14 +69,10 @@ export default function Login() {
           </ErrorContainer>
           <RememberMe onClick={setRememberValue}></RememberMe>
 
-          <ButtonContainer>
-            <LoginRegisterButton type="button" onClick={sumbitLogin}>
-              ACCEDI
-            </LoginRegisterButton>
-            <RegisterButton type="button" to="/register">
-              Registrati
-            </RegisterButton>
-          </ButtonContainer>
+          <LoginRegisterButton type="button" onClick={sumbitLogin}>
+            Accedi
+          </LoginRegisterButton>
+          <LoginRegisterSwitch to="/register">Registrati</LoginRegisterSwitch>
         </FormContainer>
       </Background>
     </>

@@ -17,6 +17,7 @@ export default function RememberMe(props) {
 
 const StyledContainer = styled.div`
   display: inline-flex;
+  margin-bottom: 1rem;
 `;
 
 const StyledSpan = styled.span`
@@ -25,8 +26,7 @@ const StyledSpan = styled.span`
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: #eee;
-  border: solid 2px #7d2ae7;
+  border: solid 2px var(--accent);
   border-radius: 3px;
 
   &:after {
@@ -44,7 +44,7 @@ const StyledCheckbox = styled.input`
   width: 0;
 
   &:checked ~ span {
-    background-color: #7d2ae7;
+    background-color: var(--accent);
   }
 
   &:checked ~ span:after {
@@ -57,15 +57,17 @@ const StyledLabel = styled.label`
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
+  line-height: 20px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: medium;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: var(--accent);
 
   &:hover span {
-    background-color: #ddd;
+    background-color: var(--accent);
   }
 
   & span:after {
@@ -73,7 +75,7 @@ const StyledLabel = styled.label`
     top: 1px;
     width: 4px;
     height: 9px;
-    border: solid white;
+    border: solid var(--primary);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
