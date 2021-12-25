@@ -6,10 +6,9 @@ import {
   Background,
   FormContainer,
   InputContainer,
-  ButtonContainer,
   LoginRegisterButton,
-  RegisterButton,
   ErrorLabel,
+  LoginRegisterSwitch,
 } from "../components/loginRegisterForm/LoginRegister.styles";
 
 export default function Register() {
@@ -38,21 +37,25 @@ export default function Register() {
         <FormContainer>
           <InputContainer>
             <LoginRegisterInput
+              placeholder="Username"
               type="text"
               label="Username"
               onChange={(e) => setClubname(e.target.value)}
             />
             <LoginRegisterInput
+              placeholder="me@example.com"
               type="email"
               label="Email"
               onChange={(e) => setEmail(e.target.value)}
             />
             <LoginRegisterInput
+              placeholder="Minimo 8 caratteri"
               type="password"
               label="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <LoginRegisterInput
+              placeholder="Minimo 8 caratteri"
               type="password"
               label="Conferma Password"
               onChange={(e) => setPassword(e.target.value)}
@@ -60,15 +63,10 @@ export default function Register() {
           </InputContainer>
           <ErrorLabel id="errore"></ErrorLabel>
 
-          {/* <RememberMe onClick={setRememberValue}></RememberMe> */}
-          <ButtonContainer>
-            <LoginRegisterButton type="button" onClick={sumbitRegister}>
-              Register
-            </LoginRegisterButton>
-            <RegisterButton type="button" to="/login">
-              Login
-            </RegisterButton>
-          </ButtonContainer>
+          <LoginRegisterButton type="button" onClick={sumbitRegister}>
+            Registrati
+          </LoginRegisterButton>
+          <LoginRegisterSwitch to="/login">Login</LoginRegisterSwitch>
         </FormContainer>
       </Background>
     </>
