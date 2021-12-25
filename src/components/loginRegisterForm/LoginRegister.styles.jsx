@@ -3,39 +3,38 @@ import { Link } from "react-router-dom";
 
 export const LoginRegisterButton = styled.button`
   height: 3rem;
-  flex: 2;
   border: none;
-  background-color: #7d2ae7;
-  color: white;
-  opacity: 1;
-  border-radius: 15px;
-  font-size: 24px;
-  text-transform: uppercase;
+  background-color: var(--accent);
+  color: var(--background);
+  border-radius: 50px;
+  font-size: x-large;
   cursor: pointer;
 `;
 
-export const RegisterButton = styled(Link)`
+export const LoginRegisterSwitch = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #7d2ae7;
-  //text-decoration: none;
+  color: var(--accent);
+  text-decoration: none;
   text-underline-offset: 2px;
   height: 3rem;
-  flex: 1;
-  //border: 2px solid #7d2ae7;
-  border-radius: 15px;
-  font-size: 20px;
-  text-transform: uppercase;
-  background-color: #f5f5f5;
+  border: 1px solid var(--accent);
+  border-radius: 50px;
+  font-size: large;
+
+  margin-top: 1rem;
 `;
 
 export const ForgotPassword = styled.a`
   margin-left: auto;
   margin-bottom: 20px;
-  color: #7d2ae8;
+  color: var(--accent);
   opacity: 0.8;
   font-size: small;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: 100;
 `;
 
 export const InputContainer = styled.div`
@@ -51,10 +50,17 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 480px;
-  background-color: #f5f5f5;
+  background-color: var(--background);
   opacity: 100%;
   border-radius: 15px;
   padding: 4rem 3rem;
+  margin: 1rem;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      padding: 2rem 1.5rem;
+    }
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -69,8 +75,7 @@ export const ButtonContainer = styled.div`
 export const Background = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url("/assets/bar.png");
-  background-color: #7d2ae8;
+  background: radial-gradient(var(--accent), var(--background));
   background-size: cover;
   display: flex;
   align-items: center;
@@ -78,7 +83,7 @@ export const Background = styled.div`
 `;
 
 export const ErrorLabel = styled.label`
-  color: red;
+  color: var(--danger);
   font-size: small;
 `;
 

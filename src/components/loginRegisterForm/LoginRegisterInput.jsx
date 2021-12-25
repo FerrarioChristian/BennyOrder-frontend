@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import PersonIcon from "@mui/icons-material/Person";
-import PasswordIcon from "@mui/icons-material/Password";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 export default function LoginRegisterInput(props) {
   return (
@@ -11,18 +11,22 @@ export default function LoginRegisterInput(props) {
       <StyledDiv>
         {(() => {
           if (props.label === "Username") {
-            return <PersonIcon sx={{ color: "#7d2ae7" }} />;
+            return <PersonOutlinedIcon sx={{ color: "var(--accent)" }} />;
           } else if (
             props.label === "Password" ||
             props.label === "Conferma Password"
           ) {
-            return <PasswordIcon sx={{ color: "#7d2ae7" }} />;
+            return <LockOutlinedIcon sx={{ color: "var(--accent)" }} />;
           } else if (props.label === "Email") {
-            return <AlternateEmailIcon sx={{ color: "#7d2ae7" }} />;
+            return <MailOutlineIcon sx={{ color: "var(--accent)" }} />;
           }
         })()}
 
-        <StyledInput type={props.type} onChange={props.onChange} />
+        <StyledInput
+          placeholder={props.placeholder}
+          type={props.type}
+          onChange={props.onChange}
+        />
       </StyledDiv>
     </>
   );
@@ -33,14 +37,14 @@ const StyledInput = styled.input`
   height: 2em;
   width: 100%;
   border: none;
-  color: black;
+  color: var(--primary);
   outline: none;
 `;
 
 const StyledLable = styled.label`
   font-size: medium;
   height: 2em;
-  color: black;
+  color: var(--accent);
   margin-bottom: 10px;
 `;
 
@@ -48,8 +52,8 @@ const StyledDiv = styled.div`
   background: none;
   height: 2em;
   width: 100%;
-  border-bottom: 2px solid #7d2ae7;
-  margin-bottom: 40px;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
   display: inline-flex;
   gap: 15px;
 `;
