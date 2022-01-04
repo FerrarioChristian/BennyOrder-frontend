@@ -10,25 +10,24 @@ export default function ValidateAccount() {
   const { confirm_code } = useParams();
 
   useEffect(() => {
+    const validateAccount = () => {
+      axios
+        .post("https://bennyorder.com:64443/confirm_account.php", {
+          confirm_code: confirm_code,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            setValid(true);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 406) {
+            setValid(false);
+          }
+        });
+    };
     validateAccount();
-  }, []);
-
-  const validateAccount = () => {
-    axios
-      .post("https://bennyorder.com:64443/confirm_account.php", {
-        confirm_code: confirm_code,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setValid(true);
-        }
-      })
-      .catch((err) => {
-        if (err.response.status === 406) {
-          setValid(false);
-        }
-      });
-  };
+  }, [confirm_code]);
 
   if (valid) {
     return <AccountConfirmed />;
