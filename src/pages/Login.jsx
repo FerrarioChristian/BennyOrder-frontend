@@ -21,18 +21,22 @@ export default function Login() {
   const [remember, setRemember] = useState(undefined);
   let navigate = useNavigate();
 
-  const sumbitLogin = async () => {
-    await axios
-      .post("https://bennyorder.com:64443/login.php", {
-        email: email,
-        password: password,
-        remember: remember,
-      })
+  const sumbitLogin = () => {
+    axios
+      .post(
+        "https://bennyorder.com:64443/login.php",
+        {
+          email: email,
+          password: password,
+          remember: remember,
+        },
+        { withCredentials: true }
+      )
       .then(() => {
-        navigate(`/home`);
+        navigate(`/`);
       })
       .catch((err) => {
-        if ((err.response.status = 401)) {
+        if (err.response.status === 401) {
           document.getElementById("errore").innerHTML =
             "Username o password invalidi";
         }
