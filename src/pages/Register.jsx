@@ -10,11 +10,13 @@ import {
   ErrorLabel,
   LoginRegisterSwitch,
 } from "../components/loginRegisterForm/LoginRegister.styles";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [clubname, setClubname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  let navigate = useNavigate();
 
   const sumbitRegister = () => {
     axios
@@ -23,7 +25,7 @@ export default function Register() {
         password: password,
         email: email,
       })
-      .then()
+      .then(() => navigate(`/home`))
       .catch((err) => {
         if ((err.response.status = 401)) {
           document.getElementById("errore").innerHTML = err.response.data.msg;
