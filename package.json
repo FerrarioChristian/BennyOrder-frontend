@@ -21,6 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "devStart": "PORT=443 HTTPS=true SSL_CRT_FILE=/etc/letsencrypt/archive/bennyorder.com/fullchain1.pem SSL_KEY_FILE=/etc/letsencrypt/archive/bennyorder.com/privkey1.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
