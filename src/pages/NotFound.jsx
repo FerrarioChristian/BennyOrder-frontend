@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <>
       <h1>Page not found</h1>
-      <a href="/home">Back to home</a>
+      <a href="/">Back to home</a>
     </>
   );
 }
