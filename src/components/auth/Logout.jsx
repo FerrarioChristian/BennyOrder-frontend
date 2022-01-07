@@ -13,7 +13,8 @@ export default function Logout() {
     axios
       .get(BASE_API_URL + "/logout.php", { withCredentials: true })
       .then(() => {
-        navigate(`/login`);
+        localStorage.setItem("isLogged", "false");
+        navigate(`/`);
       });
   };
 
