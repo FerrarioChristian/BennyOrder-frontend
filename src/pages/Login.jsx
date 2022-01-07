@@ -33,6 +33,7 @@ export default function Login() {
         { withCredentials: true }
       )
       .then(() => {
+        localStorage.setItem("isLogged", "true");
         navigate(`/`);
       })
       .catch((err) => {
