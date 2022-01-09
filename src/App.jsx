@@ -8,6 +8,8 @@ import NotFound from "pages/NotFound";
 import Homepage from "pages/Homepage";
 import RequireAuth from "components/auth/RequireAuth";
 import Dashboard from "pages/Dashboard";
+import ForgotPassword from "pages/ForgotPassword";
+import ForgotPasswordEmail from "pages/ForgotPasswordEmail";
 
 function App() {
   return (
@@ -21,6 +23,11 @@ function App() {
           path="/validateaccount/:confirm_code"
           element={<ValidateAccount />}
         />
+        <Route path="/forgotpassword">
+          <Route path="email" element={<ForgotPasswordEmail />} />
+          <Route path=":confirm_code" element={<ForgotPassword />} />
+        </Route>
+
         <Route
           path="/dashboard"
           element={
