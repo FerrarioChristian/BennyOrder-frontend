@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
 import axios from "axios";
 
@@ -11,11 +11,15 @@ import {
   LoginRegisterSwitch,
 } from "../components/loginRegisterForm/LoginRegister.styles";
 import { useNavigate } from "react-router-dom";
+import { useTitle } from "hooks/useTitle";
 
 export default function Register() {
+  useTitle("Registrati - BennyOrder");
   const [clubname, setClubname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const error = useRef(null);
+  const submit = useRef(null);
   let navigate = useNavigate();
 
   const sumbitRegister = () => {
@@ -25,13 +29,26 @@ export default function Register() {
         password: password,
         email: email,
       })
-      .then(() => navigate(`/home`))
+      .then(() => navigate(`/`))
       .catch((err) => {
         if ((err.response.status = 401)) {
-          document.getElementById("errore").innerHTML = err.response.data.msg;
+          error.current.innerHTML = err.response.data.msg;
         }
       });
   };
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Enter" || e.key === "NumpadEnter") {
+        submit.current.click();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
 
   return (
     <>
@@ -63,9 +80,13 @@ export default function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputContainer>
-          <ErrorLabel id="errore"></ErrorLabel>
+          <ErrorLabel ref={error}></ErrorLabel>
 
-          <LoginRegisterButton type="button" onClick={sumbitRegister}>
+          <LoginRegisterButton
+            ref={submit}
+            type="button"
+            onClick={sumbitRegister}
+          >
             Registrati
           </LoginRegisterButton>
           <LoginRegisterSwitch to="/login">Login</LoginRegisterSwitch>
