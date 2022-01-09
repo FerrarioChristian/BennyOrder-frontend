@@ -59,7 +59,7 @@ const StyledLabel = styled.label`
   margin-bottom: 12px;
   line-height: 20px;
   cursor: pointer;
-  font-size: medium;
+  font-size: 15px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
