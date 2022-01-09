@@ -7,7 +7,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 export default function LoginRegisterInput(props) {
   return (
     <>
-      <StyledLable>{props.label}</StyledLable>
+      <StyledLabel>{props.label}</StyledLabel>
       <StyledDiv>
         {(() => {
           if (props.label === "Username") {
@@ -41,11 +41,11 @@ const StyledInput = styled.input`
   outline: none;
 `;
 
-const StyledLable = styled.label`
-  font-size: medium;
-  height: 2em;
+const StyledLabel = styled.label`
+  font-size: small;
+  height: 1em;
   color: var(--accent);
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 `;
 
 const StyledDiv = styled.div`
@@ -53,7 +53,7 @@ const StyledDiv = styled.div`
   height: 2em;
   width: 100%;
   border-bottom: 2px solid var(--accent);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   display: inline-flex;
   gap: 15px;
 `;
