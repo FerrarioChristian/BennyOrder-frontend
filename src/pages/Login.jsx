@@ -41,7 +41,7 @@ export default function Login() {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          error.current.innerHTML = "Username o password invalidi";
+          error.current.innerHTML = "Username o password invalidi.";
         }
       });
   };
