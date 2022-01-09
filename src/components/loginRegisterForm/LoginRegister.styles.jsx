@@ -26,7 +26,7 @@ export const LoginRegisterSwitch = styled(Link)`
   margin-top: 1rem;
 `;
 
-export const ForgotPassword = styled.a`
+export const ForgotPassword = styled(Link)`
   margin-left: auto;
   margin-bottom: 20px;
   color: var(--accent);
@@ -49,7 +49,7 @@ export const InputContainer = styled.div`
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  width: 480px;
+  width: 420px;
   background-color: var(--background);
   opacity: 100%;
   border-radius: 15px;
@@ -85,6 +85,7 @@ export const Background = styled.div`
 export const ErrorLabel = styled.label`
   color: var(--danger);
   font-size: small;
+  margin-bottom: 1rem;
 `;
 
 export const ErrorContainer = styled.div`
