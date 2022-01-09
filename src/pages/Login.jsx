@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
 import RememberMe from "components/loginRegisterForm/RememberMe";
 import axios from "axios";
@@ -14,14 +14,18 @@ import {
   ErrorContainer,
   LoginRegisterSwitch,
 } from "../components/loginRegisterForm/LoginRegister.styles";
+import { useTitle } from "hooks/useTitle";
 
 export default function Login() {
+  useTitle("Accedi - BennyOrder");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(undefined);
+  const error = useRef(null);
+  const submit = useRef(null);
   let navigate = useNavigate();
 
-  const sumbitLogin = () => {
+  const submitLogin = () => {
     axios
       .post(
         "https://bennyorder.com:64443/login.php",
@@ -37,11 +41,23 @@ export default function Login() {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          document.getElementById("errore").innerHTML =
-            "Username o password invalidi";
+          error.current.innerHTML = "Username o password invalidi";
         }
       });
   };
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Enter" || e.key === "NumpadEnter") {
+        submit.current.click();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
 
   const setRememberValue = () => {
     !remember ? setRemember(true) : setRemember(undefined);
@@ -66,14 +82,14 @@ export default function Login() {
             />
           </InputContainer>
           <ErrorContainer>
-            <ErrorLabel id="errore"></ErrorLabel>
-            <ForgotPassword href="register">
+            <ErrorLabel ref={error}></ErrorLabel>
+            <ForgotPassword to="/forgotpassword/email">
               Password dimenticata?
             </ForgotPassword>
           </ErrorContainer>
           <RememberMe onClick={setRememberValue}></RememberMe>
 
-          <LoginRegisterButton type="button" onClick={sumbitLogin}>
+          <LoginRegisterButton ref={submit} type="button" onClick={submitLogin}>
             Accedi
           </LoginRegisterButton>
           <LoginRegisterSwitch to="/register">Registrati</LoginRegisterSwitch>
