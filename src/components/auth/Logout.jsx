@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
@@ -13,7 +13,7 @@ export default function Logout() {
     axios
       .get(BASE_API_URL + "/logout.php", { withCredentials: true })
       .then(() => {
-        navigate(`/login`);
+        navigate(`/`);
       });
   };
 
