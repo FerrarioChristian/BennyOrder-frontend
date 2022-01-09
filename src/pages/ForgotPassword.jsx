@@ -13,7 +13,6 @@ export default function ForgotPassword() {
 
   useEffect(() => {
     const validateAccount = () => {
-      console.log(confirm_code);
       axios
         .get("https://bennyorder.com:64443/password_recovery.php", {
           params: { c: confirm_code },
