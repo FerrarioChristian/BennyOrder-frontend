@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import AccountConfirmed from "components/accountValidation/AccountConfirmed";
-import InvalidConfirmation from "components/accountValidation/InvalidConfirmation";
+import AccountConfirmed from "components/auth/AccountConfirmed";
+import InvalidLink from "components/auth/InvalidLink";
+import { useTitle } from "hooks/useTitle";
 
 export default function ValidateAccount() {
+  useTitle("Convalida Account - BennyOrder");
+
   const [valid, setValid] = useState(false);
 
   const { confirm_code } = useParams();
@@ -21,7 +24,7 @@ export default function ValidateAccount() {
           }
         })
         .catch((err) => {
-          if (err.response.status === 406) {
+          if (err.response.status === 404) {
             setValid(false);
           }
         });
@@ -32,6 +35,6 @@ export default function ValidateAccount() {
   if (valid) {
     return <AccountConfirmed />;
   } else {
-    return <InvalidConfirmation />;
+    return <InvalidLink />;
   }
 }
