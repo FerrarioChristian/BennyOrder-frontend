@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useTitle } from "hooks/useTitle";
+import axiosInstance from "utils/axios";
 
 export default function ForgotPasswordEmail() {
   useTitle("Recupero Password - BennyOrder");
@@ -11,8 +11,8 @@ export default function ForgotPasswordEmail() {
   let navigate = useNavigate();
 
   const submitLogin = () => {
-    axios
-      .post("https://bennyorder.com:64443/password_recovery.php", {
+    axiosInstance
+      .post("/password_recovery.php", {
         email: email,
       })
       .then(() => {

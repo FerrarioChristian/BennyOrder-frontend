@@ -1,20 +1,14 @@
-import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "utils/axios";
 
 export default function Logout() {
-  const dotenv = require("dotenv");
-  dotenv.config();
-
-  const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
   let navigate = useNavigate();
 
   const logout = () => {
-    axios
-      .get(BASE_API_URL + "/logout.php", { withCredentials: true })
-      .then(() => {
-        navigate(`/`);
-      });
+    axiosInstance.get("/logout.php", { withCredentials: true }).then(() => {
+      navigate(`/`);
+    });
   };
 
   return <button onClick={logout}>Logout</button>;
