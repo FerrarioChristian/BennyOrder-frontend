@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import AccountConfirmed from "components/auth/AccountConfirmed";
 import InvalidLink from "components/auth/InvalidLink";
 import { useTitle } from "hooks/useTitle";
+import axiosInstance from "utils/axios";
 
 export default function ValidateAccount() {
   useTitle("Convalida Account - BennyOrder");
@@ -14,8 +14,8 @@ export default function ValidateAccount() {
 
   useEffect(() => {
     const validateAccount = () => {
-      axios
-        .post("https://bennyorder.com:64443/confirm_account.php", {
+      axiosInstance
+        .post("/confirm_account.php", {
           confirm_code: confirm_code,
         })
         .then((res) => {
