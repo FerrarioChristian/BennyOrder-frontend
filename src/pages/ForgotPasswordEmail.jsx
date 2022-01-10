@@ -1,14 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTitle } from "hooks/useTitle";
 import axiosInstance from "utils/axios";
+import { useEventListener } from "hooks/useEventListener";
+import { submitOnEnter } from "utils/events";
 
 export default function ForgotPasswordEmail() {
-  useTitle("Recupero Password - BennyOrder");
   const submit = useRef(null);
-
   const [email, setEmail] = useState("");
   let navigate = useNavigate();
+
+  useTitle("Recupero Password - BennyOrder");
+  useEventListener("keydown", submitOnEnter(submit));
 
   const submitLogin = () => {
     axiosInstance
@@ -19,19 +22,6 @@ export default function ForgotPasswordEmail() {
         navigate(`/`);
       });
   };
-
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === "Enter" || e.key === "NumpadEnter") {
-        submit.current.click();
-      }
-    };
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, []);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
 import {
   Background,
@@ -11,15 +11,19 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useTitle } from "hooks/useTitle";
 import axiosInstance from "utils/axios";
+import { useEventListener } from "hooks/useEventListener";
+import { submitOnEnter } from "utils/events";
 
 export default function Register() {
-  useTitle("Registrati - BennyOrder");
   const [clubname, setClubname] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const error = useRef(null);
   const submit = useRef(null);
   let navigate = useNavigate();
+
+  useTitle("Registrati - BennyOrder");
+  useEventListener("keydown", submitOnEnter(submit));
 
   const sumbitRegister = () => {
     axiosInstance
@@ -35,19 +39,6 @@ export default function Register() {
         }
       });
   };
-
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === "Enter" || e.key === "NumpadEnter") {
-        submit.current.click();
-      }
-    };
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, []);
 
   return (
     <>
