@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
 import { useNavigate } from "react-router-dom";
 import { useTitle } from "hooks/useTitle";
@@ -10,15 +10,18 @@ import {
   LoginRegisterButton,
   ErrorLabel,
 } from "../loginRegisterForm/LoginRegister.styles";
+import { useEventListener } from "hooks/useEventListener";
+import { submitOnEnter } from "utils/events";
 
 export default function RecoverPassword({ confirm_code }) {
-  useTitle("Recupero Password - BennyOrder");
-
   const error = useRef(null);
   const submit = useRef(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   let navigate = useNavigate();
+
+  useTitle("Recupero Password - BennyOrder");
+  useEventListener("keydown", submitOnEnter(submit));
 
   const sumbitRegister = () => {
     axiosInstance
@@ -33,19 +36,6 @@ export default function RecoverPassword({ confirm_code }) {
         }
       });
   };
-
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === "Enter" || e.key === "NumpadEnter") {
-        submit.current.click();
-      }
-    };
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, []);
 
   return (
     <>
