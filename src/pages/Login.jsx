@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
 import RememberMe from "components/loginRegisterForm/RememberMe";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -15,6 +14,7 @@ import {
   LoginRegisterSwitch,
 } from "../components/loginRegisterForm/LoginRegister.styles";
 import { useTitle } from "hooks/useTitle";
+import axiosInstance from "utils/axios";
 
 export default function Login() {
   useTitle("Accedi - BennyOrder");
@@ -26,9 +26,9 @@ export default function Login() {
   let navigate = useNavigate();
 
   const submitLogin = () => {
-    axios
+    axiosInstance
       .post(
-        "https://bennyorder.com:64443/login.php",
+        "/login.php",
         {
           email: email,
           password: password,

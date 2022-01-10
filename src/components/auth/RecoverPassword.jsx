@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
-import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { useTitle } from "hooks/useTitle";
+import axiosInstance from "utils/axios";
 import {
   Background,
   FormContainer,
@@ -9,8 +10,6 @@ import {
   LoginRegisterButton,
   ErrorLabel,
 } from "../loginRegisterForm/LoginRegister.styles";
-import { useNavigate } from "react-router-dom";
-import { useTitle } from "hooks/useTitle";
 
 export default function RecoverPassword({ confirm_code }) {
   useTitle("Recupero Password - BennyOrder");
@@ -22,8 +21,8 @@ export default function RecoverPassword({ confirm_code }) {
   let navigate = useNavigate();
 
   const sumbitRegister = () => {
-    axios
-      .post("https://bennyorder.com:64443/password_recovery.php", {
+    axiosInstance
+      .post("/password_recovery.php", {
         confirm_code: confirm_code,
         password: password,
       })

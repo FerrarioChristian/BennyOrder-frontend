@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
-import axios from "axios";
-
 import {
   Background,
   FormContainer,
@@ -12,6 +10,7 @@ import {
 } from "../components/loginRegisterForm/LoginRegister.styles";
 import { useNavigate } from "react-router-dom";
 import { useTitle } from "hooks/useTitle";
+import axiosInstance from "utils/axios";
 
 export default function Register() {
   useTitle("Registrati - BennyOrder");
@@ -23,8 +22,8 @@ export default function Register() {
   let navigate = useNavigate();
 
   const sumbitRegister = () => {
-    axios
-      .post("https://bennyorder.com:64443/register.php", {
+    axiosInstance
+      .post("/register.php", {
         clubname: clubname,
         password: password,
         email: email,
