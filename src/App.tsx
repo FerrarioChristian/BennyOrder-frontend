@@ -1,24 +1,25 @@
-import Login from "pages/Login";
-import Register from "pages/Register";
 import React from "react";
-import { GlobalStyles } from "./GlobalStyles.style";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ValidateAccount from "pages/ValidateAccount";
-import NotFound from "pages/NotFound";
-import Homepage from "pages/Homepage";
-import RequireAuth from "components/auth/RequireAuth";
-import Dashboard from "pages/Dashboard";
-import ForgotPassword from "pages/ForgotPassword";
-import ForgotPasswordEmail from "pages/ForgotPasswordEmail";
+import RequireAuth from "./components/auth/RequireAuth";
+import Dashboard from "./pages/admin_panel/Dashboard";
+import Products from "./pages/admin_panel/Products";
+import EmailSent from "./pages/auth/EmailSent";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ForgotPasswordEmail from "./pages/auth/ForgotPasswordEmail";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import ValidateAccount from "./pages/auth/ValidateAccount";
+import Homepage from "./pages/Homepage";
+import NotFound from "./pages/NotFound";
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <GlobalStyles />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/emailsent" element={<EmailSent />} />
         <Route
           path="/validateaccount/:confirm_code"
           element={<ValidateAccount />}
@@ -36,10 +37,18 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route
+          path="/products"
+          element={
+            <RequireAuth redirectTo="/login">
+              <Products />
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
