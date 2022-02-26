@@ -1,7 +1,11 @@
 import { useEffect, useRef } from "react";
 
-export function useEventListener(eventName, handler, element = document) {
-  const savedHandler = useRef();
+export function useEventListener(
+  eventName: string,
+  handler: (e: any) => void,
+  element = document
+) {
+  const savedHandler: any = useRef(null);
 
   useEffect(() => {
     savedHandler.current = handler;
@@ -11,8 +15,7 @@ export function useEventListener(eventName, handler, element = document) {
     const isSupported = element && element.addEventListener;
     if (!isSupported) return;
 
-    const eventListener = (event) => {
-      // @ts-ignore
+    const eventListener = (event: any) => {
       return savedHandler.current(event);
     };
 

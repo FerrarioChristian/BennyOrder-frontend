@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
-import LoginRegisterInput from "components/loginRegisterForm/LoginRegisterInput";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTitle } from "hooks/useTitle";
-import axiosInstance from "utils/axios";
+import { useEventListener } from "../../hooks/useEventListener";
+import { useTitle } from "../../hooks/useTitle";
+import axiosInstance from "../../utils/axios";
+import { submitOnEnter } from "../../utils/events";
+
 import {
   Background,
   FormContainer,
@@ -10,14 +12,15 @@ import {
   LoginRegisterButton,
   ErrorLabel,
 } from "../loginRegisterForm/LoginRegister.styles";
-import { useEventListener } from "hooks/useEventListener";
-import { submitOnEnter } from "utils/events";
+import LoginRegisterInput from "../loginRegisterForm/LoginRegisterInput";
 
-export default function RecoverPassword({ confirm_code }) {
-  const error = useRef(null);
-  const submit = useRef(null);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const RecoverPassword: React.FC<{ confirm_code: string | undefined }> = ({
+  confirm_code,
+}) => {
+  const error = useRef<HTMLLabelElement>(document.createElement("label"));
+  const submit = useRef<HTMLButtonElement>(document.createElement("button"));
+  const password = useRef<HTMLInputElement>(null);
+  const confirm_password = useRef<HTMLInputElement>(null);
   let navigate = useNavigate();
 
   useTitle("Recupero Password - BennyOrder");
@@ -46,13 +49,13 @@ export default function RecoverPassword({ confirm_code }) {
               placeholder="Minimo 8 caratteri"
               type="password"
               label="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              ref={password}
             />
             <LoginRegisterInput
               placeholder="Minimo 8 caratteri"
               type="password"
               label="Conferma Password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              ref={confirm_password}
             />
           </InputContainer>
           <ErrorLabel ref={error}></ErrorLabel>
@@ -68,4 +71,6 @@ export default function RecoverPassword({ confirm_code }) {
       </Background>
     </>
   );
-}
+};
+
+export default RecoverPassword;

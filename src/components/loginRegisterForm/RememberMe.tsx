@@ -1,19 +1,24 @@
 import styled from "styled-components";
-import React from "react";
 
-export default function RememberMe(props) {
+const RememberMe = ({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLInputElement> | undefined;
+}) => {
   return (
     <>
       <StyledContainer>
         <StyledLabel>
-          <StyledCheckbox type="checkbox" onClick={props.onClick} />
+          <StyledCheckbox type="checkbox" onClick={onClick} />
           <StyledSpan></StyledSpan>
           Mantienimi autenticato
         </StyledLabel>
       </StyledContainer>
     </>
   );
-}
+};
+
+export default RememberMe;
 
 const StyledContainer = styled.div`
   display: inline-flex;
