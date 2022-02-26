@@ -1,6 +1,6 @@
-import React from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { useTitle } from "hooks/useTitle";
+import React from "react";
+import { useTitle } from "../../hooks/useTitle";
 
 export default function AccountConfirmed() {
   useTitle("Account Confermato - BennyOrder");

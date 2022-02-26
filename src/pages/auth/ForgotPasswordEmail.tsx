@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTitle } from "hooks/useTitle";
-import axiosInstance from "utils/axios";
-import { useEventListener } from "hooks/useEventListener";
-import { submitOnEnter } from "utils/events";
+import { useEventListener } from "../../hooks/useEventListener";
+import { useTitle } from "../../hooks/useTitle";
+import axiosInstance from "../../utils/axios";
+import { submitOnEnter } from "../../utils/events";
 
 export default function ForgotPasswordEmail() {
   const submit = useRef(null);
