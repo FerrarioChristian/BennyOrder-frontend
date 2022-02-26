@@ -19,6 +19,8 @@ export default function Register() {
   const password = useRef<HTMLInputElement>(null);
   const confirmPassword = useRef<HTMLInputElement>(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const error = useRef<HTMLLabelElement>(document.createElement("label"));
   let navigate = useNavigate();
@@ -50,6 +52,18 @@ export default function Register() {
     }
   };
 
+  const togglePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setShowPassword((currShowPassword) => !currShowPassword);
+  };
+
+  const toggleConfirmPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setShowConfirmPassword(
+      (currShowConfirmPassword) => !currShowConfirmPassword
+    );
+  };
+
   return (
     <>
       <Background>
@@ -69,15 +83,17 @@ export default function Register() {
             />
             <LoginRegisterInput
               placeholder="Minimo 8 caratteri"
-              type="password"
+              type={showPassword ? "text" : "password"}
               label="Password"
               ref={password}
+              onClick={togglePassword}
             />
             <LoginRegisterInput
               placeholder="Minimo 8 caratteri"
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               label="Conferma Password"
               ref={confirmPassword}
+              onClick={toggleConfirmPassword}
             />
           </InputContainer>
           <ErrorLabel ref={error}></ErrorLabel>
