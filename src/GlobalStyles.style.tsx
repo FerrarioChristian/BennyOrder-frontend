@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-
 export const GlobalStyles = createGlobalStyle`
     :root {
       --background: #1f1d36;
@@ -23,10 +22,13 @@ export const GlobalStyles = createGlobalStyle`
     input:-webkit-autofill:focus, 
     input:-webkit-autofill:active {
         -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
+        box-shadow: 0 0 0 30px var(--background) inset !important;
+        caret-color: white;
     }
 
     input:-webkit-autofill{
         -webkit-text-fill-color: var(--primary) !important;
+        caret-color: white;
     }
 
 `;

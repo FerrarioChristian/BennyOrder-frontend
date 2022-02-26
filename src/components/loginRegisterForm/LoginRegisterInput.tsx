@@ -1,10 +1,19 @@
-import React from "react";
+import { ForwardedRef, forwardRef } from "react";
 import styled from "styled-components";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
-export default function LoginRegisterInput(props) {
+interface Props {
+  label: string;
+  placeholder: string;
+  type: string;
+}
+
+const LoginRegisterInput = (
+  props: Props,
+  ref: ForwardedRef<HTMLInputElement>
+) => {
   return (
     <>
       <StyledLabel>{props.label}</StyledLabel>
@@ -25,12 +34,14 @@ export default function LoginRegisterInput(props) {
         <StyledInput
           placeholder={props.placeholder}
           type={props.type}
-          onChange={props.onChange}
+          ref={ref}
         />
       </StyledDiv>
     </>
   );
-}
+};
+
+export default forwardRef(LoginRegisterInput);
 
 const StyledInput = styled.input`
   background: none;
