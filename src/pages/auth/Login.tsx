@@ -32,7 +32,7 @@ export default function Login() {
   let navigate = useNavigate();
   let location = useLocation();
   const state = location.state as { from: Location };
-  let from = state.from?.pathname || "/";
+  let from = state?.from.pathname || "/";
 
   useTitle("Accedi - BennyOrder");
   useEventListener("keydown", submitOnEnter(submit));
@@ -87,8 +87,8 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               label="Password"
               ref={password}
+              onClick={togglePassword}
             />
-            <button onClick={togglePassword}>Show Password</button>
           </InputContainer>
           <ErrorContainer>
             <ErrorLabel ref={error}></ErrorLabel>
