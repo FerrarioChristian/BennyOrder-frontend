@@ -3,6 +3,7 @@ import Product from "../../components/Product";
 import axiosInstance from "../../utils/axios";
 
 interface Props {
+  id: number;
   nome: string;
   prezzo: string;
   descrizione: string;
@@ -53,6 +54,7 @@ export default function Products() {
           name="price"
           placeholder="prezzo"
           step="0.01"
+          min="0"
           required
         />
         <input type="text" ref={desc} name="desc" placeholder="descrizione" />
@@ -67,6 +69,7 @@ export default function Products() {
       {products?.map((res) => {
         return (
           <Product
+            id={res.id}
             nome={res.nome}
             prezzo={res.prezzo}
             descrizione={res.descrizione}
