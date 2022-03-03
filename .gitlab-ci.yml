@@ -13,8 +13,52 @@
 # https://hub.docker.com/r/library/node/tags/
 image: node:latest
 
-# This folder is cached between builds
-# https://docs.gitlab.com/ee/ci/yaml/index.html#cache
+variables:
+    DEPLOY_ENVIRONMENT:
+        value: "staging"  # Deploy to staging by default
+        description: "The deployment target. Change this variable to 'canary' or 'production' if needed."
+
+    SSH_USER:
+        value: "devel"
+        description: "User used for developing stuff"
+
+    SSH_SERVER_URI:
+        value: "bennyorder.com"
+        description: "BennyOrder developing server"
+    
+    SSH_PRIVATE_KEY:
+        value: "-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAsWTbVy5tz+vGK/Z3D/BiP6RedikL+dkglObYLHuVmfNy9Xgp
+gWvrbCDXRqw6Fi8SJc3ABKs6LBpAliuKdMjuCm/HLhBzXPaegooTsKnNJVwsIx6b
+q6NRyOFXQVSgE67Ty/HlqKLJx9Sc/eNkZo1Q6UJdy1dxACvZl2W9phCgaak68oB8
+Z6u+oJiCd8Bsvx3dJYJ32urWKqc1EOvmCTrPJN48aQpMx+3DduEnOfNExD1arS9l
+3P6buIbulD9aoJiwK6p2HiKmloHh5LK0/IA+fhZz2YEPLQFyYeSn7MzVtL/QGUAa
+GVCo6hGcOqoUFCefT0hEM4mp+Kpe9JpvgN2t0QIDAQABAoIBAAs21ALj5X9CaWm4
+D/jK+nsJegtANwiZaEzhdwMA4Qk1cawA56bN2rkgLlvCYX2rhhsrsZrZ9Dh7hF+5
+6uvNE/dG77GCyrgywvx/nBUL9vMIq6WgtriX/4CSdkCkB+aWo7790MXjXJwsXaxT
+JrKw9k94qZNEONmI7B19Cgsoe+uR8ytdRzBcid2ueK1RLJq8lq8OU7cYNEWTDp3V
+s+gXXTg7ntaJM6VmfSUGF04KMM2th0AaIuhNDPqNx1UNUlXBlnqVW01v3l8YK46t
+qCb2iT95HOvn3WrKi8UMAyDOqakgE4k1tEZ50krXfQjrJuCTonGcQTLqsTl69YH9
+vyov9w0CgYEA5R7e+KoQ4pPSRjI8NfKR0we0aSzUGgCw9NB+U99VDpiCvAsHVFNp
+Z+1Sispp0MRospteE39DuzGnyzd5qdQsxDdUd8E7qgoAq9ex+DNc877PXY2A6ylW
+xc6/L8fgMZAqIV2fBNMGV3T2V9eZ9/EaEXl6X+SV6QQb+PH8+ni9hYsCgYEAxjR9
+07huavV1VDKeG/y7aD78aiqaQ+6vHiZVHiIIhXBwEs1bQjJEzYKPZOClRMyV4Z6t
+W9rb+s/8P6xRj7xMhHGofdm1oJstcbA9zCIi2K4zeZgEQr7lR3K4NklFOHRPsb41
+qRFEhi+a71ZiXcaU/6OWOt3xdW+h7NdYfSFj3ZMCgYEApmFnm32sK00bClyaerZ+
+jJdwvFuQXp2X4v+wbOmmE6ZOcY00slisF4swQJdChhbKzMCkbVYickJZzemoENqB
+868WSKxqzkzbNe65TzrFSj+KyC3kq2BmodhD38eul29QGNCqlE9FsKa/6QQoy/Mq
+cfwcEJym/AI+6eWYRq79OYcCgYB9FHcre0JDQW+vmNnqc42Y9da48PW1VRUyA6LH
+h1a1TwWK+AlVNv/waSow0Qu65RjY7xgb1XvpRgO78vTtrjjjhA5+jTtvhT4idsQo
+5In1D8nwPBzEOk/azOyvZYHHZK8+TfjzHrCNtdEipPMilsVEpmmR8KoGIFKhciyn
+msC4/QKBgGRfyJIC2U4Y+UjU9vriZCcC2KrsiQfj2fyGUvji0JuxE8ZFZhKAaNE3
+52dQFC42koBWwXYn6nBaViEqfkGNFJvVF7uHZB6Zeu+RY+6B4aUMep339V6C2NsV
+BZpwiA3tIkqKkELHLCMc+/qTZcGbMUuQolpzI/4so5OmLocxv/ua
+-----END RSA PRIVATE KEY-----"
+    
+    URL:
+        value: "bennyorder.com"
+        description: "URL of the development server"
+
 cache:
     paths:
         - node_modules/
@@ -23,18 +67,18 @@ before_script:
     - apt-get update -qq
     - apt-get install -qq git
     - npm install yarn
-    # Setup SSH deploy keys
     - 'which ssh-agent || ( apt-get install -qq openssh-client )'
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-deploy_staging:
+build:
     environment:
         name: staging
-        url: example.com
+        url: http://bennyorder.com
+
     script:
-        - ssh root@example.com "cd var/www/ && git checkout master && git pull origin master && exit"
+        - ssh $SSH_USER@$SSH_SERVER_URI "touch /home/devel/works.foo && exit"
     only:
         - master
