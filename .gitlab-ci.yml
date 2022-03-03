@@ -45,4 +45,4 @@ before_script:
 build:
     variables: {}
     script:
-        - ssh devel@bennyorder.com "touch /home/devel/works.foo"
+        - ssh -v devel@bennyorder.com "touch /home/devel/works.foo"
