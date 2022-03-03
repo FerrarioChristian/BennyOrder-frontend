@@ -73,12 +73,9 @@ before_script:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
-build:
-    environment:
-        name: staging
-        url: http://bennyorder.com
+# ------------------------------------------------------------------------------------------------
 
+build:
+    variables: {}
     script:
-        - ssh $SSH_USER@$SSH_SERVER_URI "touch /home/devel/works.foo && exit"
-    only:
-        - master
+        - ssh devel@bennyorder.com "touch /home/devel/works.foo && exit"
