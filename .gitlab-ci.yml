@@ -33,5 +33,5 @@ before_script:
 
 Test:
     script:
-        - ssh devel@bennyorder.com
+        - ssh -o StrictHostKeyChecking=no devel@bennyorder.com
         
