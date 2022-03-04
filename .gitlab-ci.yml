@@ -31,8 +31,7 @@ before_script:
     - ssh-keyscan bennyorder.com >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
-build:
-    variables: {}
+Test:
     script:
-        - echo ciaoo
+        - ssh devel@bennyorder.com
         
