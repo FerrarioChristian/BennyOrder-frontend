@@ -33,5 +33,5 @@ before_script:
 
 Test:
     script:
-        - ssh -o StrictHostKeyChecking=no HostKeyAlgorithms=+ssh-dss devel@bennyorder.com
+        - ssh -o HostKeyAlgorithms=+ssh-ed25519 devel@bennyorder.com
         
