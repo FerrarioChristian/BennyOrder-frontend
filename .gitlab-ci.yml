@@ -46,4 +46,4 @@ before_script:
 build:
     variables: {}
     script:
-        - ssh -i develkey.key -o StrictHostKeyChecking=no devel@bennyorder.com 'touch /home/devel/works.foo'
+        - ssh -i ~/develkey.key -o StrictHostKeyChecking=no devel@bennyorder.com 'touch /home/devel/works.foo'
