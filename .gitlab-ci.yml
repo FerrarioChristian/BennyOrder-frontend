@@ -1,17 +1,4 @@
-# This file is a template, and might need editing before it works on your project.
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/npm.gitlab-ci.yml
-
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Nodejs.gitlab-ci.yml
-
-# Official framework image. Look for the different tagged releases at:
-# https://hub.docker.com/r/library/node/tags/
-image: ubuntu:latest
+image: ubuntu
 
 variables:
     DEPLOY_ENVIRONMENT:
@@ -47,5 +34,5 @@ before_script:
 build:
     variables: {}
     script:
-        - ssh devel@bennyorder.com "hostname && echo 'Welcome!!!' > welcome.txt"
+        - echo ciaoo
         
