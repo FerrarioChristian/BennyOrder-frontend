@@ -1,42 +1,7 @@
-# This file is a template, and might need editing before it works on your project.
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/npm.gitlab-ci.yml
-
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Nodejs.gitlab-ci.yml
-
-# Official framework image. Look for the different tagged releases at:
-# https://hub.docker.com/r/library/node/tags/
-image: ubuntu:latest
-
-variables:
-    DEPLOY_ENVIRONMENT:
-        value: "staging"  # Deploy to staging by default
-        description: "The deployment target. Change this variable to 'canary' or 'production' if needed."
-
-    SSH_USER:
-        value: "devel"
-        description: "User used for developing stuff"
-
-    SSH_SERVER_URI:
-        value: "bennyorder.com"
-        description: "BennyOrder developing server"
-
-    URL:
-        value: "bennyorder.com"
-        description: "URL of the development server"
-
-cache:
-    paths:
-        - node_modules/
+image: alpine:latest
 
 before_script:
-    - apt-get update -qq
-    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )'
     - eval $(ssh-agent -s)
     - echo "$DEVEL_OSH_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
