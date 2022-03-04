@@ -38,8 +38,9 @@ before_script:
     - apt-get update -qq
     - 'which ssh-agent || ( apt-get install -qq openssh-client )'
     - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" > develkey.key
-    - chmod 600 develkey.key
+    - echo "$SSH_PRIVATE_KEY" > ~/develkey.key
+    - chmod 600 ~/develkey.key
+    - mkdir -p ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
 build:
