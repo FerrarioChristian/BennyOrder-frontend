@@ -33,5 +33,5 @@ before_script:
 
 Test:
     script:
-        - ssh -o HostKeyAlgorithms=+ssh-ed25519 devel@bennyorder.com
+        - ssh -v -o HostKeyAlgorithms=+ssh-ed25519 devel@bennyorder.com
         
