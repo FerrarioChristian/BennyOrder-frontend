@@ -5,18 +5,6 @@ variables:
         value: "staging"  # Deploy to staging by default
         description: "The deployment target. Change this variable to 'canary' or 'production' if needed."
 
-    SSH_USER:
-        value: "devel"
-        description: "User used for developing stuff"
-
-    SSH_SERVER_URI:
-        value: "bennyorder.com"
-        description: "BennyOrder developing server"
-
-    URL:
-        value: "bennyorder.com"
-        description: "URL of the development server"
-
 cache:
     paths:
         - node_modules/
@@ -25,7 +13,7 @@ before_script:
     - apt-get update -qq
     - 'which ssh-agent || ( apt-get install -qq openssh-client )'
     - eval $(ssh-agent -s)
-    - echo "$DEVEL_OSH_KEY" | tr -d '\r' | ssh-add -
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - ssh-keyscan bennyorder.com >> ~/.ssh/known_hosts
@@ -35,4 +23,3 @@ before_script:
 Test:
     script:
         - ssh -vvv devel@bennyorder.com
-        
