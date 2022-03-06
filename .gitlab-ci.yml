@@ -30,8 +30,9 @@ before_script:
     - chmod 700 ~/.ssh
     - ssh-keyscan bennyorder.com >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
+    - echo "Host *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
 
 Test:
     script:
-        - ssh -vvv -o HostKeyAlgorithms=+ssh-ed25519 devel@bennyorder.com
+        - ssh -vvv devel@bennyorder.com
         
