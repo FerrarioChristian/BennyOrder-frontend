@@ -8,11 +8,14 @@ export default function Homepage() {
   return (
     <>
       <h1>Homepage</h1>
-      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/admin/dashboard">Dashboard</Link>
       <br />
       <Link to="/login">Login</Link>
       <br />
       <Link to="/register">Register</Link>
+      <br />
+      <Link to="/club/menu">ClubMenu</Link>
+      {/* Cambiare il nome con l'id */}
       <br />
       <Logout />
     </>
