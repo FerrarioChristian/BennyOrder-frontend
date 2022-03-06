@@ -67,6 +67,7 @@ const StyledButton = styled.button`
   background: none;
   outline: none;
   border: none;
+  cursor: pointer;
 `;
 
 const StyledInput = styled.input`

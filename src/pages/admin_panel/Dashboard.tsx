@@ -7,7 +7,9 @@ export default function Dashboard() {
   return (
     <>
       <h1>Dashboard</h1>
-      <Link to="/products">Prodotti</Link>
+      <Link to="/admin/products">Gestisci Menu</Link>
+      <br />
+      <Link to="/admin/assign_tables">Gestisci Dispositivi</Link>
     </>
   );
 }
