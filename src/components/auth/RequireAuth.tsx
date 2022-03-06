@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, Outlet } from "react-router-dom";
 import axiosInstance from "../../utils/axios";
 
-const RequireAuth: React.FC<{ children: any; redirectTo: string }> = ({
-  children,
-  redirectTo,
-}) => {
+interface Props {
+  redirectTo: string;
+}
+
+const RequireAuth = ({ redirectTo }: Props) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -38,7 +39,7 @@ const RequireAuth: React.FC<{ children: any; redirectTo: string }> = ({
     return <h2>Loading...</h2>;
   } else {
     return isAuth ? (
-      children
+      <Outlet />
     ) : (
       <Navigate to={redirectTo} state={{ from: location }} replace />
     );
