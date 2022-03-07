@@ -1,23 +1,13 @@
 image: ubuntu
 
-variables:
-    DEPLOY_ENVIRONMENT:
-        value: "staging"  # Deploy to staging by default
-        description: "The deployment target. Change this variable to 'canary' or 'production' if needed."
-
-cache:
-    paths:
-        - node_modules/
-
 before_script:
-    - apt-get update -qq
-    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
-    - eval $(ssh-agent -s)
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | ssh-add -
-    - echo "Host *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
-
-Test:
+  - apt-get update -qq
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    
+deploy_staging:
     script:
-        - ssh -vvv devel@bennyorder.com
+        - ssh devel@bennyorder.com "touch works.ciao"
