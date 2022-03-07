@@ -15,7 +15,6 @@ before_script:
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - chmod 644 ~/.ssh/known_hosts
     - echo "$SSH_PRIVATE_KEY" | ssh-add -
     - echo "Host *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
 
