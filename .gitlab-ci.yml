@@ -21,4 +21,4 @@ before_script:
 
 Test:
     script:
-        - ssh -vvv -o PasswordAuthentication=no devel@bennyorder.com
+        - ssh -vvv devel@bennyorder.com
