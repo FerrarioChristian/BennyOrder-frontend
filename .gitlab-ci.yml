@@ -1,5 +1,11 @@
 image: ubuntu
 
+stages:
+  - pre-build
+  - build
+  - deploy
+  - log
+
 before_script:
   - apt-get update -qq
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
@@ -9,17 +15,21 @@ before_script:
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   
 pre-build:
+  stage: pre-build
   script:
     - ssh devel@bennyorder.com "cd /opt/bennyorder/frontend && rm -rf /opt/bennyorder/frontend/build && git pull && yarn install"
 
 build:
+  stage: build
   script:
     - ssh devel@bennyorder.com "cd /opt/bennyorder/frontend && yarn build"
 
 deploy:
+    stage: deploy
     script:
         - ssh devel@bennyorder.com "cp -R /opt/bennyorder/frontend/build/* /var/www/bennyorder"
 
 log:
+  stage: log
   script:
     - ssh devel@bennyorder.com 'echo "$CI_COMMIT_TITLE" >> /var/log/gitlab_deploy.log && echo "\n" >> /var/log/gitlab_deploy.log'
