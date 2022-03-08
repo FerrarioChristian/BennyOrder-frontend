@@ -7,7 +7,19 @@ before_script:
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    
-deploy_staging:
+  
+pre-build:
+  script:
+    - ssh devel@bennyorder.com "cd /opt/bennyorder/frontend && rm -rf /opt/bennyorder/frontend/build && git pull && yarn install"
+
+build:
+  script:
+    - ssh devel@bennyorder.com "cd /opt/bennyorder/frontend && yarn build"
+
+deploy:
     script:
-        - ssh devel@bennyorder.com "touch works.ciao"
+        - ssh devel@bennyorder.com "cp -R /opt/bennyorder/frontend/build/* /var/www/bennyorder"
+
+log:
+  script:
+    - ssh devel@bennyorder.com 'echo "$CI_COMMIT_TITLE" >> /var/log/gitlab_deploy.log && echo "\n" >> /var/log/gitlab_deploy.log'
