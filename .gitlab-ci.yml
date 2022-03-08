@@ -30,6 +30,8 @@ deploy:
         - ssh devel@bennyorder.com "cp -R /opt/bennyorder/frontend/build/* /var/www/bennyorder"
 
 log:
+  variables:
+    COMMIT_TITLE: $CI_COMMIT_TITLE
   stage: log
   script:
-    - ssh devel@bennyorder.com 'echo "$CI_COMMIT_TITLE" >> /var/log/gitlab_deploy.log && echo "\n" >> /var/log/gitlab_deploy.log'
+    - ssh devel@bennyorder.com "echo '$COMMIT_TITLE' >> /var/log/gitlab_deploy.log"
