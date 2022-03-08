@@ -34,4 +34,4 @@ log:
     COMMIT_TITLE: $CI_COMMIT_TITLE
   stage: log
   script:
-    - ssh devel@bennyorder.com "echo '$COMMIT_TITLE' >> /var/log/gitlab_deploy.log"
+    - ssh devel@bennyorder.com "echo '[$(date)] $COMMIT_TITLE' >> /var/log/gitlab_deploy.log"
