@@ -109,7 +109,7 @@ export default function Register() {
                 size="30px"
               />
             ) : (
-              "Accedi"
+              "Registrati"
             )}
           </LoginRegisterButton>
           <LoginRegisterSwitch to="/login">Login</LoginRegisterSwitch>
