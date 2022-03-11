@@ -2,15 +2,15 @@ import { useRef } from "react";
 import { DeviceType } from "../../pages/admin_panel/ManageTables";
 import axiosInstance from "../../utils/axios";
 
-const Device = ({ seriale, id_tavolo }: DeviceType) => {
-  const id_tavoloInputRef = useRef(document.createElement("input"));
+const Device = ({ serial, table_id }: DeviceType) => {
+  const tableIdInputRef = useRef(document.createElement("input"));
 
   const editDeviceTable = () => {
     axiosInstance.post(
       "associate_table.php",
       {
-        seriale,
-        id_tavolo: id_tavoloInputRef.current.value,
+        serial,
+        table_id: tableIdInputRef.current.value,
       },
       { withCredentials: true }
     );
@@ -18,8 +18,8 @@ const Device = ({ seriale, id_tavolo }: DeviceType) => {
 
   return (
     <>
-      <h1>{seriale}</h1>
-      <input type="text" defaultValue={id_tavolo} ref={id_tavoloInputRef} />
+      <h1>{serial}</h1>
+      <input type="text" defaultValue={table_id} ref={tableIdInputRef} />
       <button onClick={editDeviceTable}>Modifica</button>
     </>
   );

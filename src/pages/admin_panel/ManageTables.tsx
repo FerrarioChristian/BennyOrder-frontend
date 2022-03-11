@@ -3,8 +3,8 @@ import axiosInstance from "../../utils/axios";
 import Device from "../../components/device/Device";
 
 export interface DeviceType {
-  seriale: string;
-  id_tavolo: number;
+  serial: string;
+  table_id: number;
 }
 
 const ManageTables = () => {
@@ -21,9 +21,9 @@ const ManageTables = () => {
       {devices.map((device) => {
         return (
           <Device
-            key={device.seriale}
-            seriale={device.seriale}
-            id_tavolo={device.id_tavolo}
+            key={device.serial}
+            serial={device.serial}
+            table_id={device.table_id}
           />
         );
       })}

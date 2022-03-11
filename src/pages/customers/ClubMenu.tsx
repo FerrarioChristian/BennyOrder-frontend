@@ -5,15 +5,15 @@ import axiosInstance from "../../utils/axios";
 
 interface Product {
   id: number;
-  nome: string;
-  prezzo: string;
-  descrizione: string;
-  residuo: number;
+  name: string;
+  price: string;
+  description: string;
+  remaining: number;
 }
 
 interface Order {
   id: number;
-  note: string;
+  notes: string;
 }
 
 const ClubMenu = () => {
@@ -22,14 +22,16 @@ const ClubMenu = () => {
   //const { tirt } = useParams();
 
   useEffect(() => {
-    axiosInstance.get(`/list_products.php?tirt=93561aaaaaaab`).then((res) => {
-      setProducts(res.data);
-    });
+    axiosInstance
+      .get(`/list_products.php?tirt=48067aaaaaaab`, { withCredentials: true })
+      .then((res) => {
+        setProducts(res.data);
+      });
   }, []);
 
   const orderProduct = (e: React.MouseEvent) => {
     e.preventDefault();
-    axiosInstance.post("new_order.php", { tirt: "1234567890123", orders });
+    axiosInstance.post("new_order.php", { tirt: "48067aaaaaaab", orders });
   };
 
   return (
@@ -41,10 +43,10 @@ const ClubMenu = () => {
           <Product
             key={res.id}
             id={res.id}
-            nome={res.nome}
-            prezzo={res.prezzo}
-            descrizione={res.descrizione}
-            residuo={res.residuo}
+            name={res.name}
+            price={res.price}
+            description={res.description}
+            remaining={res.remaining}
             admin={false}
             setOrders={setOrders}
           />
