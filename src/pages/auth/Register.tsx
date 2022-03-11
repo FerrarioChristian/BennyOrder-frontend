@@ -14,7 +14,7 @@ import axiosInstance from "../../utils/axios";
 import LoginRegisterInput from "../../components/loginRegisterForm/LoginRegisterInput";
 
 export default function Register() {
-  const clubname = useRef<HTMLInputElement>(null);
+  const username = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const confirmPassword = useRef<HTMLInputElement>(null);
@@ -35,7 +35,7 @@ export default function Register() {
       setIsFetching(true);
       axiosInstance
         .post("/register.php", {
-          clubname: clubname.current?.value,
+          username: username.current?.value,
           password: password.current?.value,
           email: email.current?.value,
         })
@@ -73,7 +73,7 @@ export default function Register() {
               placeholder="Username"
               type="text"
               label="Username"
-              ref={clubname}
+              ref={username}
             />
             <LoginRegisterInput
               placeholder="me@example.com"

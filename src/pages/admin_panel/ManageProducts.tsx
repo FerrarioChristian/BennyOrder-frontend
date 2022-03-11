@@ -5,25 +5,27 @@ import axiosInstance from "../../utils/axios";
 
 interface Props {
   id: number;
-  nome: string;
-  prezzo: string;
-  descrizione: string;
-  residuo: number;
+  name: string;
+  price: string;
+  description: string;
+  remaining: number;
 }
 
 export default function ManageProducts() {
   const [products, setProducts] = useState<Props[]>();
 
   useEffect(() => {
-    axiosInstance.get(`/list_products.php?tirt=18230aaaaaaab`).then((res) => {
-      setProducts(res.data);
-    });
+    axiosInstance
+      .get(`/list_products.php`, { withCredentials: true })
+      .then((res) => {
+        setProducts(res.data);
+      });
   }, []);
 
-  const name = useRef(document.createElement("input"));
-  const price = useRef(document.createElement("input"));
-  const desc = useRef(document.createElement("input"));
-  const pieces = useRef(document.createElement("input"));
+  const nameInputRef = useRef(document.createElement("input"));
+  const priceInputRef = useRef(document.createElement("input"));
+  const descInputRef = useRef(document.createElement("input"));
+  const piecesInputRef = useRef(document.createElement("input"));
 
   const submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -31,10 +33,10 @@ export default function ManageProducts() {
       .post(
         "/new_product.php",
         {
-          name: name.current.value,
-          prezzo: price.current.value,
-          description: desc.current.value,
-          remaining: pieces.current.value,
+          name: nameInputRef.current.value,
+          price: priceInputRef.current.value,
+          description: descInputRef.current.value,
+          remaining: piecesInputRef.current.value,
         },
         { withCredentials: true }
       )
@@ -46,20 +48,31 @@ export default function ManageProducts() {
       <h1>Prodotti</h1>
       <h2>Aggiungi un nuovo prodotto</h2>
       <form onSubmit={submit}>
-        <input type="text" name="name" placeholder="nome" required ref={name} />
+        <input
+          type="text"
+          name="name"
+          placeholder="nome"
+          required
+          ref={nameInputRef}
+        />
         <input
           type="number"
-          ref={price}
+          ref={priceInputRef}
           name="price"
           placeholder="prezzo"
           step="0.01"
           min="0"
           required
         />
-        <input type="text" ref={desc} name="desc" placeholder="descrizione" />
+        <input
+          type="text"
+          ref={descInputRef}
+          name="desc"
+          placeholder="descrizione"
+        />
         <input
           type="number"
-          ref={pieces}
+          ref={piecesInputRef}
           name="pieces"
           placeholder="numero pezzi"
         />
@@ -70,10 +83,10 @@ export default function ManageProducts() {
           <Product
             key={res.id}
             id={res.id}
-            nome={res.nome}
-            prezzo={res.prezzo}
-            descrizione={res.descrizione}
-            residuo={res.residuo}
+            name={res.name}
+            price={res.price}
+            description={res.description}
+            remaining={res.remaining}
             admin={true}
           />
         );
