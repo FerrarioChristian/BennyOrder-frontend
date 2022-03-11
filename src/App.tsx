@@ -12,6 +12,7 @@ import ValidateAccount from "./pages/auth/ValidateAccount";
 import ClubMenu from "./pages/customers/ClubMenu";
 import Homepage from "./pages/Homepage";
 import NotFound from "./pages/NotFound";
+import AdminLayout from "./pages/admin_panel/AdminLayout";
 
 const App = () => {
   return (
@@ -34,7 +35,7 @@ const App = () => {
         </Route>
 
         <Route element={<RequireAuth redirectTo="/login" />}>
-          <Route path="/admin">
+          <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="products" element={<ManageProducts />} />
             <Route path="assign_tables" element={<ManageTables />} />
