@@ -16,22 +16,34 @@ before_script:
   
 pre-build:
   stage: pre-build
+  only: 
+    refs:
+      - main
   script:
     - ssh devel@bennyorder.com "cd /opt/bennyorder/frontend && rm -rf /opt/bennyorder/frontend/build && git pull && yarn install"
 
 build:
   stage: build
+  only: 
+    refs:
+      - main
   script:
     - ssh devel@bennyorder.com "cd /opt/bennyorder/frontend && yarn build"
 
 deploy:
-    stage: deploy
-    script:
-        - ssh devel@bennyorder.com "cp -R /opt/bennyorder/frontend/build/* /var/www/bennyorder"
+  stage: deploy
+  only: 
+    refs:
+      - main
+  script:
+    - ssh devel@bennyorder.com "cp -R /opt/bennyorder/frontend/build/* /var/www/bennyorder"
 
 log:
   variables:
     COMMIT_TITLE: $CI_COMMIT_TITLE
   stage: log
+  only: 
+    refs:
+      - main
   script:
     - ssh devel@bennyorder.com "echo '[$(date)] $COMMIT_TITLE' >> /var/log/gitlab_deploy.log"
