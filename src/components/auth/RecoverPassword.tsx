@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEventListener } from "../../hooks/useEventListener";
 import { useTitle } from "../../hooks/useTitle";
@@ -14,12 +14,14 @@ import {
 } from "../loginRegisterForm/LoginRegister.styles";
 import LoginRegisterInput from "../loginRegisterForm/LoginRegisterInput";
 
-const RecoverPassword: React.FC<{ confirm_code: string | undefined }> = ({
-  confirm_code,
-}) => {
+interface Props {
+  confirm_code?: string;
+}
+
+const RecoverPassword = ({ confirm_code }: Props) => {
   const error = useRef<HTMLLabelElement>(document.createElement("label"));
   const submit = useRef<HTMLButtonElement>(document.createElement("button"));
-  const password = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(document.createElement("input"));
   const confirm_password = useRef<HTMLInputElement>(null);
   let navigate = useNavigate();
 
@@ -30,12 +32,16 @@ const RecoverPassword: React.FC<{ confirm_code: string | undefined }> = ({
     axiosInstance
       .post("/password_recovery.php", {
         confirm_code: confirm_code,
-        password: password,
+        password: password.current.value,
       })
-      .then(() => navigate(`/password_changed`))
+      .then(() => {
+        navigate(`/password_changed`);
+      })
       .catch((err) => {
-        if ((err.response.status = 401)) {
-          error.current.innerHTML = err.response.data.msg;
+        console.log(err);
+        if (err.response.status === 401) {
+          error.current.innerHTML =
+            err.response.data.msg ?? "Errore sconosciuto.";
         }
       });
   };

@@ -16,6 +16,7 @@ const AdminLayout = () => {
         <SideBarUL>
           {adminNavLinks.map((res) => (
             <AdminNavLink
+              key={res.route}
               isOpen={isOpen}
               label={res.label}
               icon={res.icon}
