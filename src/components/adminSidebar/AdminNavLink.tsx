@@ -25,7 +25,7 @@ const SpanLink = styled.span`
   white-space: nowrap;
   opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   pointer-events: none;
-  transition: 0.2s;
+  transition: all 0.1s ease;
   text-decoration: none;
 `;
 
@@ -38,6 +38,7 @@ const ILink = styled.i`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.1s ease;
 `;
 
 const StyledLink = styled(Link)`
