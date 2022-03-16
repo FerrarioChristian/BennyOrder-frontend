@@ -57,7 +57,7 @@ const SideBarContainer = styled.nav`
   height: 100vh;
   padding: 8px 14px;
   background: var(--background);
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 `;
 
 const AdminLayoutContainer = styled.div`

@@ -38,8 +38,8 @@ export default function Login() {
   useEventListener("keydown", submitOnEnter(submit));
 
   const submitLogin = (e: React.SyntheticEvent) => {
-    setIsFetching(true);
     e.preventDefault();
+    setIsFetching(true);
     axiosInstance
       .post(
         "/login.php",

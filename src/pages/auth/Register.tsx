@@ -12,12 +12,16 @@ import { useNavigate } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
 import LoginRegisterInput from "../../components/loginRegisterForm/LoginRegisterInput";
+import { submitOnEnter } from "../../utils/events";
+import { useEventListener } from "../../hooks/useEventListener";
 
 export default function Register() {
   const username = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const confirmPassword = useRef<HTMLInputElement>(null);
+  const submit = useRef(null);
+
   const [isFetching, setIsFetching] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -26,6 +30,7 @@ export default function Register() {
   let navigate = useNavigate();
 
   useTitle("Registrati - BennyOrder");
+  useEventListener("keydown", submitOnEnter(submit));
 
   const submitRegister = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -98,7 +103,7 @@ export default function Register() {
           </InputContainer>
           <ErrorLabel ref={error}></ErrorLabel>
 
-          <LoginRegisterButton type="submit">
+          <LoginRegisterButton ref={submit} type="submit" disabled={isFetching}>
             {isFetching ? (
               <CircularProgress
                 style={{
