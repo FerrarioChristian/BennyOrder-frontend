@@ -1,21 +1,32 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import AdminNavLink from "../../components/adminSidebar/AdminNavLink";
 import LogoNavLink from "../../components/adminSidebar/LogoNavLink";
 import ProfileNavLink from "../../components/adminSidebar/ProfileNavLink";
+import { adminNavLinks } from "../../utils/navBarLinks";
 
 const AdminLayout = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
   return (
     <AdminLayoutContainer>
-      <SideBarContainer>
-        <LogoNavLink />
+      <SideBarContainer isOpen={isOpen}>
+        <LogoNavLink isOpen={isOpen} setIsOpen={setIsOpen} />
         <SideBarUL>
-          <AdminNavLink />
-          <AdminNavLink />
-          <AdminNavLink />
-          <AdminNavLink />
-          <AdminNavLink />
-          <ProfileNavLink name="nome" description="descrizione" />
+          {adminNavLinks.map((res) => (
+            <AdminNavLink
+              isOpen={isOpen}
+              label={res.label}
+              icon={res.icon}
+              route={res.route}
+            />
+          ))}
+          <ProfileNavLink
+            isOpen={isOpen}
+            name="nome"
+            description="descrizione"
+          />
         </SideBarUL>
       </SideBarContainer>
       <MainContainer>
@@ -25,10 +36,14 @@ const AdminLayout = () => {
   );
 };
 
-const MainContainer = styled.main``;
+const MainContainer = styled.main`
+  padding: 40px 40px;
+`;
 
 const SideBarUL = styled.ul`
-  list-style-type: none;
+  list-style: none;
+  margin-top: 20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -36,10 +51,11 @@ const SideBarContainer = styled.nav`
   color: var(--primary);
   display: flex;
   flex-direction: column;
-  min-width: 250px;
-  width: 250px;
+  min-width: ${({ isOpen }: { isOpen: boolean }) =>
+    isOpen ? "250px;" : "78px;"};
+  width: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "250px;" : "78px;")};
   height: 100vh;
-  padding: 6px 14px;
+  padding: 8px 14px;
   background: var(--background);
   transition: all 0.5s ease;
 `;

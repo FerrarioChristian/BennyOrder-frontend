@@ -1,7 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { ReactNode } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axios";
 
-export default function Logout() {
+interface Props {
+  className?: string;
+  children?: ReactNode;
+}
+
+export default function Logout({ className, children }: Props) {
   let navigate = useNavigate();
 
   const logout = () => {
@@ -10,5 +16,9 @@ export default function Logout() {
     });
   };
 
-  return <button onClick={logout}>Logout</button>;
+  return (
+    <a className={className} onClick={logout}>
+      {children}
+    </a>
+  );
 }
