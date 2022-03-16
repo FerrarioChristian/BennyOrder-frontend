@@ -21,7 +21,6 @@ export default function Register() {
   const password = useRef<HTMLInputElement>(null);
   const confirmPassword = useRef<HTMLInputElement>(null);
   const submit = useRef(null);
-
   const [isFetching, setIsFetching] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -49,9 +48,8 @@ export default function Register() {
           setIsFetching(false);
         })
         .catch((err) => {
-          if ((err.response.status = 401)) {
-            error.current.innerHTML = err.response.data.msg;
-          }
+          error.current.innerHTML =
+            err.response.data.msg ?? "Errore sconosciuto.";
           setIsFetching(false);
         });
     }
