@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axios";
 
 interface Props {
