@@ -1,40 +1,43 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ReactNode } from "react";
 
-const AdminNavLink = () => {
+interface Props {
+  isOpen: boolean;
+  route: string;
+  icon: ReactNode;
+  label: string;
+}
+
+const AdminNavLink = ({ isOpen, route, icon, label }: Props) => {
   return (
-    <StyledLink to="/admin/dashboard">
-      <ALink>
-        <ILink></ILink>
-        <SpanLink>Dashboard</SpanLink>
-      </ALink>
+    <StyledLink to={route}>
+      <ILink>{icon}</ILink>
+      <SpanLink isOpen={isOpen}>{label}</SpanLink>
       <span></span>
     </StyledLink>
   );
 };
 
 const SpanLink = styled.span`
-  color: #fff;
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
-  opacity: 0;
+  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   pointer-events: none;
-  transition: 0.4s;
+  transition: 0.2s;
+  text-decoration: none;
 `;
 
 const ILink = styled.i`
   height: 50px;
+  min-width: 50px;
   line-height: 50px;
   font-size: 18px;
-`;
-
-const ALink = styled.a`
-  display: flex;
   border-radius: 12px;
+  display: flex;
   align-items: center;
-  text-decoration: none;
-  transition: all 0.4s ease;
+  justify-content: center;
 `;
 
 const StyledLink = styled(Link)`
@@ -43,10 +46,15 @@ const StyledLink = styled(Link)`
   list-style: none;
   border-radius: 12px;
   transition: all 0.2s ease;
+  color: var(--primary);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 
   &:hover {
     background-color: var(--primary);
+    color: var(--background);
   }
 `;
 
