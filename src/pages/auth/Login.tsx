@@ -57,9 +57,11 @@ export default function Login() {
       .catch((err) => {
         setIsFetching(false);
         if (err.response.status === 401) {
-          error.current!.innerHTML = err.response.data.msg;
+          error.current!.innerHTML =
+            err.response.data.msg ?? "Errore sconosiuto.";
         } else if (err.response.status === 403) {
-          error.current!.innerHTML = err.response.data.msg;
+          error.current!.innerHTML =
+            err.response.data.msg ?? "Errore sconosciuto.";
         }
       });
   };
