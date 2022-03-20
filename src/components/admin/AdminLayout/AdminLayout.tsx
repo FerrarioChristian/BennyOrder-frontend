@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import AdminNavLink from "../../components/adminSidebar/AdminNavLink";
-import LogoNavLink from "../../components/adminSidebar/LogoNavLink";
-import ProfileNavLink from "../../components/adminSidebar/ProfileNavLink";
-import { adminNavLinks } from "../../utils/navBarLinks";
+import AdminNavLink from "./AdminNavLink";
+import LogoNavLink from "./LogoNavLink";
+import ProfileNavLink from "./ProfileNavLink";
+import { adminNavLinks } from "../../../utils/navBarLinks";
 
 const AdminLayout = () => {
   const [isOpen, setIsOpen] = useState(true);

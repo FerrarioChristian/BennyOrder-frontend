@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Logout from "../auth/Logout";
+import Logout from "../../auth/Logout";
 
 interface Props {
   name: string;

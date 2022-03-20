@@ -9,15 +9,15 @@ import {
   ErrorLabel,
   ErrorContainer,
   LoginRegisterSwitch,
-} from "../../components/loginRegisterForm/LoginRegister.styles";
+} from "./LoginRegister.styles";
 import { CircularProgress } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
 import { useEventListener } from "../../hooks/useEventListener";
 import { submitOnEnter } from "../../utils/events";
 import axiosInstance from "../../utils/axios";
-import LoginRegisterInput from "../../components/loginRegisterForm/LoginRegisterInput";
-import RememberMe from "../../components/loginRegisterForm/RememberMe";
+import LoginRegisterInput from "./LoginRegisterInput";
+import RememberMe from "./RememberMe";
 
 export default function Login() {
   const [remember, setRemember] = useState<boolean>(false);

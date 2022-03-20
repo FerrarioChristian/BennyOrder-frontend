@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 //import { useParams } from "react-router-dom";
-import Product from "../../components/product/Product";
+import Product from "../shared/Product";
 import axiosInstance from "../../utils/axios";
 
 interface Product {
