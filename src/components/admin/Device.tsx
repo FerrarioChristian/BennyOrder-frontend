@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { DeviceType } from "../../pages/admin_panel/ManageTables";
+import { DeviceType } from "./ManageTables";
 import axiosInstance from "../../utils/axios";
 
 const Device = ({ serial, table_id }: DeviceType) => {

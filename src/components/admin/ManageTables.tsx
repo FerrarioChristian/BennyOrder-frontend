@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axios";
-import Device from "../../components/device/Device";
+import Device from "./Device";
 
 export interface DeviceType {
   serial: string;
