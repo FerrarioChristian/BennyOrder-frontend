@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RequireAuth from "./components/auth/RequireAuth";
-import ManageTables from "./pages/admin_panel/ManageTables";
-import Dashboard from "./pages/admin_panel/Dashboard";
-import ManageProducts from "./pages/admin_panel/ManageProducts";
-import EmailSent from "./pages/auth/EmailSent";
-import ForgotPassword from "./pages/auth/ForgotPassword";
-import ForgotPasswordEmail from "./pages/auth/ForgotPasswordEmail";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import ValidateAccount from "./pages/auth/ValidateAccount";
-import ClubMenu from "./pages/customers/ClubMenu";
+import ManageTables from "./components/admin/ManageTables";
+import Dashboard from "./components/admin/Dashboard";
+import ManageProducts from "./components/admin/ManageProducts";
+import EmailSent from "./components/auth/EmailSent";
+import ForgotPassword from "./components/auth/ForgotPassword";
+import ForgotPasswordEmail from "./components/auth/ForgotPasswordEmail";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import ValidateAccount from "./components/auth/ValidateAccount";
+import ClubMenu from "./components/customers/ClubMenu";
 import Homepage from "./pages/Homepage";
 import NotFound from "./pages/NotFound";
-import AdminLayout from "./pages/admin_panel/AdminLayout";
+import AdminLayout from "./components/admin/AdminLayout/AdminLayout";
 
 const App = () => {
   return (

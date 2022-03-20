@@ -6,12 +6,12 @@ import {
   LoginRegisterButton,
   ErrorLabel,
   LoginRegisterSwitch,
-} from "../../components/loginRegisterForm/LoginRegister.styles";
+} from "./LoginRegister.styles";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
-import LoginRegisterInput from "../../components/loginRegisterForm/LoginRegisterInput";
+import LoginRegisterInput from "./LoginRegisterInput";
 import { submitOnEnter } from "../../utils/events";
 import { useEventListener } from "../../hooks/useEventListener";
 

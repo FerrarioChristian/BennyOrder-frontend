@@ -11,8 +11,8 @@ import {
   InputContainer,
   LoginRegisterButton,
   ErrorLabel,
-} from "../loginRegisterForm/LoginRegister.styles";
-import LoginRegisterInput from "../loginRegisterForm/LoginRegisterInput";
+} from "./LoginRegister.styles";
+import LoginRegisterInput from "./LoginRegisterInput";
 
 interface Props {
   confirm_code?: string;

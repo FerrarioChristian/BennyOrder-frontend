@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Product from "../../components/product/Product";
+import Product from "../shared/Product";
 
 import axiosInstance from "../../utils/axios";
 
