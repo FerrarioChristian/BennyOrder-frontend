@@ -24,5 +24,4 @@ const Device = ({ serial, table_id }: DeviceType) => {
     </>
   );
 };
-
 export default Device;

@@ -21,12 +21,14 @@ export const GlobalStyles = createGlobalStyle`
     input:-webkit-autofill:hover, 
     input:-webkit-autofill:focus, 
     input:-webkit-autofill:active {
+        font-family: "Open Sans", sans-serif;
         -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
         box-shadow: 0 0 0 30px var(--background) inset !important;
         caret-color: white;
     }
 
     input:-webkit-autofill{
+        font-family: "Open Sans", sans-serif;
         -webkit-text-fill-color: var(--primary) !important;
         caret-color: white;
     }

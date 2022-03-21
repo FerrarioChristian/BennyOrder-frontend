@@ -27,6 +27,7 @@ const ProfileNavLink = ({ name, description, isOpen }: Props) => {
     </ProfileNav>
   );
 };
+export default ProfileNavLink;
 
 const Name = styled.p`
   font-size: 18px;
@@ -87,5 +88,3 @@ const ProfileNav = styled.li`
   position: relative;
   margin-top: auto;
 `;
-
-export default ProfileNavLink;

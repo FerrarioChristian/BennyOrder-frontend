@@ -2,7 +2,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Link } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
 
-export default function EmailSent() {
+const EmailSent = () => {
   useTitle("Account Creato - BennyOrder");
   return (
     <>
@@ -11,4 +11,5 @@ export default function EmailSent() {
       <CheckCircleOutlineIcon />
     </>
   );
-}
+};
+export default EmailSent;

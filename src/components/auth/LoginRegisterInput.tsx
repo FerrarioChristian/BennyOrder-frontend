@@ -60,10 +60,9 @@ const LoginRegisterInput = (
     </>
   );
 };
-
 export default forwardRef(LoginRegisterInput);
 
-const StyledButton = styled.button`
+const StyledButton = styled.span`
   background: none;
   outline: none;
   border: none;

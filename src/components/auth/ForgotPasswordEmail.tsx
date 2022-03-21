@@ -5,7 +5,7 @@ import { useTitle } from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
 import { submitOnEnter } from "../../utils/events";
 
-export default function ForgotPasswordEmail() {
+const ForgotPasswordEmail = () => {
   const submit = useRef(null);
   const [email, setEmail] = useState("");
   let navigate = useNavigate();
@@ -36,4 +36,5 @@ export default function ForgotPasswordEmail() {
       </button>
     </>
   );
-}
+};
+export default ForgotPasswordEmail;
