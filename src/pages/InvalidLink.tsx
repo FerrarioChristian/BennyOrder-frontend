@@ -1,7 +1,7 @@
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import { useTitle } from "../hooks/useTitle";
 
-export default function InvalidLink() {
+const InvalidLink = () => {
   useTitle("Link Invalido - BennyOrder");
 
   return (
@@ -10,4 +10,5 @@ export default function InvalidLink() {
       <DoDisturbIcon />
     </>
   );
-}
+};
+export default InvalidLink;

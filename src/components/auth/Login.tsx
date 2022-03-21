@@ -18,19 +18,21 @@ import { submitOnEnter } from "../../utils/events";
 import axiosInstance from "../../utils/axios";
 import LoginRegisterInput from "./LoginRegisterInput";
 import RememberMe from "./RememberMe";
+import useToggle from "../../hooks/useToggle";
 
-export default function Login() {
-  const [remember, setRemember] = useState<boolean>(false);
+const Login = () => {
+  const [remember, toggleRemember] = useToggle(false);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
   const error = useRef<HTMLLabelElement>(null);
   const submit = useRef(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, toggleShowPassword] = useToggle(false);
 
   let navigate = useNavigate();
   let location = useLocation();
+
   const state = location.state as { from: Location };
   let from = state?.from.pathname || "/";
 
@@ -66,15 +68,6 @@ export default function Login() {
       });
   };
 
-  const setRememberValue = () => {
-    !remember ? setRemember(true) : setRemember(false);
-  };
-
-  const togglePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setShowPassword((currShowPassword) => !currShowPassword);
-  };
-
   return (
     <>
       <Background>
@@ -91,7 +84,7 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               label="Password"
               ref={password}
-              onClick={togglePassword}
+              onClick={toggleShowPassword}
             />
           </InputContainer>
           <ErrorContainer>
@@ -100,7 +93,7 @@ export default function Login() {
               Password dimenticata?
             </ForgotPassword>
           </ErrorContainer>
-          <RememberMe onClick={setRememberValue}></RememberMe>
+          <RememberMe onClick={toggleRemember} />
 
           <LoginRegisterButton ref={submit} type="submit" disabled={isFetching}>
             {isFetching ? (
@@ -121,4 +114,5 @@ export default function Login() {
       </Background>
     </>
   );
-}
+};
+export default Login;

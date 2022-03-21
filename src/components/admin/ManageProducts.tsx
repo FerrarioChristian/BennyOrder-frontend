@@ -2,17 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Product from "../shared/Product";
 
 import axiosInstance from "../../utils/axios";
+import { ProductType } from "../shared/Product";
 
-interface Props {
-  id: number;
-  name: string;
-  price: string;
-  description: string;
-  remaining: number;
-}
-
-export default function ManageProducts() {
-  const [products, setProducts] = useState<Props[]>();
+const ManageProducts = () => {
+  const [products, setProducts] = useState<ProductType[]>();
 
   useEffect(() => {
     axiosInstance
@@ -93,4 +86,5 @@ export default function ManageProducts() {
       })}
     </>
   );
-}
+};
+export default ManageProducts;

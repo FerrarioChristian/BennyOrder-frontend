@@ -1,8 +1,7 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import React from "react";
 import { useTitle } from "../../hooks/useTitle";
 
-export default function AccountConfirmed() {
+const AccountConfirmed = () => {
   useTitle("Account Confermato - BennyOrder");
   return (
     <>
@@ -10,4 +9,5 @@ export default function AccountConfirmed() {
       <CheckCircleOutlineIcon />
     </>
   );
-}
+};
+export default AccountConfirmed;

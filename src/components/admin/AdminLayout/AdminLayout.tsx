@@ -37,6 +37,8 @@ const AdminLayout = () => {
   );
 };
 
+export default AdminLayout;
+
 const MainContainer = styled.main`
   padding: 40px 40px;
 `;
@@ -48,6 +50,7 @@ const SideBarUL = styled.ul`
   display: flex;
   flex-direction: column;
 `;
+
 const SideBarContainer = styled.nav`
   color: var(--primary);
   display: flex;
@@ -66,4 +69,3 @@ const AdminLayoutContainer = styled.div`
   flex-direction: row;
   height: 100%;
 `;
-export default AdminLayout;
