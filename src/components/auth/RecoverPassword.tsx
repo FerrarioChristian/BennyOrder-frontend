@@ -19,9 +19,9 @@ interface Props {
 }
 
 const RecoverPassword = ({ confirm_code }: Props) => {
-  const error = useRef<HTMLLabelElement>(document.createElement("label"));
-  const submit = useRef<HTMLButtonElement>(document.createElement("button"));
-  const password = useRef<HTMLInputElement>(document.createElement("input"));
+  const error = useRef<HTMLLabelElement>(null);
+  const submit = useRef<HTMLButtonElement>(null);
+  const password = useRef<HTMLInputElement>(null);
   const confirm_password = useRef<HTMLInputElement>(null);
   let navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const RecoverPassword = ({ confirm_code }: Props) => {
     axiosInstance
       .post("/password_recovery.php", {
         confirm_code: confirm_code,
-        password: password.current.value,
+        password: password.current!.value,
       })
       .then(() => {
         navigate(`/password_changed`);
@@ -40,7 +40,7 @@ const RecoverPassword = ({ confirm_code }: Props) => {
       .catch((err) => {
         console.log(err);
         if (err.response.status === 401) {
-          error.current.innerHTML =
+          error.current!.innerHTML =
             err.response.data.msg ?? "Errore sconosciuto.";
         }
       });
@@ -78,5 +78,4 @@ const RecoverPassword = ({ confirm_code }: Props) => {
     </>
   );
 };
-
 export default RecoverPassword;

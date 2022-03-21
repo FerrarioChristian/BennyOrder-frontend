@@ -1,23 +1,15 @@
 import { useEffect, useState } from "react";
 //import { useParams } from "react-router-dom";
-import Product from "../shared/Product";
+import Product, { ProductType } from "../shared/Product";
 import axiosInstance from "../../utils/axios";
 
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  description: string;
-  remaining: number;
-}
-
-interface Order {
+export interface Order {
   id: number;
   notes: string;
 }
 
 const ClubMenu = () => {
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<ProductType[]>();
   const [orders, setOrders] = useState<Order[]>([]);
   //const { tirt } = useParams();
 
@@ -55,5 +47,4 @@ const ClubMenu = () => {
     </>
   );
 };
-
 export default ClubMenu;
