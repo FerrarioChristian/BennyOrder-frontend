@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactNode } from "react";
 
-interface Props {
+interface NavLinkType {
   isOpen: boolean;
   route: string;
   icon: ReactNode;
   label: string;
 }
 
-const AdminNavLink = ({ isOpen, route, icon, label }: Props) => {
+const AdminNavLink = ({ isOpen, route, icon, label }: NavLinkType) => {
   return (
     <StyledLink to={route}>
       <ILink>{icon}</ILink>
@@ -18,6 +18,7 @@ const AdminNavLink = ({ isOpen, route, icon, label }: Props) => {
     </StyledLink>
   );
 };
+export default AdminNavLink;
 
 const SpanLink = styled.span`
   font-size: 15px;
@@ -58,5 +59,3 @@ const StyledLink = styled(Link)`
     color: var(--background);
   }
 `;
-
-export default AdminNavLink;

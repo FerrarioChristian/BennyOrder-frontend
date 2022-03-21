@@ -1,19 +1,18 @@
 import { useRef } from "react";
 import axiosInstance from "../../utils/axios";
+import { Order } from "../customers/ClubMenu";
 
-interface Props {
+export interface ProductType {
   id: number;
   name: string;
   price: string;
   description: string;
   remaining: number;
-  admin: boolean;
-  setOrders?: React.Dispatch<React.SetStateAction<Order[]>>;
 }
 
-interface Order {
-  id: number;
-  notes: string;
+interface Props extends ProductType {
+  admin: boolean;
+  setOrders?: React.Dispatch<React.SetStateAction<Order[]>>;
 }
 
 export default function Product({
@@ -25,11 +24,11 @@ export default function Product({
   admin,
   setOrders,
 }: Props) {
-  const newNameInputRef = useRef(document.createElement("input"));
-  const newDescriptionInputRef = useRef(document.createElement("input"));
-  const newPriceInputRef = useRef(document.createElement("input"));
-  const newRemainingInputRef = useRef(document.createElement("input"));
-  const notesInputRef = useRef(document.createElement("input"));
+  const newName = useRef<HTMLInputElement>(null);
+  const newDescription = useRef<HTMLInputElement>(null);
+  const newPrice = useRef<HTMLInputElement>(null);
+  const newRemaining = useRef<HTMLInputElement>(null);
+  const notes = useRef<HTMLInputElement>(null);
 
   const deleteProduct = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -41,7 +40,7 @@ export default function Product({
   const addToOrder = (e: React.MouseEvent) => {
     e.preventDefault();
     setOrders?.((currOrder) => {
-      return [...currOrder, { id, notes: notesInputRef.current.value }];
+      return [...currOrder, { id, notes: newName.current!.value }];
     });
   };
 
@@ -61,10 +60,10 @@ export default function Product({
         "/edit_product.php",
         {
           id,
-          new_name: newNameInputRef.current.value,
-          new_price: newPriceInputRef.current.value,
-          new_description: newDescriptionInputRef.current.value,
-          new_remaining: newRemainingInputRef.current.value,
+          new_name: newName.current!.value,
+          new_price: newPrice.current!.value,
+          new_description: newDescription.current!.value,
+          new_remaining: newRemaining.current!.value,
         },
         { withCredentials: true }
       )
@@ -77,28 +76,23 @@ export default function Product({
       <input
         type="text"
         placeholder="Nome prodotto"
-        ref={newNameInputRef}
+        ref={newName}
         hidden={!admin}
       />
       <p>Prezzo: {price}</p>
-      <input
-        type="text"
-        placeholder="Prezzo"
-        ref={newPriceInputRef}
-        hidden={!admin}
-      />
+      <input type="text" placeholder="Prezzo" ref={newPrice} hidden={!admin} />
       <p>Descrizione {description} </p>
       <input
         type="text"
         placeholder="Descrizione"
-        ref={newDescriptionInputRef}
+        ref={newDescription}
         hidden={!admin}
       />
       <p>Residuo {remaining}</p>
       <input
         type="text"
         placeholder="Pezzi"
-        ref={newRemainingInputRef}
+        ref={newRemaining}
         hidden={!admin}
       />
       <button onClick={editProduct} hidden={!admin}>
@@ -107,7 +101,7 @@ export default function Product({
       <button onClick={deleteProduct} hidden={!admin}>
         Elimina
       </button>
-      <input placeholder="Note:" hidden={admin} ref={notesInputRef} />
+      <input placeholder="Note:" hidden={admin} ref={notes} />
       <button onClick={addToOrder} hidden={admin}>
         Aggiungi
       </button>

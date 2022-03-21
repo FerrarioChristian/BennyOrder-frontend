@@ -9,6 +9,9 @@ export const LoginRegisterButton = styled.button`
   border-radius: 50px;
   font-size: x-large;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const LoginRegisterSwitch = styled(Link)`

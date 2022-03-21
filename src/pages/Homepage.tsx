@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Logout from "../components/auth/Logout";
 import { useTitle } from "../hooks/useTitle";
 
-export default function Homepage() {
+const Homepage = () => {
   useTitle("Homepage - BennyOrder");
 
   return (
@@ -20,4 +20,5 @@ export default function Homepage() {
       <Logout />
     </>
   );
-}
+};
+export default Homepage;

@@ -5,7 +5,7 @@ import RecoverPassword from "./RecoverPassword";
 import { useTitle } from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
 
-export default function ForgotPassword() {
+const ForgotPassword = () => {
   useTitle("Password Dimenticata - BennyOrder");
   const [valid, setValid] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
@@ -44,4 +44,5 @@ export default function ForgotPassword() {
       return <InvalidLink />;
     }
   }
-}
+};
+export default ForgotPassword;

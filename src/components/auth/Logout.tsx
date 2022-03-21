@@ -7,7 +7,7 @@ interface Props {
   children?: ReactNode;
 }
 
-export default function Logout({ className, children }: Props) {
+const Logout = ({ className, children }: Props) => {
   let navigate = useNavigate();
 
   const logout = () => {
@@ -17,8 +17,9 @@ export default function Logout({ className, children }: Props) {
   };
 
   return (
-    <a className={className} onClick={logout}>
+    <span className={className} onClick={logout}>
       {children}
-    </a>
+    </span>
   );
-}
+};
+export default Logout;

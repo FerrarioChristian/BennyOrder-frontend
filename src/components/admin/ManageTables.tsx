@@ -30,5 +30,4 @@ const ManageTables = () => {
     </>
   );
 };
-
 export default ManageTables;

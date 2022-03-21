@@ -5,7 +5,7 @@ import InvalidLink from "../../pages/InvalidLink";
 import { useTitle } from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
 
-export default function ValidateAccount() {
+const ValidateAccount = () => {
   useTitle("Convalida Account - BennyOrder");
   const [isFetching, setIsFetching] = useState(false);
   const [valid, setValid] = useState(false);
@@ -43,4 +43,5 @@ export default function ValidateAccount() {
       return <InvalidLink />;
     }
   }
-}
+};
+export default ValidateAccount;

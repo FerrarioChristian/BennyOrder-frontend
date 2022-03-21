@@ -14,18 +14,19 @@ import axiosInstance from "../../utils/axios";
 import LoginRegisterInput from "./LoginRegisterInput";
 import { submitOnEnter } from "../../utils/events";
 import { useEventListener } from "../../hooks/useEventListener";
+import useToggle from "../../hooks/useToggle";
 
-export default function Register() {
+const Register = () => {
   const username = useRef<HTMLInputElement>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const confirmPassword = useRef<HTMLInputElement>(null);
-  const submit = useRef(null);
+  const submit = useRef<HTMLButtonElement>(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, toggleShowPassword] = useToggle(false);
+  const [showConfirmPassword, toggleShowConfirmPassword] = useToggle(false);
 
-  const error = useRef<HTMLLabelElement>(document.createElement("label"));
+  const error = useRef<HTMLLabelElement>(null);
   let navigate = useNavigate();
 
   useTitle("Registrati - BennyOrder");
@@ -34,7 +35,7 @@ export default function Register() {
   const submitRegister = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (password.current?.value !== confirmPassword.current?.value) {
-      error.current.innerHTML = "Le password non coincidono.";
+      error.current!.innerHTML = "Le password non coincidono.";
     } else {
       setIsFetching(true);
       axiosInstance
@@ -48,23 +49,11 @@ export default function Register() {
           setIsFetching(false);
         })
         .catch((err) => {
-          error.current.innerHTML =
+          error.current!.innerHTML =
             err.response.data.msg ?? "Errore sconosciuto.";
           setIsFetching(false);
         });
     }
-  };
-
-  const togglePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setShowPassword((currShowPassword) => !currShowPassword);
-  };
-
-  const toggleConfirmPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setShowConfirmPassword(
-      (currShowConfirmPassword) => !currShowConfirmPassword
-    );
   };
 
   return (
@@ -89,28 +78,21 @@ export default function Register() {
               type={showPassword ? "text" : "password"}
               label="Password"
               ref={password}
-              onClick={togglePassword}
+              onClick={toggleShowPassword}
             />
             <LoginRegisterInput
               placeholder="Minimo 8 caratteri"
               type={showConfirmPassword ? "text" : "password"}
               label="Conferma Password"
               ref={confirmPassword}
-              onClick={toggleConfirmPassword}
+              onClick={toggleShowConfirmPassword}
             />
           </InputContainer>
           <ErrorLabel ref={error}></ErrorLabel>
 
           <LoginRegisterButton ref={submit} type="submit" disabled={isFetching}>
             {isFetching ? (
-              <CircularProgress
-                style={{
-                  color: "var(--secondary)",
-                  margin: "auto",
-                  display: "flex",
-                }}
-                size="30px"
-              />
+              <CircularProgress color="inherit" size="30px" />
             ) : (
               "Registrati"
             )}
@@ -120,4 +102,5 @@ export default function Register() {
       </Background>
     </>
   );
-}
+};
+export default Register;

@@ -25,6 +25,8 @@ const LogoNavLink = ({ isOpen, setIsOpen }: Props) => {
   );
 };
 
+export default LogoNavLink;
+
 const LogoContainer = styled.div`
   height: 60px;
   display: flex;
@@ -64,5 +66,3 @@ const HamburgerMenu = styled.span`
   justify-content: center;
   cursor: pointer;
 `;
-
-export default LogoNavLink;

@@ -7,8 +7,8 @@ interface Props {
 }
 
 const RequireAuth = ({ redirectTo }: Props) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
 
@@ -45,5 +45,4 @@ const RequireAuth = ({ redirectTo }: Props) => {
     );
   }
 };
-
 export default RequireAuth;
