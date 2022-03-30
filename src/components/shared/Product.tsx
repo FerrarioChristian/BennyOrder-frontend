@@ -40,7 +40,7 @@ export default function Product({
   const addToOrder = (e: React.MouseEvent) => {
     e.preventDefault();
     setOrders?.((currOrder) => {
-      return [...currOrder, { id, notes: newName.current!.value }];
+      return [...currOrder, { id, notes: notes.current!.value }];
     });
   };
 
