@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useTitle } from "../../hooks/useTitle";
+import useTitle from "../../hooks/useTitle";
 
-const Dashboard = () => {
+function Dashboard() {
   useTitle("***NOME_BAR*** - BennyOrder");
 
   return (
@@ -12,5 +12,5 @@ const Dashboard = () => {
       <Link to="/admin/assign_tables">Gestisci Dispositivi</Link>
     </>
   );
-};
+}
 export default Dashboard;

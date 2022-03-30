@@ -1,13 +1,13 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { useTitle } from "../../hooks/useTitle";
+import useTitle from "../../hooks/useTitle";
 
-const AccountConfirmed = () => {
+function AccountConfirmed() {
   useTitle("Account Confermato - BennyOrder");
   return (
     <>
-      <p> L'account è stato confermato.</p>
+      <p> L&apos;account è stato confermato.</p>
       <CheckCircleOutlineIcon />
     </>
   );
-};
+}
 export default AccountConfirmed;

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export function useEventListener(
+function useEventListener(
   eventName: string,
   handler: (e: any) => void,
   element = document
@@ -13,15 +13,13 @@ export function useEventListener(
 
   useEffect(() => {
     const isSupported = element && element.addEventListener;
-    if (!isSupported) return;
-
-    const eventListener = (event: any) => {
-      return savedHandler.current(event);
-    };
-
+    if (!isSupported) return undefined;
+    const eventListener = (event: any) => savedHandler.current(event);
     element.addEventListener(eventName, eventListener);
     return () => {
       element.removeEventListener(eventName, eventListener);
     };
   }, [eventName, element]);
 }
+
+export default useEventListener;

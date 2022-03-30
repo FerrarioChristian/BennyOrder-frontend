@@ -7,19 +7,27 @@ interface Props {
   children?: ReactNode;
 }
 
-const Logout = ({ className, children }: Props) => {
-  let navigate = useNavigate();
+function Logout({ className, children }: Props) {
+  const navigate = useNavigate();
 
   const logout = () => {
-    axiosInstance.get("/logout.php", { withCredentials: true }).then(() => {
-      navigate(`/`);
-    });
+    axiosInstance
+      .get("/logout.php", { withCredentials: true })
+      .then(() => {
+        navigate("/");
+      });
   };
 
   return (
-    <span className={className} onClick={logout}>
+    <span
+      role="button"
+      className={className}
+      onClick={logout}
+      onKeyPress={logout}
+      tabIndex={0}
+    >
       {children}
     </span>
   );
-};
+}
 export default Logout;

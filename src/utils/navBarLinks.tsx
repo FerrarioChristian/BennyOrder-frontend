@@ -4,7 +4,7 @@ import AnalyticsIcon from "@mui/icons-material/Analytics";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 
-export const adminNavLinks = [
+const adminNavLinks = [
   {
     route: "/admin/dashboard",
     icon: <DashboardRoundedIcon />,
@@ -31,3 +31,5 @@ export const adminNavLinks = [
     label: "Impostazioni",
   },
 ];
+
+export default adminNavLinks;

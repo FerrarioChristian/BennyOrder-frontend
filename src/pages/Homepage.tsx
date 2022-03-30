@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import Logout from "../components/auth/Logout";
-import { useTitle } from "../hooks/useTitle";
+import useTitle from "../hooks/useTitle";
 
-const Homepage = () => {
+function Homepage() {
   useTitle("Homepage - BennyOrder");
 
   return (
@@ -14,11 +13,7 @@ const Homepage = () => {
       <br />
       <Link to="/register">Register</Link>
       <br />
-      <Link to="/club/menu">ClubMenu</Link>
-      {/* Cambiare il nome con l'id */}
-      <br />
-      <Logout />
     </>
   );
-};
+}
 export default Homepage;

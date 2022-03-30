@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
 import RequireAuth from "./components/auth/RequireAuth";
 import ManageTables from "./components/admin/ManageTables";
 import Dashboard from "./components/admin/Dashboard";
@@ -13,8 +17,9 @@ import ClubMenu from "./components/customers/ClubMenu";
 import Homepage from "./pages/Homepage";
 import NotFound from "./pages/NotFound";
 import AdminLayout from "./components/admin/AdminLayout/AdminLayout";
+import NewSession from "./components/customers/NewSession";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Routes>
@@ -23,16 +28,16 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/emailsent" element={<EmailSent />} />
         <Route
-          path="/validateaccount/:confirm_code"
+          path="/validateaccount/:confirmCode"
           element={<ValidateAccount />}
         />
         <Route path="/forgotpassword">
           <Route path="email" element={<ForgotPasswordEmail />} />
-          <Route path=":confirm_code" element={<ForgotPassword />} />
+          <Route path=":confirmCode" element={<ForgotPassword />} />
         </Route>
-        <Route path="/club">
-          <Route path=":tirt" element={<ClubMenu />}></Route>
-        </Route>
+
+        <Route path="/o/:tirt" element={<NewSession />} />
+        <Route path="/clubmenu" element={<ClubMenu />} />
 
         <Route element={<RequireAuth redirectTo="/login" />}>
           <Route path="/admin" element={<AdminLayout />}>
@@ -46,6 +51,6 @@ const App = () => {
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;

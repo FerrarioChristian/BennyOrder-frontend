@@ -2,31 +2,6 @@ import styled from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoDevIcon from "@mui/icons-material/LogoDev";
 
-interface Props {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const LogoNavLink = ({ isOpen, setIsOpen }: Props) => {
-  const setSideBarOpen = () => {
-    setIsOpen((currState) => !currState);
-  };
-
-  return (
-    <LogoContainer>
-      <LogoIcon isOpen={isOpen}>
-        <LogoDevIcon />
-      </LogoIcon>
-      <LogoName isOpen={isOpen}>BennyOrder</LogoName>
-      <HamburgerMenu>
-        <MenuIcon onClick={setSideBarOpen} />
-      </HamburgerMenu>
-    </LogoContainer>
-  );
-};
-
-export default LogoNavLink;
-
 const LogoContainer = styled.div`
   height: 60px;
   display: flex;
@@ -41,14 +16,16 @@ const LogoIcon = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
+  opacity: ${({ isOpen }: { isOpen: boolean }) =>
+    isOpen ? "1;" : "0;"};
   transition: 0.2s ease;
 `;
 
 const LogoName = styled.p`
   font-size: 18px;
   font-weight: 600;
-  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
+  opacity: ${({ isOpen }: { isOpen: boolean }) =>
+    isOpen ? "1;" : "0;"};
   transition: 0.2s ease;
 `;
 
@@ -66,3 +43,28 @@ const HamburgerMenu = styled.span`
   justify-content: center;
   cursor: pointer;
 `;
+
+interface Props {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function LogoNavLink({ isOpen, setIsOpen }: Props) {
+  const setSideBarOpen = () => {
+    setIsOpen((currState) => !currState);
+  };
+
+  return (
+    <LogoContainer>
+      <LogoIcon isOpen={isOpen}>
+        <LogoDevIcon />
+      </LogoIcon>
+      <LogoName isOpen={isOpen}>BennyOrder</LogoName>
+      <HamburgerMenu>
+        <MenuIcon onClick={setSideBarOpen} />
+      </HamburgerMenu>
+    </LogoContainer>
+  );
+}
+
+export default LogoNavLink;
