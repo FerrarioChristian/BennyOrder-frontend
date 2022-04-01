@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import Product from "../shared/Product";
+import Product, { ProductType } from "../shared/Product";
 
 import axiosInstance from "../../utils/axios";
-import { ProductType } from "../shared/Product";
 
-const ManageProducts = () => {
+function ManageProducts() {
   const [products, setProducts] = useState<ProductType[]>();
 
   useEffect(() => {
     axiosInstance
-      .get(`/list_products.php`, { withCredentials: true })
+      .get("/list_products.php", { withCredentials: true })
       .then((res) => {
         setProducts(res.data);
       });
@@ -69,22 +68,20 @@ const ManageProducts = () => {
           name="pieces"
           placeholder="numero pezzi"
         />
-        <button> Aggiungi </button>
+        <button type="submit"> Aggiungi </button>
       </form>
-      {products?.map((res) => {
-        return (
-          <Product
-            key={res.id}
-            id={res.id}
-            name={res.name}
-            price={res.price}
-            description={res.description}
-            remaining={res.remaining}
-            admin={true}
-          />
-        );
-      })}
+      {products?.map((res) => (
+        <Product
+          key={res.id}
+          id={res.id}
+          name={res.name}
+          price={res.price}
+          description={res.description}
+          remaining={res.remaining}
+          admin
+        />
+      ))}
     </>
   );
-};
+}
 export default ManageProducts;

@@ -1,33 +1,26 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axios";
-import Device from "./Device";
+import Device, { DeviceType } from "./Device";
 
-export interface DeviceType {
-  serial: string;
-  table_id: number;
-}
-
-const ManageTables = () => {
+function ManageTables() {
   const [devices, setDevices] = useState<DeviceType[]>([]);
   useEffect(() => {
     axiosInstance
-      .get(`/list_devices.php`, { withCredentials: true })
+      .get("/list_devices.php", { withCredentials: true })
       .then((res) => {
         setDevices(res.data);
       });
   }, []);
   return (
     <>
-      {devices.map((device) => {
-        return (
-          <Device
-            key={device.serial}
-            serial={device.serial}
-            table_id={device.table_id}
-          />
-        );
-      })}
+      {devices.map((device) => (
+        <Device
+          key={device.serial}
+          serial={device.serial}
+          table_id={device.table_id}
+        />
+      ))}
     </>
   );
-};
+}
 export default ManageTables;

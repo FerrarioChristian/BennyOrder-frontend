@@ -1,24 +1,5 @@
 import styled from "styled-components";
 
-const RememberMe = ({
-  onClick,
-}: {
-  onClick: React.MouseEventHandler<HTMLInputElement> | undefined;
-}) => {
-  return (
-    <>
-      <StyledContainer>
-        <StyledLabel>
-          <StyledCheckbox type="checkbox" onClick={onClick} />
-          <StyledSpan></StyledSpan>
-          Mantienimi autenticato
-        </StyledLabel>
-      </StyledContainer>
-    </>
-  );
-};
-export default RememberMe;
-
 const StyledContainer = styled.div`
   display: inline-flex;
   margin-bottom: 1rem;
@@ -86,3 +67,20 @@ const StyledLabel = styled.label`
     transform: rotate(45deg);
   }
 `;
+
+function RememberMe({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLInputElement> | undefined;
+}) {
+  return (
+    <StyledContainer>
+      <StyledLabel>
+        <StyledCheckbox type="checkbox" onClick={onClick} />
+        <StyledSpan />
+        Mantienimi autenticato
+      </StyledLabel>
+    </StyledContainer>
+  );
+}
+export default RememberMe;

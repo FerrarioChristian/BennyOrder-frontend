@@ -1,6 +1,6 @@
-import { useTitle } from "../hooks/useTitle";
+import useTitle from "../hooks/useTitle";
 
-const NotFound = () => {
+function NotFound() {
   useTitle("Pagina non trovata - BennyOrder");
   return (
     <>
@@ -8,5 +8,5 @@ const NotFound = () => {
       <a href="/">Back to home</a>
     </>
   );
-};
+}
 export default NotFound;

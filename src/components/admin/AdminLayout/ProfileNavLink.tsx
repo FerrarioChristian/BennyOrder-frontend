@@ -8,27 +8,6 @@ interface Props {
   isOpen: boolean;
 }
 
-const ProfileNavLink = ({ name, description, isOpen }: Props) => {
-  return (
-    <ProfileNav>
-      <ProfileInfoContainer isOpen={isOpen}>
-        <StyledImgProfile
-          src="https://www.w3schools.com/images/w3schools_green.jpg"
-          alt="Profile"
-        />
-        <div>
-          <Name>{name}</Name>
-          <Description>{description}</Description>
-        </div>
-      </ProfileInfoContainer>
-      <LogoutButton>
-        <LogoutIcon />
-      </LogoutButton>
-    </ProfileNav>
-  );
-};
-export default ProfileNavLink;
-
 const Name = styled.p`
   font-size: 18px;
   font-weight: 400;
@@ -76,7 +55,8 @@ const StyledImgProfile = styled.img`
 `;
 
 const ProfileInfoContainer = styled.div`
-  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
+  opacity: ${({ isOpen }: { isOpen: boolean }) =>
+    isOpen ? "1;" : "0;"};
   transition: 0.2s;
   display: flex;
   align-items: center;
@@ -88,3 +68,24 @@ const ProfileNav = styled.li`
   position: relative;
   margin-top: auto;
 `;
+
+function ProfileNavLink({ name, description, isOpen }: Props) {
+  return (
+    <ProfileNav>
+      <ProfileInfoContainer isOpen={isOpen}>
+        <StyledImgProfile
+          src="https://www.w3schools.com/images/w3schools_green.jpg"
+          alt="Profile"
+        />
+        <div>
+          <Name>{name}</Name>
+          <Description>{description}</Description>
+        </div>
+      </ProfileInfoContainer>
+      <LogoutButton>
+        <LogoutIcon />
+      </LogoutButton>
+    </ProfileNav>
+  );
+}
+export default ProfileNavLink;

@@ -1,8 +1,12 @@
 import { useRef } from "react";
-import { DeviceType } from "./ManageTables";
 import axiosInstance from "../../utils/axios";
 
-const Device = ({ serial, table_id }: DeviceType) => {
+export interface DeviceType {
+  serial: string;
+  table_id: number;
+}
+
+function Device({ serial, table_id }: DeviceType) {
   const tableIdInputRef = useRef(document.createElement("input"));
 
   const editDeviceTable = () => {
@@ -19,9 +23,15 @@ const Device = ({ serial, table_id }: DeviceType) => {
   return (
     <>
       <h1>{serial}</h1>
-      <input type="text" defaultValue={table_id} ref={tableIdInputRef} />
-      <button onClick={editDeviceTable}>Modifica</button>
+      <input
+        type="text"
+        defaultValue={table_id}
+        ref={tableIdInputRef}
+      />
+      <button type="button" onClick={editDeviceTable}>
+        Modifica
+      </button>
     </>
   );
-};
+}
 export default Device;
