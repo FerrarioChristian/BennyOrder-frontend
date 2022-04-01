@@ -6,62 +6,6 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-interface Props {
-  label: string;
-  placeholder: string;
-  type: string;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-const LoginRegisterInput = (
-  props: Props,
-  ref: ForwardedRef<HTMLInputElement>
-) => {
-  return (
-    <>
-      <StyledLabel>{props.label}</StyledLabel>
-      <StyledDiv>
-        {(() => {
-          if (props.label === "Username") {
-            return <PersonOutlinedIcon sx={{ color: "var(--accent)" }} />;
-          } else if (
-            props.label === "Password" ||
-            props.label === "Conferma Password"
-          ) {
-            return <LockOutlinedIcon sx={{ color: "var(--accent)" }} />;
-          } else if (props.label === "Email") {
-            return <MailOutlineIcon sx={{ color: "var(--accent)" }} />;
-          }
-        })()}
-
-        <StyledInput
-          placeholder={props.placeholder}
-          type={props.type}
-          ref={ref}
-        />
-        {(() => {
-          if (props.onClick) {
-            if (props.type !== "password") {
-              return (
-                <StyledButton onClick={props.onClick}>
-                  <VisibilityOffIcon sx={{ color: "var(--primary)" }} />
-                </StyledButton>
-              );
-            }
-
-            return (
-              <StyledButton onClick={props.onClick}>
-                <VisibilityIcon sx={{ color: "var(--primary)" }} />
-              </StyledButton>
-            );
-          }
-        })()}
-      </StyledDiv>
-    </>
-  );
-};
-export default forwardRef(LoginRegisterInput);
-
 const StyledButton = styled.span`
   background: none;
   outline: none;
@@ -94,3 +38,70 @@ const StyledDiv = styled.div`
   display: inline-flex;
   gap: 15px;
 `;
+
+interface Props {
+  label: string;
+  placeholder: string;
+  type: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+function LoginRegisterInput(
+  { label, placeholder, type, onClick }: Props,
+  ref: ForwardedRef<HTMLInputElement>
+) {
+  return (
+    <>
+      <StyledLabel>{label}</StyledLabel>
+      <StyledDiv>
+        {(() => {
+          if (label === "Username") {
+            return (
+              <PersonOutlinedIcon sx={{ color: "var(--accent)" }} />
+            );
+          }
+          if (label === "Password" || label === "Conferma Password") {
+            return (
+              <LockOutlinedIcon sx={{ color: "var(--accent)" }} />
+            );
+          }
+          if (label === "Email") {
+            return (
+              <MailOutlineIcon sx={{ color: "var(--accent)" }} />
+            );
+          }
+          return null;
+        })()}
+
+        <StyledInput
+          placeholder={placeholder}
+          type={type}
+          ref={ref}
+        />
+
+        {(() => {
+          if (onClick) {
+            if (type !== "password") {
+              return (
+                <StyledButton onClick={onClick}>
+                  <VisibilityOffIcon
+                    sx={{ color: "var(--primary)" }}
+                  />
+                </StyledButton>
+              );
+            }
+
+            return (
+              <StyledButton onClick={onClick}>
+                <VisibilityIcon sx={{ color: "var(--primary)" }} />
+              </StyledButton>
+            );
+          }
+          return null;
+        })()}
+      </StyledDiv>
+    </>
+  );
+}
+
+export default forwardRef(LoginRegisterInput);
