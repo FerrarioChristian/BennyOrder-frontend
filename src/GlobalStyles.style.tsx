@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-export const GlobalStyles = createGlobalStyle`
+
+const GlobalStyles = createGlobalStyle`
     :root {
       --background: #1f1d36;
       --primary: #f7f7f7;
@@ -34,3 +35,5 @@ export const GlobalStyles = createGlobalStyle`
     }
 
 `;
+
+export default GlobalStyles;

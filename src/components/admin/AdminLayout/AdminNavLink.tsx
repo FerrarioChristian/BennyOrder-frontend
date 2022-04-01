@@ -2,29 +2,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactNode } from "react";
 
-interface NavLinkType {
-  isOpen: boolean;
-  route: string;
-  icon: ReactNode;
-  label: string;
-}
-
-const AdminNavLink = ({ isOpen, route, icon, label }: NavLinkType) => {
-  return (
-    <StyledLink to={route}>
-      <ILink>{icon}</ILink>
-      <SpanLink isOpen={isOpen}>{label}</SpanLink>
-      <span></span>
-    </StyledLink>
-  );
-};
-export default AdminNavLink;
-
 const SpanLink = styled.span`
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
-  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
+  opacity: ${({ isOpen }: { isOpen: boolean }) =>
+    isOpen ? "1;" : "0;"};
   pointer-events: none;
   transition: all 0.1s ease;
   text-decoration: none;
@@ -59,3 +42,21 @@ const StyledLink = styled(Link)`
     color: var(--background);
   }
 `;
+
+interface NavLinkType {
+  isOpen: boolean;
+  route: string;
+  icon: ReactNode;
+  label: string;
+}
+
+function AdminNavLink({ isOpen, route, icon, label }: NavLinkType) {
+  return (
+    <StyledLink to={route}>
+      <ILink>{icon}</ILink>
+      <SpanLink isOpen={isOpen}>{label}</SpanLink>
+      <span />
+    </StyledLink>
+  );
+}
+export default AdminNavLink;

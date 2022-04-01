@@ -1,14 +1,14 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEventListener } from "../../hooks/useEventListener";
-import { useTitle } from "../../hooks/useTitle";
+import useEventListener from "../../hooks/useEventListener";
+import useTitle from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
-import { submitOnEnter } from "../../utils/events";
+import submitOnEnter from "../../utils/events";
 
-const ForgotPasswordEmail = () => {
+function ForgotPasswordEmail() {
   const submit = useRef(null);
   const [email, setEmail] = useState("");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useTitle("Recupero Password - BennyOrder");
   useEventListener("keydown", submitOnEnter(submit));
@@ -16,10 +16,10 @@ const ForgotPasswordEmail = () => {
   const submitLogin = () => {
     axiosInstance
       .post("/password_recovery.php", {
-        email: email,
+        email,
       })
       .then(() => {
-        navigate(`/`);
+        navigate("/");
       });
   };
 
@@ -36,5 +36,5 @@ const ForgotPasswordEmail = () => {
       </button>
     </>
   );
-};
+}
 export default ForgotPasswordEmail;

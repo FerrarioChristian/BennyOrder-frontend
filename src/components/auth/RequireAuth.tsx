@@ -6,7 +6,7 @@ interface Props {
   redirectTo: string;
 }
 
-const RequireAuth = ({ redirectTo }: Props) => {
+function RequireAuth({ redirectTo }: Props) {
   const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,13 +17,13 @@ const RequireAuth = ({ redirectTo }: Props) => {
       axiosInstance
         .get("/user_auth.php", { withCredentials: true })
         .then((res) => {
-          if (isLoading && res.status === 200) {
+          if (res.status === 200) {
             setIsAuth(true);
             setIsLoading(false);
           }
         })
         .catch((err) => {
-          if (isLoading && err.response?.status === 401) {
+          if (err.response?.status === 401) {
             setIsAuth(false);
             setIsLoading(false);
           }
@@ -37,12 +37,11 @@ const RequireAuth = ({ redirectTo }: Props) => {
 
   if (isLoading) {
     return <h2>Loading...</h2>;
-  } else {
-    return isAuth ? (
-      <Outlet />
-    ) : (
-      <Navigate to={redirectTo} state={{ from: location }} replace />
-    );
   }
-};
+  return isAuth ? (
+    <Outlet />
+  ) : (
+    <Navigate to={redirectTo} state={{ from: location }} replace />
+  );
+}
 export default RequireAuth;

@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AccountConfirmed from "./AccountConfirmed";
 import InvalidLink from "../../pages/InvalidLink";
-import { useTitle } from "../../hooks/useTitle";
+import useTitle from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
 
-const ValidateAccount = () => {
+function ValidateAccount() {
   useTitle("Convalida Account - BennyOrder");
   const [isFetching, setIsFetching] = useState(false);
   const [valid, setValid] = useState(false);
-  const { confirm_code } = useParams();
+  const { confirmCode } = useParams();
 
   useEffect(() => {
     const validateAccount = () => {
       setIsFetching(true);
       axiosInstance
         .post("/confirm_account.php", {
-          confirm_code: confirm_code,
+          confirm_code: confirmCode,
         })
         .then((res) => {
           if (res.status === 200) {
@@ -32,16 +32,14 @@ const ValidateAccount = () => {
         });
     };
     validateAccount();
-  }, [confirm_code]);
+  }, [confirmCode]);
 
   if (isFetching) {
     return null;
-  } else {
-    if (valid) {
-      return <AccountConfirmed />;
-    } else {
-      return <InvalidLink />;
-    }
   }
-};
+  if (valid) {
+    return <AccountConfirmed />;
+  }
+  return <InvalidLink />;
+}
 export default ValidateAccount;
