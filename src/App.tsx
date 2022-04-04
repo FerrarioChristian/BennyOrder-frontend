@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RequireAuth from "./components/auth/RequireAuth";
 import ManageTables from "./components/admin/ManageTables";
 import Dashboard from "./components/admin/Dashboard";

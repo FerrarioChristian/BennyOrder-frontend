@@ -6,8 +6,7 @@ const SpanLink = styled.span`
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
-  opacity: ${({ isOpen }: { isOpen: boolean }) =>
-    isOpen ? "1;" : "0;"};
+  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   pointer-events: none;
   transition: all 0.1s ease;
   text-decoration: none;

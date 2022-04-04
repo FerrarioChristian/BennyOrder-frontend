@@ -16,7 +16,7 @@ import useTitle from "../../hooks/useTitle";
 import useEventListener from "../../hooks/useEventListener";
 import submitOnEnter from "../../utils/events";
 import axiosInstance from "../../utils/axios";
-import LoginRegisterInput from "./LoginRegisterInput";
+import FormInput from "./FormInput";
 import RememberMe from "./RememberMe";
 import useToggle from "../../hooks/useToggle";
 
@@ -28,7 +28,6 @@ function Login() {
   const error = useRef<HTMLLabelElement>(null);
   const submit = useRef(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [showPassword, toggleShowPassword] = useToggle(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -72,18 +71,17 @@ function Login() {
     <Background>
       <FormContainer onSubmit={submitLogin}>
         <InputContainer>
-          <LoginRegisterInput
+          <FormInput
             placeholder="me@example.com"
             type="text"
             label="Email"
             ref={email}
           />
-          <LoginRegisterInput
+          <FormInput
             placeholder="Password"
-            type={showPassword ? "text" : "password"}
+            type="password"
             label="Password"
             ref={password}
-            onClick={toggleShowPassword}
           />
         </InputContainer>
         <ErrorContainer>
@@ -94,11 +92,7 @@ function Login() {
         </ErrorContainer>
         <RememberMe onClick={toggleRemember} />
 
-        <LoginRegisterButton
-          ref={submit}
-          type="submit"
-          disabled={isFetching}
-        >
+        <LoginRegisterButton ref={submit} type="submit" disabled={isFetching}>
           {isFetching ? (
             <CircularProgress
               style={{
@@ -112,9 +106,7 @@ function Login() {
             "Accedi"
           )}
         </LoginRegisterButton>
-        <LoginRegisterSwitch to="/register">
-          Registrati
-        </LoginRegisterSwitch>
+        <LoginRegisterSwitch to="/register">Registrati</LoginRegisterSwitch>
       </FormContainer>
     </Background>
   );
