@@ -55,8 +55,7 @@ const StyledImgProfile = styled.img`
 `;
 
 const ProfileInfoContainer = styled.div`
-  opacity: ${({ isOpen }: { isOpen: boolean }) =>
-    isOpen ? "1;" : "0;"};
+  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   transition: 0.2s;
   display: flex;
   align-items: center;

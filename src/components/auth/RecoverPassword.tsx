@@ -12,7 +12,7 @@ import {
   LoginRegisterButton,
   ErrorLabel,
 } from "./LoginRegister.styles";
-import LoginRegisterInput from "./LoginRegisterInput";
+import FormInput from "./FormInput";
 
 interface Props {
   confirm_code?: string;
@@ -49,13 +49,13 @@ function RecoverPassword({ confirm_code }: Props) {
     <Background>
       <FormContainer>
         <InputContainer>
-          <LoginRegisterInput
+          <FormInput
             placeholder="Minimo 8 caratteri"
             type="password"
             label="Password"
             ref={password}
           />
-          <LoginRegisterInput
+          <FormInput
             placeholder="Minimo 8 caratteri"
             type="password"
             label="Conferma Password"

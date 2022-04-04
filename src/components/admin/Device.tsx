@@ -23,11 +23,7 @@ function Device({ serial, table_id }: DeviceType) {
   return (
     <>
       <h1>{serial}</h1>
-      <input
-        type="text"
-        defaultValue={table_id}
-        ref={tableIdInputRef}
-      />
+      <input type="text" defaultValue={table_id} ref={tableIdInputRef} />
       <button type="button" onClick={editDeviceTable}>
         Modifica
       </button>

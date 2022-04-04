@@ -11,11 +11,9 @@ function Logout({ className, children }: Props) {
   const navigate = useNavigate();
 
   const logout = () => {
-    axiosInstance
-      .get("/logout.php", { withCredentials: true })
-      .then(() => {
-        navigate("/");
-      });
+    axiosInstance.get("/logout.php", { withCredentials: true }).then(() => {
+      navigate("/");
+    });
   };
 
   return (
