@@ -11,10 +11,9 @@ import {
 } from "./LoginRegister.styles";
 import useTitle from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";
-import LoginRegisterInput from "./LoginRegisterInput";
+import FormInput from "./FormInput";
 import submitOnEnter from "../../utils/events";
 import useEventListener from "../../hooks/useEventListener";
-import useToggle from "../../hooks/useToggle";
 
 function Register() {
   const username = useRef<HTMLInputElement>(null);
@@ -23,9 +22,6 @@ function Register() {
   const confirmPassword = useRef<HTMLInputElement>(null);
   const submit = useRef<HTMLButtonElement>(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [showPassword, toggleShowPassword] = useToggle(false);
-  const [showConfirmPassword, toggleShowConfirmPassword] =
-    useToggle(false);
 
   const error = useRef<HTMLLabelElement>(null);
   const navigate = useNavigate();
@@ -61,40 +57,34 @@ function Register() {
     <Background>
       <FormContainer onSubmit={submitRegister}>
         <InputContainer>
-          <LoginRegisterInput
+          <FormInput
             placeholder="Username"
             type="text"
             label="Username"
             ref={username}
           />
-          <LoginRegisterInput
+          <FormInput
             placeholder="me@example.com"
             type="email"
             label="Email"
             ref={email}
           />
-          <LoginRegisterInput
+          <FormInput
             placeholder="Minimo 8 caratteri"
-            type={showPassword ? "text" : "password"}
+            type="password"
             label="Password"
             ref={password}
-            onClick={toggleShowPassword}
           />
-          <LoginRegisterInput
+          <FormInput
             placeholder="Minimo 8 caratteri"
-            type={showConfirmPassword ? "text" : "password"}
+            type="password"
             label="Conferma Password"
             ref={confirmPassword}
-            onClick={toggleShowConfirmPassword}
           />
         </InputContainer>
         <ErrorLabel ref={error} />
 
-        <LoginRegisterButton
-          ref={submit}
-          type="submit"
-          disabled={isFetching}
-        >
+        <LoginRegisterButton ref={submit} type="submit" disabled={isFetching}>
           {isFetching ? (
             <CircularProgress color="inherit" size="30px" />
           ) : (
