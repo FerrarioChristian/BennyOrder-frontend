@@ -91,12 +91,7 @@ export default function Product({
         Prezzo:
         {price}
       </p>
-      <input
-        type="text"
-        placeholder="Prezzo"
-        ref={newPrice}
-        hidden={!admin}
-      />
+      <input type="text" placeholder="Prezzo" ref={newPrice} hidden={!admin} />
       <p>
         Descrizione
         {description}

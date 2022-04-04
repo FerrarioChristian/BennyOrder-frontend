@@ -24,8 +24,7 @@ const SideBarContainer = styled.nav`
   flex-direction: column;
   min-width: ${({ isOpen }: { isOpen: boolean }) =>
     isOpen ? "250px;" : "78px;"};
-  width: ${({ isOpen }: { isOpen: boolean }) =>
-    isOpen ? "250px;" : "78px;"};
+  width: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "250px;" : "78px;")};
   height: 100vh;
   padding: 8px 14px;
   background: var(--background);

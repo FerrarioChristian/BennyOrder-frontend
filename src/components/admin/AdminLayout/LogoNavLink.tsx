@@ -16,16 +16,14 @@ const LogoIcon = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: ${({ isOpen }: { isOpen: boolean }) =>
-    isOpen ? "1;" : "0;"};
+  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   transition: 0.2s ease;
 `;
 
 const LogoName = styled.p`
   font-size: 18px;
   font-weight: 600;
-  opacity: ${({ isOpen }: { isOpen: boolean }) =>
-    isOpen ? "1;" : "0;"};
+  opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   transition: 0.2s ease;
 `;
 
