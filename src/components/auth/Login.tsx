@@ -43,7 +43,7 @@ function Login() {
     setIsFetching(true);
     axiosInstance
       .post(
-        "/login.php",
+        "/api/auth/users/login",
         {
           email: email.current?.value,
           password: password.current?.value,
@@ -60,6 +60,8 @@ function Login() {
         if (err.response.status === 401) {
           error.current!.innerHTML =
             err.response.data.msg ?? "Errore sconosiuto.";
+          password.current!.value = "";
+          password.current!.focus();
         } else if (err.response.status === 403) {
           error.current!.innerHTML =
             err.response.data.msg ?? "Errore sconosciuto.";
