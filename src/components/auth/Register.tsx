@@ -62,24 +62,28 @@ function Register() {
             type="text"
             label="Username"
             ref={username}
+            autocomplete="username"
           />
           <FormInput
             placeholder="me@example.com"
             type="email"
             label="Email"
             ref={email}
+            autocomplete="email"
           />
           <FormInput
             placeholder="Minimo 8 caratteri"
             type="password"
             label="Password"
             ref={password}
+            autocomplete="new-password"
           />
           <FormInput
             placeholder="Minimo 8 caratteri"
             type="password"
             label="Conferma Password"
             ref={confirmPassword}
+            autocomplete="new-password"
           />
         </InputContainer>
         <ErrorLabel ref={error} />

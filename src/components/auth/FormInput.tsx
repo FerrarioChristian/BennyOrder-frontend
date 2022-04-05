@@ -34,11 +34,12 @@ const StyledDiv = styled.div`
 interface Props {
   label: string;
   placeholder: string;
-  type?: string;
+  type: string;
+  autocomplete?: string;
 }
 
 function FormInput(
-  { label, placeholder, type }: Props,
+  { label, placeholder, type, autocomplete }: Props,
   ref: ForwardedRef<HTMLInputElement>
 ) {
   const [inputType, PasswordEye] = usePasswordToggle();
@@ -47,23 +48,21 @@ function FormInput(
     <>
       <StyledLabel>{label}</StyledLabel>
       <StyledDiv>
-        {() => {
-          switch (type) {
-            case "text":
-              return <PersonOutlinedIcon sx={{ color: "var(--accent)" }} />;
-            case "password":
-              return <LockOutlinedIcon sx={{ color: "var(--accent)" }} />;
-            case "email":
-              return <MailOutlineIcon sx={{ color: "var(--accent)" }} />;
-            default:
-              return null;
-          }
-        }}
+        {
+          {
+            text: <PersonOutlinedIcon sx={{ color: "var(--accent)" }} />,
+            password: <LockOutlinedIcon sx={{ color: "var(--accent)" }} />,
+            email: <MailOutlineIcon sx={{ color: "var(--accent)" }} />,
+          }[type]
+        }
+
         <StyledInput
           placeholder={placeholder}
           type={type === "password" ? inputType : type}
           ref={ref}
+          autoComplete={autocomplete}
         />
+
         {type === "password" && PasswordEye}
       </StyledDiv>
     </>
