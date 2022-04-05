@@ -33,10 +33,13 @@ function Register() {
     e.preventDefault();
     if (password.current?.value !== confirmPassword.current?.value) {
       error.current!.innerHTML = "Le password non coincidono.";
+      password.current!.value = "";
+      confirmPassword.current!.value = "";
+      password.current!.focus();
     } else {
       setIsFetching(true);
       axiosInstance
-        .post("/register.php", {
+        .post("/api/auth/users/register", {
           username: username.current?.value,
           password: password.current?.value,
           email: email.current?.value,
@@ -48,6 +51,23 @@ function Register() {
         .catch((err) => {
           error.current!.innerHTML =
             err.response.data.msg ?? "Errore sconosciuto.";
+          switch (err.response.data.parameter) {
+            case "username":
+              username.current!.value = "";
+              username.current!.focus();
+              break;
+            case "email":
+              email.current!.value = "";
+              email.current!.focus();
+              break;
+            case "password":
+              password.current!.value = "";
+              confirmPassword.current!.value = "";
+              password.current!.focus();
+              break;
+            default:
+              return;
+          }
           setIsFetching(false);
         });
     }
