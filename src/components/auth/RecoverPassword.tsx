@@ -41,6 +41,9 @@ function RecoverPassword({ confirm_code }: Props) {
         if (err.response.status === 401) {
           error.current!.innerHTML =
             err.response.data.msg ?? "Errore sconosciuto.";
+          password.current!.value = "";
+          confirmPassword.current!.value = "";
+          password.current!.focus();
         }
       });
   };
