@@ -76,12 +76,14 @@ function Login() {
             type="text"
             label="Email"
             ref={email}
+            autocomplete="username"
           />
           <FormInput
             placeholder="Password"
             type="password"
             label="Password"
             ref={password}
+            autocomplete="current-password"
           />
         </InputContainer>
         <ErrorContainer>

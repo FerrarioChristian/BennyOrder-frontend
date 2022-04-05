@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axios";
 
 interface Props {
@@ -7,41 +7,30 @@ interface Props {
 }
 
 function RequireAuth({ redirectTo }: Props) {
-  const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAuth = () => {
       axiosInstance
-        .get("/user_auth.php", { withCredentials: true })
+        .get("/api/auth/users/session-check", { withCredentials: true })
         .then((res) => {
           if (res.status === 200) {
-            setIsAuth(true);
             setIsLoading(false);
           }
         })
         .catch((err) => {
+          navigate(redirectTo, { replace: true, state: { from: location } });
           if (err.response?.status === 401) {
-            setIsAuth(false);
             setIsLoading(false);
           }
         });
     };
     getAuth();
-    return () => {
-      setIsLoading(false);
-    };
-  }, []);
+  }, [location, navigate, redirectTo]);
 
-  if (isLoading) {
-    return <h2>Loading...</h2>;
-  }
-  return isAuth ? (
-    <Outlet />
-  ) : (
-    <Navigate to={redirectTo} state={{ from: location }} replace />
-  );
+  return isLoading ? <h2>Loading...</h2> : <Outlet />;
 }
 export default RequireAuth;
