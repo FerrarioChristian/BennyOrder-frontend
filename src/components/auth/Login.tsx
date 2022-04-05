@@ -21,13 +21,13 @@ import RememberMe from "./RememberMe";
 import useToggle from "../../hooks/useToggle";
 
 function Login() {
+  const [isFetching, setIsFetching] = useState(false);
   const [remember, toggleRemember] = useToggle(false);
+
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
-
   const error = useRef<HTMLLabelElement>(null);
   const submit = useRef(null);
-  const [isFetching, setIsFetching] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
