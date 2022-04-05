@@ -54,12 +54,14 @@ function RecoverPassword({ confirm_code }: Props) {
             type="password"
             label="Password"
             ref={password}
+            autocomplete="new-password"
           />
           <FormInput
             placeholder="Minimo 8 caratteri"
             type="password"
             label="Conferma Password"
             ref={confirmPassword}
+            autocomplete="new-password"
           />
         </InputContainer>
         <ErrorLabel ref={error} />
