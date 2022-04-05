@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { ToggleType } from "../../hooks/useToggle";
 
 const StyledButton = styled.span`
   background: none;
@@ -9,12 +10,7 @@ const StyledButton = styled.span`
   cursor: pointer;
 `;
 
-interface Props {
-  visible: boolean;
-  toggleVisibility?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-function PasswordEye({ visible, toggleVisibility }: Props) {
+function PasswordEye({ visible, toggleVisibility }: ToggleType) {
   return (
     <StyledButton onClick={toggleVisibility}>
       {visible ? (
