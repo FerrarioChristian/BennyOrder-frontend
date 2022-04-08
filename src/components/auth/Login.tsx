@@ -43,7 +43,7 @@ function Login() {
     setIsFetching(true);
     axiosInstance
       .post(
-        "/api/auth/users/login",
+        "/auth/users/login",
         {
           email: email.current?.value,
           password: password.current?.value,

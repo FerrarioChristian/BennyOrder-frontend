@@ -15,17 +15,18 @@ function RequireAuth({ redirectTo }: Props) {
   useEffect(() => {
     const getAuth = () => {
       axiosInstance
-        .get("/api/auth/users/session-check", { withCredentials: true })
+        .get("/auth/users/session-check", { withCredentials: true })
         .then((res) => {
           if (res.status === 200) {
             setIsLoading(false);
           }
         })
         .catch((err) => {
-          navigate(redirectTo, { replace: true, state: { from: location } });
+          // navigate(redirectTo, { replace: true, state: { from: location } });
           if (err.response?.status === 401) {
             setIsLoading(false);
           }
+          setIsLoading(false);
         });
     };
     getAuth();

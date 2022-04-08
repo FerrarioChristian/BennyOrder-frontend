@@ -1,55 +1,48 @@
-import React, { useEffect, useRef, useState } from "react";
-import Product, { ProductType } from "../shared/Product";
-
-import axiosInstance from "../../utils/axios";
+import React, { useRef } from "react";
+import { useQuery, useMutation, useQueryClient } from "react-query";
+import Product from "../shared/Product";
+import { productsListApi, productNewApi } from "../../utils/apiCalls/products";
+import { ProductType } from "../../utils/types";
 
 function ManageProducts() {
-  const [products, setProducts] = useState<ProductType[]>();
+  const name = useRef<HTMLInputElement>(null);
+  const price = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLInputElement>(null);
+  const remaining = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    axiosInstance
-      .get("/list_products.php", { withCredentials: true })
-      .then((res) => {
-        setProducts(res.data);
-      });
-  }, []);
+  const queryClient = useQueryClient();
+  const { data, status } = useQuery("productList", productsListApi);
+  const { mutate: productNewMutate } = useMutation(productNewApi, {
+    onSuccess: () => queryClient.invalidateQueries("productList"),
+  });
 
-  const nameInputRef = useRef(document.createElement("input"));
-  const priceInputRef = useRef(document.createElement("input"));
-  const descInputRef = useRef(document.createElement("input"));
-  const piecesInputRef = useRef(document.createElement("input"));
-
-  const submit = (e: React.SyntheticEvent) => {
+  const submitNewProduct = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    axiosInstance
-      .post(
-        "/new_product.php",
-        {
-          name: nameInputRef.current.value,
-          price: priceInputRef.current.value,
-          description: descInputRef.current.value,
-          remaining: piecesInputRef.current.value,
-        },
-        { withCredentials: true }
-      )
-      .then();
+    productNewMutate({
+      name: name.current!.value,
+      price: price.current!.value,
+      description: description.current!.value,
+      remaining: parseInt(remaining.current!.value, 10),
+    });
   };
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "error") {
+    return <div>Error!</div>;
+  }
 
   return (
     <>
       <h1>Prodotti</h1>
       <h2>Aggiungi un nuovo prodotto</h2>
-      <form onSubmit={submit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="nome"
-          required
-          ref={nameInputRef}
-        />
+      <form onSubmit={submitNewProduct}>
+        <input type="text" name="name" placeholder="nome" required ref={name} />
         <input
           type="number"
-          ref={priceInputRef}
+          ref={price}
           name="price"
           placeholder="prezzo"
           step="0.01"
@@ -58,19 +51,19 @@ function ManageProducts() {
         />
         <input
           type="text"
-          ref={descInputRef}
+          ref={description}
           name="desc"
           placeholder="descrizione"
         />
         <input
           type="number"
-          ref={piecesInputRef}
-          name="pieces"
+          ref={remaining}
+          name="remaining"
           placeholder="numero pezzi"
         />
         <button type="submit"> Aggiungi </button>
       </form>
-      {products?.map((res) => (
+      {data?.data.map((res: ProductType) => (
         <Product
           key={res.id}
           id={res.id}
