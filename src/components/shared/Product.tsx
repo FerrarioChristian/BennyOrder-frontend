@@ -1,18 +1,10 @@
 import { useRef } from "react";
-import axiosInstance from "../../utils/axios";
-
-export interface OrderType {
-  id: number;
-  notes: string;
-}
-
-export interface ProductType {
-  id: number;
-  name: string;
-  price: string;
-  description: string;
-  remaining: number;
-}
+import { useMutation, useQueryClient } from "react-query";
+import {
+  productDeleteApi,
+  productEditApi,
+} from "../../utils/apiCalls/products";
+import { OrderType, ProductType } from "../../utils/types";
 
 interface Props extends ProductType {
   admin: boolean;
@@ -34,11 +26,30 @@ export default function Product({
   const newRemaining = useRef<HTMLInputElement>(null);
   const notes = useRef<HTMLInputElement>(null);
 
+  const queryClient = useQueryClient();
+
+  const { mutate: productEditMutate } = useMutation(productEditApi, {
+    onSuccess: () => queryClient.invalidateQueries("productList"),
+  });
+
+  const { mutate: productDeleteMutate } = useMutation(productDeleteApi, {
+    onSuccess: () => queryClient.invalidateQueries("productList"),
+  });
+
+  const editProduct = (e: React.MouseEvent) => {
+    e.preventDefault();
+    productEditMutate({
+      id,
+      name: newName.current!.value,
+      price: newPrice.current!.value,
+      description: newDescription.current!.value,
+      remaining: parseInt(newRemaining.current!.value, 10),
+    });
+  };
+
   const deleteProduct = (e: React.MouseEvent) => {
     e.preventDefault();
-    axiosInstance
-      .post("/delete_product.php", { id }, { withCredentials: true })
-      .then();
+    productDeleteMutate(id);
   };
 
   const addToOrder = (e: React.MouseEvent) => {
@@ -56,23 +67,6 @@ export default function Product({
       currOrder.splice(index, 1);
       return currOrder;
     });
-  };
-
-  const editProduct = (e: React.MouseEvent) => {
-    e.preventDefault();
-    axiosInstance
-      .post(
-        "/edit_product.php",
-        {
-          id,
-          new_name: newName.current!.value,
-          new_price: newPrice.current!.value,
-          new_description: newDescription.current!.value,
-          new_remaining: newRemaining.current!.value,
-        },
-        { withCredentials: true }
-      )
-      .then();
   };
 
   return (

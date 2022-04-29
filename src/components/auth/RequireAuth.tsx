@@ -15,7 +15,7 @@ function RequireAuth({ redirectTo }: Props) {
   useEffect(() => {
     const getAuth = () => {
       axiosInstance
-        .get("/api/auth/users/session-check", { withCredentials: true })
+        .get("/auth/users", { withCredentials: true })
         .then((res) => {
           if (res.status === 200) {
             setIsLoading(false);
@@ -26,6 +26,7 @@ function RequireAuth({ redirectTo }: Props) {
           if (err.response?.status === 401) {
             setIsLoading(false);
           }
+          setIsLoading(false);
         });
     };
     getAuth();

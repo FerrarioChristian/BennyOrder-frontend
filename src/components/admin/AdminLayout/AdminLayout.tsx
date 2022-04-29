@@ -8,6 +8,8 @@ import adminNavLinks from "../../../utils/navBarLinks";
 
 const MainContainer = styled.main`
   padding: 40px 40px;
+  overflow-y: auto;
+  flex-grow: 1;
 `;
 
 const SideBarUL = styled.ul`
@@ -28,7 +30,7 @@ const SideBarContainer = styled.nav`
   height: 100vh;
   padding: 8px 14px;
   background: var(--background);
-  transition: all 0.2s ease;
+  transition: width 0.2s ease;
 `;
 
 const AdminLayoutContainer = styled.div`

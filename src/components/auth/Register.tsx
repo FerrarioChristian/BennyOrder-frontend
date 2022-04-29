@@ -39,7 +39,7 @@ function Register() {
     } else {
       setIsFetching(true);
       axiosInstance
-        .post("/api/auth/users/register", {
+        .post("/accounts", {
           username: username.current?.value,
           password: password.current?.value,
           email: email.current?.value,

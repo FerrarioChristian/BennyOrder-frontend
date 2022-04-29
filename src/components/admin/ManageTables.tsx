@@ -5,19 +5,18 @@ import Device, { DeviceType } from "./Device";
 function ManageTables() {
   const [devices, setDevices] = useState<DeviceType[]>([]);
   useEffect(() => {
-    axiosInstance
-      .get("/list_devices.php", { withCredentials: true })
-      .then((res) => {
-        setDevices(res.data);
-      });
+    axiosInstance.get("/devices", { withCredentials: true }).then((res) => {
+      setDevices(res.data);
+    });
   }, []);
   return (
     <>
       {devices.map((device) => (
         <Device
-          key={device.serial}
+          key={device.id}
+          id={device.id}
           serial={device.serial}
-          table_id={device.table_id}
+          table_name={device.table_name}
         />
       ))}
     </>
