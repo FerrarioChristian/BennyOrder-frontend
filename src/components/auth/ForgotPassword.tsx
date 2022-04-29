@@ -16,9 +16,7 @@ function ForgotPassword() {
     const validateAccount = () => {
       setIsFetching(true);
       axiosInstance
-        .get("/password_recovery.php", {
-          params: { c: confirmCode },
-        })
+        .get(`/accounts/validate/${confirmCode}`)
         .then((res) => {
           if (res.status === 200) {
             setValid(true);

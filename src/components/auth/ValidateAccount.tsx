@@ -15,7 +15,8 @@ function ValidateAccount() {
     const validateAccount = () => {
       setIsFetching(true);
       axiosInstance
-        .post("/confirm_account.php", {
+        .patch(`/accounts/validate/12`, {
+          // find a way to get the ID
           confirm_code: confirmCode,
         })
         .then((res) => {

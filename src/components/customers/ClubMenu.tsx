@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react";
-import Product, { OrderType, ProductType } from "../shared/Product";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import Product from "../shared/Product";
 import axiosInstance from "../../utils/axios";
+import { OrderType, ProductType } from "../../utils/types";
+import { productsListApi } from "../../utils/apiCalls/products";
 
 function ClubMenu() {
-  const [products, setProducts] = useState<ProductType[]>();
   const [orders, setOrders] = useState<OrderType[]>([]);
 
-  useEffect(() => {
-    axiosInstance
-      .get("list_products.php", { withCredentials: true })
-      .then((res) => {
-        setProducts(res.data);
-      });
-  }, []);
+  const { data, status } = useQuery("productList", productsListApi);
 
   const orderProduct = (e: React.MouseEvent) => {
     e.preventDefault();
-    axiosInstance.post("new_order.php", { orders }, { withCredentials: true });
+    axiosInstance.post("/orders", { orders }, { withCredentials: true });
   };
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "error") {
+    return <div>Error!</div>;
+  }
 
   return (
     <>
@@ -25,7 +29,7 @@ function ClubMenu() {
       <button type="button" onClick={orderProduct}>
         Ordina
       </button>
-      {products?.map((res) => (
+      {data?.data.map((res: ProductType) => (
         <Product
           key={res.id}
           id={res.id}

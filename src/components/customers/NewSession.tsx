@@ -1,6 +1,7 @@
 import { useRef } from "react";
+import { useMutation } from "react-query";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../../utils/axios";
+import { loginCustomerApi } from "../../utils/apiCalls/auth";
 
 function NewSession() {
   const name = useRef<HTMLInputElement>(null);
@@ -8,17 +9,16 @@ function NewSession() {
 
   const navigate = useNavigate();
 
-  const submit = () => {
-    axiosInstance
-      .post(
-        "new_device_session.php",
-        {
-          tirt,
-          name: name.current!.value,
-        },
-        { withCredentials: true }
-      )
-      .then(() => navigate("/clubmenu"));
+  const { mutate } = useMutation(loginCustomerApi, {
+    onSuccess: () => navigate("/clubmenu"),
+  });
+
+  const submit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    mutate({
+      tirt,
+      name: name.current!.value,
+    });
   };
 
   return (
