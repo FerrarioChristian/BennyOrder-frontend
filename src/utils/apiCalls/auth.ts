@@ -1,9 +1,24 @@
 import axiosInstance from "../axios";
+import { LoginCustomerType, LoginUserType, RegisterUserType } from "../types";
 
-const logoutAPI = axiosInstance.get("/logout.php", {
-  withCredentials: true,
-});
+export const logoutUserApi = () =>
+  axiosInstance.delete("/auth/users", {
+    withCredentials: true,
+  });
 
-export default logoutAPI;
+export const loginUserApi = (loginCredentials: LoginUserType) =>
+  axiosInstance.post("/auth/users", loginCredentials, {
+    withCredentials: true,
+  });
 
-// const loginAPI = 7;
+export const registerUserApi = (registerCredentials: RegisterUserType) =>
+  axiosInstance.post("/accounts", registerCredentials, {
+    withCredentials: true,
+  });
+
+// export const confirmAccountApi = () => {};
+
+export const loginCustomerApi = (loginCredentials: LoginCustomerType) =>
+  axiosInstance.post("/auth/customers", loginCredentials, {
+    withCredentials: true,
+  });

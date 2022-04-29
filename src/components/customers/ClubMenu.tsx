@@ -12,7 +12,7 @@ function ClubMenu() {
 
   const orderProduct = (e: React.MouseEvent) => {
     e.preventDefault();
-    axiosInstance.post("new_order.php", { orders }, { withCredentials: true });
+    axiosInstance.post("/orders", { orders }, { withCredentials: true });
   };
 
   if (status === "loading") {

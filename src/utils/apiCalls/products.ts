@@ -10,7 +10,7 @@ export const productNewApi = (newProduct: NewProductType) =>
   axiosInstance.post("/products", newProduct, { withCredentials: true });
 
 export const productDeleteApi = (id: number) =>
-  axiosInstance.delete(`/products${id}`, { withCredentials: true });
+  axiosInstance.delete(`/products/${id}`, { withCredentials: true });
 
 export const productEditApi = (editedProduct: ProductType) =>
   axiosInstance.put(`/products/${editedProduct.id}`, editedProduct, {

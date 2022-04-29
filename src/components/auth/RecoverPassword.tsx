@@ -30,7 +30,8 @@ function RecoverPassword({ confirm_code }: Props) {
 
   const sumbitRegister = () => {
     axiosInstance
-      .post("/password_recovery.php", {
+      .patch("/accounts/recovery/12", {
+        // find a way to get the ID
         confirm_code,
         password: password.current!.value,
       })

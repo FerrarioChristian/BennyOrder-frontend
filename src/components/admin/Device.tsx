@@ -3,18 +3,19 @@ import axiosInstance from "../../utils/axios";
 
 export interface DeviceType {
   serial: string;
-  table_id: number;
+  table_name: number;
+  id: number;
 }
 
-function Device({ serial, table_id }: DeviceType) {
+function Device({ id, serial, table_name }: DeviceType) {
   const tableIdInputRef = useRef(document.createElement("input"));
 
   const editDeviceTable = () => {
-    axiosInstance.post(
-      "associate_table.php",
+    axiosInstance.put(
+      `/devices/${id}`,
       {
         serial,
-        table_id: tableIdInputRef.current.value,
+        table_name: tableIdInputRef.current.value,
       },
       { withCredentials: true }
     );
@@ -23,7 +24,7 @@ function Device({ serial, table_id }: DeviceType) {
   return (
     <>
       <h1>{serial}</h1>
-      <input type="text" defaultValue={table_id} ref={tableIdInputRef} />
+      <input type="text" defaultValue={table_name} ref={tableIdInputRef} />
       <button type="button" onClick={editDeviceTable}>
         Modifica
       </button>

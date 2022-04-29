@@ -15,7 +15,7 @@ function ForgotPasswordEmail() {
 
   const submitLogin = () => {
     axiosInstance
-      .post("/password_recovery.php", {
+      .post("/accounts/recovery", {
         email,
       })
       .then(() => {
