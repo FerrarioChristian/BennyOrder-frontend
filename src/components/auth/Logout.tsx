@@ -11,7 +11,7 @@ function Logout({ className, children }: Props) {
   const navigate = useNavigate();
 
   const logout = () => {
-    axiosInstance.get("/logout.php", { withCredentials: true }).then(() => {
+    axiosInstance.delete("/auth/users", { withCredentials: true }).then(() => {
       navigate("/");
     });
   };
