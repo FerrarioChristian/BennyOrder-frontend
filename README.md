@@ -4,6 +4,7 @@
 
 ```css
 :root {
+  --white: #f0f0f0;
   --background: #1f1d36;
   --primary: #f7f7f7;
   --accent: #8989cf;

@@ -1,10 +1,14 @@
 import { useRef } from "react";
 import { useMutation, useQueryClient } from "react-query";
+import EuroIcon from "@mui/icons-material/Euro";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import {
   productDeleteApi,
   productEditApi,
 } from "../../utils/apiCalls/products";
 import { OrderType, ProductType } from "../../utils/types";
+import Availability from "../generic/Availability";
+import Card, { CardInlineFlex } from "../generic/Card";
 
 interface Props extends ProductType {
   admin: boolean;
@@ -16,14 +20,13 @@ export default function Product({
   name,
   price,
   description,
-  remaining,
+  available,
   admin,
   setOrders,
 }: Props) {
   const newName = useRef<HTMLInputElement>(null);
   const newDescription = useRef<HTMLInputElement>(null);
   const newPrice = useRef<HTMLInputElement>(null);
-  const newRemaining = useRef<HTMLInputElement>(null);
   const notes = useRef<HTMLInputElement>(null);
 
   const queryClient = useQueryClient();
@@ -43,7 +46,7 @@ export default function Product({
       name: newName.current!.value,
       price: newPrice.current!.value,
       description: newDescription.current!.value,
-      remaining: parseInt(newRemaining.current!.value, 10),
+      available: true,
     });
   };
 
@@ -71,39 +74,35 @@ export default function Product({
 
   return (
     <>
-      <h3>
-        Nome prodotto:
-        {name}
-      </h3>
+      <Card title={name} isEdit>
+        <CardInlineFlex>
+          <FormatAlignLeftIcon />
+          <p>{description}</p>
+        </CardInlineFlex>
+        <CardInlineFlex>
+          <EuroIcon />
+          <p>Prezzo: {price}</p>
+        </CardInlineFlex>
+        <Availability
+          availability={available}
+          hidden={!admin}
+          type="products"
+        />
+      </Card>
+
       <input
         type="text"
         placeholder="Nome prodotto"
         ref={newName}
         hidden={!admin}
       />
-      <p>
-        Prezzo:
-        {price}
-      </p>
+
       <input type="text" placeholder="Prezzo" ref={newPrice} hidden={!admin} />
-      <p>
-        Descrizione
-        {description}
-      </p>
+
       <input
         type="text"
         placeholder="Descrizione"
         ref={newDescription}
-        hidden={!admin}
-      />
-      <p>
-        Residuo
-        {remaining}
-      </p>
-      <input
-        type="text"
-        placeholder="Pezzi"
-        ref={newRemaining}
         hidden={!admin}
       />
       <button type="button" onClick={editProduct} hidden={!admin}>

@@ -3,7 +3,7 @@ import RequireAuth from "./components/auth/RequireAuth";
 import ManageTables from "./components/admin/ManageTables";
 import Dashboard from "./components/admin/Dashboard";
 import ManageProducts from "./components/admin/ManageProducts";
-import EmailSent from "./components/auth/EmailSent";
+import EmailSent from "./pages/EmailSent";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordEmail from "./components/auth/ForgotPasswordEmail";
 import Login from "./components/auth/Login";

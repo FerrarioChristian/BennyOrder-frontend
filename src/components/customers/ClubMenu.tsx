@@ -36,7 +36,7 @@ function ClubMenu() {
           name={res.name}
           price={res.price}
           description={res.description}
-          remaining={res.remaining}
+          available={res.available}
           admin={false}
           setOrders={setOrders}
         />

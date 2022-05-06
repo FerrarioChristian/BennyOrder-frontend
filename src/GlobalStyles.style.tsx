@@ -2,9 +2,10 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
     :root {
-      --background: #1f1d36;
-      --primary: #f7f7f7;
-      --accent: #8989cf;
+      --text: #707070;
+      --background: #eef0f4;
+      --primary: #1f1d36;
+      --accent: #b4b4f2;
       --danger: #ff0062;
       --success: #00d165;
       --warning: #ffaa00;
@@ -23,14 +24,14 @@ const GlobalStyles = createGlobalStyle`
     input:-webkit-autofill:focus, 
     input:-webkit-autofill:active {
         font-family: "Open Sans", sans-serif;
-        -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
-        box-shadow: 0 0 0 30px var(--background) inset !important;
+        -webkit-box-shadow: 0 0 0 30px var(--primary) inset !important;
+        box-shadow: 0 0 0 30px var(--primary) inset !important;
         caret-color: white;
     }
 
     input:-webkit-autofill{
         font-family: "Open Sans", sans-serif;
-        -webkit-text-fill-color: var(--primary) !important;
+        -webkit-text-fill-color: var(--background) !important;
         caret-color: white;
     }
 
