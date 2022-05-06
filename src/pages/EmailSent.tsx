@@ -1,6 +1,6 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Link } from "react-router-dom";
-import useTitle from "../../hooks/useTitle";
+import useTitle from "../hooks/useTitle";
 
 function EmailSent() {
   useTitle("Account Creato - BennyOrder");

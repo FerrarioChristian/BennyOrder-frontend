@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { ReactNode } from "react";
 
@@ -24,21 +24,22 @@ const ILink = styled.i`
   transition: all 0.1s ease;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
   position: relative;
   margin: 8px 0;
   list-style: none;
   border-radius: 12px;
   transition: all 0.2s ease;
-  color: var(--primary);
+  color: var(--background);
   cursor: pointer;
   display: flex;
   align-items: center;
   text-decoration: none;
 
-  &:hover {
-    background-color: var(--primary);
-    color: var(--background);
+  &:hover,
+  &.active {
+    background-color: var(--background);
+    color: var(--primary);
   }
 `;
 
@@ -54,7 +55,6 @@ function AdminNavLink({ isOpen, route, icon, label }: NavLinkType) {
     <StyledLink to={route}>
       <ILink>{icon}</ILink>
       <SpanLink isOpen={isOpen}>{label}</SpanLink>
-      <span />
     </StyledLink>
   );
 }

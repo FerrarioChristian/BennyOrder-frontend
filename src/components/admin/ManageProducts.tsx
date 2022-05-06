@@ -8,7 +8,6 @@ function ManageProducts() {
   const name = useRef<HTMLInputElement>(null);
   const price = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
-  const remaining = useRef<HTMLInputElement>(null);
 
   const queryClient = useQueryClient();
   const { data, status } = useQuery("productList", productsListApi);
@@ -22,7 +21,7 @@ function ManageProducts() {
       name: name.current!.value,
       price: price.current!.value,
       description: description.current!.value,
-      remaining: parseInt(remaining.current!.value, 10),
+      available: true,
     });
   };
 
@@ -55,12 +54,6 @@ function ManageProducts() {
           name="desc"
           placeholder="descrizione"
         />
-        <input
-          type="number"
-          ref={remaining}
-          name="remaining"
-          placeholder="numero pezzi"
-        />
         <button type="submit"> Aggiungi </button>
       </form>
       {data?.data.map((res: ProductType) => (
@@ -70,7 +63,7 @@ function ManageProducts() {
           name={res.name}
           price={res.price}
           description={res.description}
-          remaining={res.remaining}
+          available={res.available}
           admin
         />
       ))}

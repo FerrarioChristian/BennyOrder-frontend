@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Logout from "../../auth/Logout";
 
 interface Props {
@@ -11,14 +12,14 @@ interface Props {
 const Name = styled.p`
   font-size: 18px;
   font-weight: 400;
-  color: var(--primary);
+  color: var(--background);
   white-space: nowrap;
 `;
 
 const Description = styled.p`
   font-size: 15px;
   font-weight: 400;
-  color: var(--primary);
+  color: var(--background);
   white-space: nowrap;
 `;
 
@@ -29,7 +30,7 @@ const LogoutButton = styled(Logout)`
   transform: translateY(-50%);
   line-height: 60px;
   font-size: 18px;
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
   height: 50px;
   width: 50px;
   display: flex;
@@ -39,19 +40,21 @@ const LogoutButton = styled(Logout)`
   cursor: pointer;
 
   &:hover {
-    background-color: var(--primary);
-    color: var(--background);
+    background-color: var(--background);
+    color: var(--primary);
   }
 `;
 
-const StyledImgProfile = styled.img`
+const StyledImgProfile = styled.span`
   height: 45px;
   width: 45px;
   min-width: 45px;
-  object-fit: cover;
-  margin-right: 10px;
   border-radius: 6px;
-  cursor: pointer;
+  color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
 `;
 
 const ProfileInfoContainer = styled.div`
@@ -72,10 +75,9 @@ function ProfileNavLink({ name, description, isOpen }: Props) {
   return (
     <ProfileNav>
       <ProfileInfoContainer isOpen={isOpen}>
-        <StyledImgProfile
-          src="https://www.w3schools.com/images/w3schools_green.jpg"
-          alt="Profile"
-        />
+        <StyledImgProfile>
+          <AccountCircleIcon sx={{ fontSize: "2.8rem" }} />
+        </StyledImgProfile>
         <div>
           <Name>{name}</Name>
           <Description>{description}</Description>

@@ -7,9 +7,10 @@ import ProfileNavLink from "./ProfileNavLink";
 import adminNavLinks from "../../../utils/navBarLinks";
 
 const MainContainer = styled.main`
-  padding: 40px 40px;
+  padding: 60px 60px;
   overflow-y: auto;
   flex-grow: 1;
+  background-color: var(--background);
 `;
 
 const SideBarUL = styled.ul`
@@ -21,7 +22,7 @@ const SideBarUL = styled.ul`
 `;
 
 const SideBarContainer = styled.nav`
-  color: var(--primary);
+  color: var(--background);
   display: flex;
   flex-direction: column;
   min-width: ${({ isOpen }: { isOpen: boolean }) =>
@@ -29,7 +30,7 @@ const SideBarContainer = styled.nav`
   width: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "250px;" : "78px;")};
   height: 100vh;
   padding: 8px 14px;
-  background: var(--background);
+  background: var(--primary);
   transition: width 0.2s ease;
 `;
 
