@@ -10,7 +10,7 @@ const StyledInput = styled.input`
   height: 2em;
   width: 100%;
   border: none;
-  color: var(--primary);
+  color: var(--background);
   outline: none;
 `;
 
