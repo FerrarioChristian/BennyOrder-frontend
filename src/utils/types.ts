@@ -2,7 +2,7 @@ export interface NewProductType {
   name: string;
   price: string;
   description: string;
-  remaining: number;
+  available: boolean;
 }
 
 export interface ProductType extends NewProductType {
@@ -30,4 +30,18 @@ export interface RegisterUserType extends CredentialsType {
 export interface LoginCustomerType {
   tirt: string | undefined;
   name: string;
+}
+
+export interface TableType extends AvailabilityType {
+  id: number;
+  serial: string;
+  name: string;
+  seats: number;
+  created_at: string;
+}
+
+export interface AvailabilityType {
+  type: string;
+  availability: 0 | 1 | 2 | boolean;
+  hidden?: boolean;
 }
