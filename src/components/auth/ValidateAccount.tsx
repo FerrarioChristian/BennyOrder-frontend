@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AccountConfirmed from "./AccountConfirmed";
+import AccountConfirmed from "../../pages/AccountConfirmed";
 import InvalidLink from "../../pages/InvalidLink";
 import useTitle from "../../hooks/useTitle";
 import axiosInstance from "../../utils/axios";

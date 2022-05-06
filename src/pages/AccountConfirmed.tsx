@@ -1,5 +1,5 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import useTitle from "../../hooks/useTitle";
+import useTitle from "../hooks/useTitle";
 
 function AccountConfirmed() {
   useTitle("Account Confermato - BennyOrder");

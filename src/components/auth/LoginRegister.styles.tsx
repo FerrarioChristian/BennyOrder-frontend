@@ -5,7 +5,7 @@ export const LoginRegisterButton = styled.button`
   height: 3rem;
   border: none;
   background-color: var(--accent);
-  color: var(--background);
+  color: var(--primary);
   border-radius: 50px;
   font-size: x-large;
   cursor: pointer;
@@ -53,11 +53,12 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 420px;
-  background-color: var(--background);
+  background-color: var(--primary);
   opacity: 100%;
   border-radius: 15px;
   padding: 4rem 3rem;
   margin: 1rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 
   @media only screen and (max-width: 600px) {
     & {
@@ -78,7 +79,7 @@ export const ButtonContainer = styled.div`
 export const Background = styled.div`
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(var(--accent), var(--background));
+  background: var(--background);
   background-size: cover;
   display: flex;
   align-items: center;
