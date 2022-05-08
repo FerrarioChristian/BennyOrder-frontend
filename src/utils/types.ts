@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface NewProductType {
   name: string;
   price: string;
@@ -7,6 +9,7 @@ export interface NewProductType {
 
 export interface ProductType extends NewProductType {
   id: number;
+  hiddenEdit?: boolean;
 }
 
 export interface OrderType {
@@ -32,16 +35,25 @@ export interface LoginCustomerType {
   name: string;
 }
 
-export interface TableType extends AvailabilityType {
+export interface NewTableType {
   id: number;
   serial: string;
   name: string;
   seats: number;
+}
+
+export interface TableType extends AvailabilityType, NewTableType {
   created_at: string;
 }
 
 export interface AvailabilityType {
-  type: string;
+  type?: string;
   availability: 0 | 1 | 2 | boolean;
   hidden?: boolean;
+}
+
+export interface CardActionsType {
+  submit?: (e: React.SyntheticEvent) => void;
+  cancel?: () => void;
+  deletes?: (e: React.SyntheticEvent) => void;
 }
