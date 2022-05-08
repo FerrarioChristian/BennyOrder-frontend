@@ -10,6 +10,12 @@ const SpanLink = styled.span`
   pointer-events: none;
   transition: all 0.1s ease;
   text-decoration: none;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      opacity: ${({ isOpen }: { isOpen: boolean }) => (!isOpen ? "1;" : "0;")};
+    }
+  }
 `;
 
 const ILink = styled.i`

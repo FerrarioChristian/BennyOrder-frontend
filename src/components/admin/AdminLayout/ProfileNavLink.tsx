@@ -63,6 +63,10 @@ const ProfileInfoContainer = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
+
+  @media only screen and (max-width: 600px) {
+    opacity: ${({ isOpen }: { isOpen: boolean }) => (!isOpen ? "1;" : "0;")};
+  }
 `;
 
 const ProfileNav = styled.li`
