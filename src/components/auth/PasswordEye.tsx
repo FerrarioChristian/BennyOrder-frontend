@@ -14,9 +14,9 @@ function PasswordEye({ visible, toggleVisibility }: ToggleType) {
   return (
     <StyledButton onClick={toggleVisibility}>
       {visible ? (
-        <VisibilityOffIcon sx={{ color: "var(--primary)" }} />
+        <VisibilityOffIcon sx={{ color: "var(--accent)" }} />
       ) : (
-        <VisibilityIcon sx={{ color: "var(--primary)" }} />
+        <VisibilityIcon sx={{ color: "var(--accent)" }} />
       )}
     </StyledButton>
   );

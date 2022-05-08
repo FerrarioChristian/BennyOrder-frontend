@@ -18,6 +18,12 @@ const LogoIcon = styled.span`
   align-items: center;
   opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   transition: 0.2s ease;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      opacity: ${({ isOpen }: { isOpen: boolean }) => (!isOpen ? "1;" : "0;")};
+    }
+  }
 `;
 
 const LogoName = styled.p`
@@ -25,6 +31,12 @@ const LogoName = styled.p`
   font-weight: 600;
   opacity: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? "1;" : "0;")};
   transition: 0.2s ease;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      opacity: ${({ isOpen }: { isOpen: boolean }) => (!isOpen ? "1;" : "0;")};
+    }
+  }
 `;
 
 const HamburgerMenu = styled.span`

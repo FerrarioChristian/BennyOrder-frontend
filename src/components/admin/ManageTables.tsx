@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import styled from "styled-components";
-import axiosInstance from "../../utils/axios";
+import { tablesListApi } from "../../utils/apiCalls/tables";
 import { TableType } from "../../utils/types";
 import { CardGridContainer } from "../generic/Card";
 import Table from "./Table";
@@ -20,18 +20,13 @@ const HeaderLine = styled.hr`
 `;
 
 function ManageTables() {
-  const [tables, setTables] = useState<TableType[]>([]);
-  useEffect(() => {
-    axiosInstance.get("/tables", { withCredentials: true }).then((res) => {
-      setTables(res.data);
-    });
-  }, []);
+  const { data } = useQuery("tablesList", tablesListApi);
   return (
     <>
       <Title>Gestione Tavoli</Title>
       <HeaderLine />
       <CardGridContainer>
-        {tables.map((table) => (
+        {data?.data.map((table: TableType) => (
           <Table
             key={table.id}
             id={table.id}

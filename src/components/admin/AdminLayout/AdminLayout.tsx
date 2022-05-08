@@ -8,9 +8,16 @@ import adminNavLinks from "../../../utils/navBarLinks";
 
 const MainContainer = styled.main`
   padding: 60px 60px;
-  overflow-y: auto;
   flex-grow: 1;
   background-color: var(--background);
+  overflow-y: auto;
+  max-height: 100vh;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      padding: 15px;
+    }
+  }
 `;
 
 const SideBarUL = styled.ul`
@@ -32,6 +39,15 @@ const SideBarContainer = styled.nav`
   padding: 8px 14px;
   background: var(--primary);
   transition: width 0.2s ease;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      min-width: ${({ isOpen }: { isOpen: boolean }) =>
+        !isOpen ? "250px;" : "78px;"};
+      width: ${({ isOpen }: { isOpen: boolean }) =>
+        !isOpen ? "250px;" : "78px;"};
+    }
+  }
 `;
 
 const AdminLayoutContainer = styled.div`
