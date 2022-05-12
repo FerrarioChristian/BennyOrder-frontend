@@ -35,21 +35,19 @@ export interface LoginCustomerType {
   name: string;
 }
 
-export interface NewTableType {
-  id: number;
+export interface TableType extends AvailabilityType {
+  id?: number;
   serial: string;
   name: string;
   seats: number;
-}
-
-export interface TableType extends AvailabilityType, NewTableType {
-  created_at: string;
+  created_at?: string;
 }
 
 export interface AvailabilityType {
   type?: string;
-  availability: 0 | 1 | 2 | boolean;
+  availability?: 0 | 1 | 2 | boolean;
   hidden?: boolean;
+  isEdit?: boolean;
 }
 
 export interface CardActionsType {

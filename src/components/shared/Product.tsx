@@ -7,8 +7,9 @@ import {
   productEditApi,
 } from "../../utils/apiCalls/products";
 import { OrderType, ProductType } from "../../utils/types";
-import Availability from "../generic/Availability";
-import Card, { CardInlineFlex } from "../generic/Card";
+import Availability from "../generic/Card/Availability";
+import Card from "../generic/Card/Card";
+import { CardInlineFlex } from "../generic/Card/Card.styles";
 
 interface Props extends ProductType {
   admin: boolean;
