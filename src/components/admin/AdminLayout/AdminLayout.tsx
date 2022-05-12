@@ -4,7 +4,7 @@ import styled from "styled-components";
 import AdminNavLink from "./AdminNavLink";
 import LogoNavLink from "./LogoNavLink";
 import ProfileNavLink from "./ProfileNavLink";
-import adminNavLinks from "../../../utils/navBarLinks";
+import adminNavLinks from "./adminNavLinks";
 
 const MainContainer = styled.main`
   padding: 60px 60px;
