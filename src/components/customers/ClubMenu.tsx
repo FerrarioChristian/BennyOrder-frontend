@@ -10,7 +10,7 @@ function ClubMenu() {
 
   const { data, status } = useQuery("productList", productsListApi);
 
-  const orderProduct = (e: React.MouseEvent) => {
+  const orderProducts = (e: React.MouseEvent) => {
     e.preventDefault();
     axiosInstance.post("/orders", { orders }, { withCredentials: true });
   };
@@ -26,7 +26,7 @@ function ClubMenu() {
   return (
     <>
       <h1>Menu:</h1>
-      <button type="button" onClick={orderProduct}>
+      <button type="button" onClick={orderProducts}>
         Ordina
       </button>
       {data?.data.map((res: ProductType) => (

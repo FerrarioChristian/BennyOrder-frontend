@@ -45,9 +45,10 @@ export interface TableType extends AvailabilityType {
 
 export interface AvailabilityType {
   type?: string;
-  availability?: 0 | 1 | 2 | boolean;
+  availability?: number | boolean;
   hidden?: boolean;
   isEdit?: boolean;
+  setNewAvailability?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface CardActionsType {

@@ -26,11 +26,13 @@ const HeaderLine = styled.hr`
 
 const modalCustomStyles = {
   content: {
-    maxWidth: "30rem",
-    maxHeight: "30rem",
     backgroundColor: "transparent",
     margin: "auto",
     border: "none",
+    padding: "auto",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center ",
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.92)",
@@ -54,7 +56,7 @@ function ManageTables() {
         style={modalCustomStyles}
       >
         <Table
-          name="Franco"
+          name="Nuovo Tavolo"
           seats={2}
           serial=""
           availability={1}
