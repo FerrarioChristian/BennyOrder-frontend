@@ -2,8 +2,7 @@ import QrCodeIcon from "@mui/icons-material/QrCode";
 import styled from "styled-components";
 import PeopleIcon from "@mui/icons-material/People";
 import { useMutation, useQueryClient } from "react-query";
-import React, { useRef } from "react";
-
+import { useRef, useState } from "react";
 import { TableType } from "../../utils/types";
 import Availability from "../generic/Card/Availability";
 import useToggle from "../../hooks/useToggle";
@@ -30,10 +29,12 @@ function Table({
 }: TableType) {
   const [isEdit, toggleEdit] = useToggle(isEditTmp || false);
 
-  // const newTableName = useRef<HTMLInputElement>(null);
+  const newTableName = useRef<HTMLInputElement>(null);
   const newSeats = useRef<HTMLInputElement>(null);
-  // const newAvailability = useRef<HTMLInputElement>(null);
   const newSerial = useRef<HTMLInputElement>(null);
+  const [newAvailability, setNewAvailability] = useState(
+    availability?.toString() || "1"
+  );
 
   const queryClient = useQueryClient();
 
@@ -46,9 +47,9 @@ function Table({
     tableEditMutate({
       id,
       serial: newSerial.current!.value,
-      name: "Crack Carlo",
+      name: newTableName.current!.value,
       seats: parseInt(newSeats.current!.value, 10),
-      availability: 1,
+      availability: parseInt(newAvailability, 10),
     });
     toggleEdit();
   };
@@ -72,8 +73,18 @@ function Table({
     : null;
 
   return (
-    <Card title={name} isEdit={isEdit} toggleEdit={toggleEdit}>
-      <Availability availability={availability} type={type} isEdit={isEdit} />
+    <Card
+      title={name}
+      isEdit={isEdit}
+      toggleEdit={toggleEdit}
+      nameInputRef={newTableName}
+    >
+      <Availability
+        availability={availability}
+        type={type}
+        isEdit={isEdit}
+        setNewAvailability={setNewAvailability}
+      />
       <CardInlineFlex>
         <PeopleIcon /> <p>Posti: </p>
         {!isEdit ? (

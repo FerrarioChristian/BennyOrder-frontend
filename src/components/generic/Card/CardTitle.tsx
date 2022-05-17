@@ -16,7 +16,7 @@ const CardTitleInput = styled(CardInput)`
   color: var(--primary);
 `;
 
-function CardTitle({ title, isEdit, toggleEdit }: CardTitleType) {
+function CardTitle({ title, isEdit, toggleEdit, nameInputRef }: CardTitleType) {
   return (
     <CardInlineFlex color="var(--primary)">
       {!isEdit ? (
@@ -25,7 +25,7 @@ function CardTitle({ title, isEdit, toggleEdit }: CardTitleType) {
           <EditIcon sx={{ cursor: "pointer" }} onClick={toggleEdit} />
         </>
       ) : (
-        <CardTitleInput defaultValue={title} />
+        <CardTitleInput defaultValue={title} ref={nameInputRef} />
       )}
     </CardInlineFlex>
   );
