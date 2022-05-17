@@ -5,34 +5,39 @@ import CheckIcon from "@mui/icons-material/Check";
 import { CardActionsType } from "../../../utils/types";
 import { CardInlineFlex } from "./Card.styles";
 
-const CardActionsButton = styled.button`
+export const CardActionsButton = styled.button`
   display: flex;
   color: white;
-  background-color: ${(props) => props.color || "var(--primary)"};
+  background-color: white;
+  color: ${(props) => props.color || "var(--primary)"};
   border: 2px solid ${(props) => props.color || "var(--primary)"};
+
   border-radius: 20px;
   justify-content: center;
   align-items: center;
   padding: 2px 15px;
   cursor: pointer;
 
+  &:hover {
+    color: white;
+    background-color: ${(props) => props.color || "var(--primary)"};
+    border: 2px solid ${(props) => props.color || "var(--primary)"};
+  }
+
   &:first-child {
     margin-right: auto;
-    background-color: white;
-    color: ${(props) => props.color || "var(--primary)"};
+  }
+
+  &:last-child {
+    color: white;
+    background-color: ${(props) => props.color || "var(--primary)"};
     border: 2px solid ${(props) => props.color || "var(--primary)"};
 
     &:hover {
-      color: white;
-      background-color: ${(props) => props.color || "var(--primary)"};
+      background-color: white;
+      color: ${(props) => props.color || "var(--primary)"};
       border: 2px solid ${(props) => props.color || "var(--primary)"};
     }
-  }
-  &:hover {
-    border: 2px solid white;
-    background-color: white;
-    color: ${(props) => props.color || "var(--primary)"};
-    border: 2px solid ${(props) => props.color || "var(--primary)"};
   }
 `;
 

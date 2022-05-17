@@ -71,6 +71,7 @@ function Availability({
   hidden,
   type,
   isEdit,
+  setNewAvailability,
 }: AvailabilityType) {
   if (hidden) return null;
 
@@ -112,6 +113,9 @@ function Availability({
         options={options}
         styles={selectCustomStyles}
         defaultValue={sesso !== undefined ? options[sesso] : options[1]}
+        onChange={(option) => {
+          setNewAvailability?.(option!.value.toString());
+        }}
       />
     );
   }
