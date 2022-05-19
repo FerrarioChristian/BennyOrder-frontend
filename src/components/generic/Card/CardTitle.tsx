@@ -19,7 +19,7 @@ const CardTitleInput = styled(CardInput)`
 function CardTitle({ title, isEdit, toggleEdit, nameInputRef }: CardTitleType) {
   return (
     <CardInlineFlex color="var(--primary)">
-      {!isEdit ? (
+      {!isEdit || !nameInputRef ? (
         <>
           <Title>{title}</Title>
           <EditIcon sx={{ cursor: "pointer" }} onClick={toggleEdit} />

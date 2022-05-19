@@ -1,4 +1,30 @@
+import ReactModal from "react-modal";
 import { createGlobalStyle } from "styled-components";
+
+ReactModal.setAppElement("#root");
+ReactModal.defaultStyles = {
+  content: {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "transparent",
+    margin: "auto",
+    border: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center ",
+    outline: "none",
+  },
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.92)",
+  },
+};
 
 const GlobalStyles = createGlobalStyle`
     :root {
