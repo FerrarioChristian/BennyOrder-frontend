@@ -35,14 +35,6 @@ export interface LoginCustomerType {
   name: string;
 }
 
-export interface TableType extends AvailabilityType {
-  id?: number;
-  serial: string;
-  name: string;
-  seats: number;
-  created_at?: string;
-}
-
 export interface AvailabilityType {
   type?: string;
   availability?: number | boolean;
@@ -56,3 +48,14 @@ export interface CardActionsType {
   cancel?: () => void;
   deletes?: (e: React.SyntheticEvent) => void;
 }
+
+export type TableType = {
+  id: number;
+  serial: string;
+  name: string;
+  seats: number;
+  availability: number | boolean;
+  created_at?: string;
+};
+
+export interface NewTableType extends Omit<TableType, "id"> {}

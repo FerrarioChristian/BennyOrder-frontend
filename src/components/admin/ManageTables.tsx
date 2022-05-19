@@ -1,13 +1,14 @@
-import { useQuery } from "react-query";
 import styled from "styled-components";
 import Modal from "react-modal";
 import useToggle from "../../hooks/useToggle";
-import { tablesListApi } from "../../utils/apiCalls/tables";
 import { TableType } from "../../utils/types";
-import Table from "./Table";
 import { CardGridContainer } from "../generic/Card/Card.styles";
+import Table from "./Table/Table";
+import TableForm from "./Table/TableForm";
+import newTableData from "./Table/newTableData";
+import { useListTable } from "../../utils/apiCalls/tables";
+import { CardActionsButton } from "../generic/Card/CardActions";
 
-// Titolo della pagina
 const Title = styled.h1`
   font-size: 2rem;
   text-transform: uppercase;
@@ -16,7 +17,6 @@ const Title = styled.h1`
   cursor: default;
 `;
 
-// Linea sotto titolo layout
 const HeaderLine = styled.hr`
   border: none;
   height: 2px;
@@ -24,58 +24,23 @@ const HeaderLine = styled.hr`
   margin-bottom: 2rem;
 `;
 
-const modalCustomStyles = {
-  content: {
-    backgroundColor: "transparent",
-    margin: "auto",
-    border: "none",
-    padding: "auto",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center ",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.92)",
-  },
-};
-
 function ManageTables() {
   const [isOpen, toggleIsOpen] = useToggle();
-  const { data } = useQuery("tablesList", tablesListApi);
+  const { data } = useListTable();
 
   return (
     <>
       <Title>Gestione Tavoli</Title>
       <HeaderLine />
-      <button type="button" onClick={toggleIsOpen}>
+      <CardActionsButton color="var(--primary)" onClick={toggleIsOpen}>
         Nuovo Tavolo
-      </button>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={() => toggleIsOpen()}
-        style={modalCustomStyles}
-      >
-        <Table
-          name="Nuovo Tavolo"
-          seats={2}
-          serial=""
-          availability={1}
-          type="tables"
-          isEdit
-        />
+      </CardActionsButton>
+      <Modal isOpen={isOpen} onRequestClose={() => toggleIsOpen()}>
+        <TableForm table={newTableData} close={toggleIsOpen} mode="new" />
       </Modal>
       <CardGridContainer>
         {data?.data.map((table: TableType) => (
-          <Table
-            key={table.id}
-            id={table.id}
-            serial={table.serial}
-            name={table.name}
-            availability={table.availability}
-            seats={table.seats}
-            type="tables"
-            created_at={table.created_at}
-          />
+          <Table key={table.id} table={table} />
         ))}
       </CardGridContainer>
     </>

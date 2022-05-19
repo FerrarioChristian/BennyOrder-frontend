@@ -8,10 +8,9 @@ import { CardInlineFlex } from "./Card.styles";
 export const CardActionsButton = styled.button`
   display: flex;
   color: white;
-  background-color: white;
+  background-color: transparent;
   color: ${(props) => props.color || "var(--primary)"};
   border: 2px solid ${(props) => props.color || "var(--primary)"};
-
   border-radius: 20px;
   justify-content: center;
   align-items: center;
@@ -34,7 +33,7 @@ export const CardActionsButton = styled.button`
     border: 2px solid ${(props) => props.color || "var(--primary)"};
 
     &:hover {
-      background-color: white;
+      background-color: transparent;
       color: ${(props) => props.color || "var(--primary)"};
       border: 2px solid ${(props) => props.color || "var(--primary)"};
     }
