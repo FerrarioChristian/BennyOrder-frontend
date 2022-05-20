@@ -19,8 +19,8 @@ interface Props {
 }
 
 function TableForm({ table, close, mode }: Props) {
-  const newSerial = useRef<HTMLInputElement>(null);
   const newName = useRef<HTMLInputElement>(null);
+  const newSerial = useRef<HTMLInputElement>(null);
   const newSeats = useRef<HTMLInputElement>(null);
   const [newAvailability, setNewAvailability] = useState(
     table.availability.toString()
