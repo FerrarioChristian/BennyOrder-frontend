@@ -50,6 +50,21 @@ const SideBarContainer = styled.nav`
   }
 `;
 
+export const Title = styled.h1`
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--primary);
+  cursor: default;
+`;
+
+export const HeaderLine = styled.hr`
+  border: none;
+  height: 2px;
+  background-color: var(--primary);
+  margin-bottom: 2rem;
+`;
+
 const AdminLayoutContainer = styled.div`
   display: flex;
   flex-direction: row;
