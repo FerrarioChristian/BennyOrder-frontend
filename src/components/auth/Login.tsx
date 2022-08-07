@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 import { CircularProgress } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -15,14 +15,14 @@ import {
 import useTitle from "../../hooks/useTitle";
 import useEventListener from "../../hooks/useEventListener";
 import submitOnEnter from "../../utils/events";
-import axiosInstance from "../../utils/axios";
 import FormInput from "./FormInput";
 import RememberMe from "./RememberMe";
 import useToggle from "../../hooks/useToggle";
+import { useLoginMutation } from "../../utils/apiCalls/auth";
 
 function Login() {
-  const [isFetching, setIsFetching] = useState(false);
   const [remember, toggleRemember] = useToggle(false);
+  const { mutate, isLoading } = useLoginMutation();
 
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
@@ -40,33 +40,27 @@ function Login() {
 
   const submitLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setIsFetching(true);
-    axiosInstance
-      .post(
-        "/auth/users",
-        {
-          email: email.current?.value,
-          password: password.current?.value,
-          remember,
+    mutate(
+      {
+        email: email.current!.value,
+        password: password.current!.value,
+        remember,
+      },
+      {
+        onSuccess: () => navigate(from, { replace: true }),
+        onError: (err: any) => {
+          if (err.response.status === 401) {
+            error.current!.innerHTML =
+              err.response.data.msg ?? "Errore sconosiuto.";
+            password.current!.value = "";
+            password.current!.focus();
+          } else if (err.response.status === 403) {
+            error.current!.innerHTML =
+              err.response.data.msg ?? "Errore sconosciuto.";
+          }
         },
-        { withCredentials: true }
-      )
-      .then(() => {
-        navigate(from, { replace: true });
-        setIsFetching(false);
-      })
-      .catch((err) => {
-        setIsFetching(false);
-        if (err.response.status === 401) {
-          error.current!.innerHTML =
-            err.response.data.msg ?? "Errore sconosiuto.";
-          password.current!.value = "";
-          password.current!.focus();
-        } else if (err.response.status === 403) {
-          error.current!.innerHTML =
-            err.response.data.msg ?? "Errore sconosciuto.";
-        }
-      });
+      }
+    );
   };
 
   return (
@@ -96,8 +90,8 @@ function Login() {
         </ErrorContainer>
         <RememberMe onClick={toggleRemember} />
 
-        <LoginRegisterButton ref={submit} type="submit" disabled={isFetching}>
-          {isFetching ? (
+        <LoginRegisterButton ref={submit} type="submit" disabled={isLoading}>
+          {isLoading ? (
             <CircularProgress
               style={{
                 color: "var(--secondary)",

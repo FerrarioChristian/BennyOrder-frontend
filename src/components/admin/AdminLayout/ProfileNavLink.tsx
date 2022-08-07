@@ -5,7 +5,7 @@ import Logout from "../../auth/Logout";
 
 interface Props {
   name: string;
-  description: string;
+  clubname: string;
   isOpen: boolean;
 }
 
@@ -75,7 +75,7 @@ const ProfileNav = styled.li`
   margin-top: auto;
 `;
 
-function ProfileNavLink({ name, description, isOpen }: Props) {
+function ProfileNavLink({ name, clubname, isOpen }: Props) {
   return (
     <ProfileNav>
       <ProfileInfoContainer isOpen={isOpen}>
@@ -84,7 +84,7 @@ function ProfileNavLink({ name, description, isOpen }: Props) {
         </StyledImgProfile>
         <div>
           <Name>{name}</Name>
-          <Description>{description}</Description>
+          <Description>{clubname}</Description>
         </div>
       </ProfileInfoContainer>
       <LogoutButton>
