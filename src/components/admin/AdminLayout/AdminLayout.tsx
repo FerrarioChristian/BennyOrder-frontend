@@ -5,9 +5,11 @@ import AdminNavLink from "./AdminNavLink";
 import LogoNavLink from "./LogoNavLink";
 import ProfileNavLink from "./ProfileNavLink";
 import adminNavLinks from "./adminNavLinks";
+import { useGetUserInfo } from "../../../utils/apiCalls/auth";
+import useTitle from "../../../hooks/useTitle";
 
 const MainContainer = styled.main`
-  padding: 60px 60px;
+  padding: 40px 60px;
   flex-grow: 1;
   background-color: var(--background);
   overflow-y: auto;
@@ -62,7 +64,7 @@ export const HeaderLine = styled.hr`
   border: none;
   height: 2px;
   background-color: var(--primary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 `;
 
 const AdminLayoutContainer = styled.div`
@@ -72,7 +74,13 @@ const AdminLayoutContainer = styled.div`
 `;
 
 function AdminLayout() {
+  const { data, isLoading } = useGetUserInfo();
+
+  useTitle(`${data?.data.clubname} - BennyOrder`);
+
   const [isOpen, setIsOpen] = useState(true);
+
+  if (isLoading) return <h2>PLoading...</h2>;
 
   return (
     <AdminLayoutContainer>
@@ -90,8 +98,8 @@ function AdminLayout() {
           ))}
           <ProfileNavLink
             isOpen={isOpen}
-            name="nome"
-            description="descrizione"
+            name={data?.data.username}
+            clubname={data?.data.clubname}
           />
         </SideBarUL>
       </SideBarContainer>
