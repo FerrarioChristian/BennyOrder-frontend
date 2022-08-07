@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../utils/axios";
+import { useLogoutMutation } from "../../utils/apiCalls/auth";
 
 interface Props {
   className?: string;
@@ -10,10 +10,10 @@ interface Props {
 function Logout({ className, children }: Props) {
   const navigate = useNavigate();
 
+  const { mutate } = useLogoutMutation();
+
   const logout = () => {
-    axiosInstance.delete("/auth/users", { withCredentials: true }).then(() => {
-      navigate("/");
-    });
+    mutate(undefined, { onSuccess: () => navigate("/") });
   };
 
   return (
