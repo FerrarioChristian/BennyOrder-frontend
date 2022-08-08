@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
+/* import { ReactQueryDevtools } from "react-query/devtools"; */
 import App from "./App";
 import GlobalStyles from "./GlobalStyles.style";
 
@@ -15,6 +16,7 @@ root.render(
     <GlobalStyles />
     <QueryClientProvider client={queryClient}>
       <App />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   </React.StrictMode>
 );
