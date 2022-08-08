@@ -9,13 +9,13 @@ interface Props {
 function RequireAuth({ redirectTo }: Props) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { /*  data, */ isLoading, isError } = useGetUserInfo();
+  const { isLoading, isSuccess } = useGetUserInfo();
 
   useEffect(() => {
-    if (isError) {
+    if (isSuccess) {
       navigate(redirectTo, { replace: true, state: { from: location } });
     }
-  }, [isError]);
+  }, [isSuccess]);
 
   return isLoading ? null : <Outlet />;
 }

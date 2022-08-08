@@ -54,7 +54,7 @@ function Login() {
               err.response.data.msg ?? "Errore sconosiuto.";
             password.current!.value = "";
             password.current!.focus();
-          } else if (err.response.status === 403) {
+          } else {
             error.current!.innerHTML =
               err.response.data.msg ?? "Errore sconosciuto.";
           }
