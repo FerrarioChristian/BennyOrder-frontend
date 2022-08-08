@@ -1,5 +1,6 @@
 import TableBarIcon from "@mui/icons-material/TableBar";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
@@ -19,6 +20,11 @@ const adminNavLinks = [
     route: "/admin/assign_tables",
     icon: <TableBarIcon />,
     label: "Gestione Tavoli",
+  },
+  {
+    route: "/admin/orders",
+    icon: <PendingActionsIcon />,
+    label: "Ordini",
   },
   {
     route: "/admin/analytics",
