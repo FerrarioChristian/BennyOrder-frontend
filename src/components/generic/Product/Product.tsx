@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import EuroIcon from "@mui/icons-material/Euro";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import { useState } from "react";
-import { OrderType, ProductType } from "../../../utils/types";
+import { NewOrderType, ProductType } from "../../../utils/types";
 import Availability from "../Card/Availability";
 import Card from "../Card/Card";
 import { CardInlineFlex } from "../Card/Card.styles";
@@ -12,7 +12,7 @@ import ProductForm from "./ProductForm";
 interface Props {
   product: ProductType;
   admin: boolean;
-  setOrders?: React.Dispatch<React.SetStateAction<OrderType[]>>;
+  setOrders?: React.Dispatch<React.SetStateAction<NewOrderType[]>>;
 }
 
 export default function Product({ product, admin, setOrders }: Props) {
@@ -21,13 +21,18 @@ export default function Product({ product, admin, setOrders }: Props) {
 
   const addToOrder = (e: React.MouseEvent) => {
     e.preventDefault();
-    setOrders?.((currOrder) => [...currOrder, { id: product.id, notes }]);
+    setOrders?.((currOrder) => [
+      ...currOrder,
+      { product_id: product.id, notes },
+    ]);
   };
 
   const removeFromOrder = (e: React.MouseEvent) => {
     e.preventDefault();
     setOrders?.((currOrder) => {
-      const index = currOrder.findIndex((prod) => prod.id === product.id);
+      const index = currOrder.findIndex(
+        (prod) => prod.product_id === product.id
+      );
       currOrder.splice(index, 1);
       return currOrder;
     });

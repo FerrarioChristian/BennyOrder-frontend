@@ -1,8 +1,8 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import Select from "react-select";
-
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useState } from "react";
 import { AvailabilityType } from "../../../utils/types";
 import { CardInlineFlex } from "./Card.styles";
 
@@ -34,38 +34,6 @@ export default () => (
 );
  */
 
-const selectCustomStyles = {
-  option: (provided: any, state: any) => ({
-    ...provided,
-    color: state.isSelected ? "yellow" : "black",
-    backgroundColor: state.isSelected ? "green" : "white",
-    maxWidth: "15rem",
-  }),
-  control: (provided: any) => ({
-    ...provided,
-    borderRadius: "20px",
-    maxWidth: "15rem",
-    minHeight: "1.5rem",
-    padding: "0",
-    marginBottom: "1rem",
-    border: "1px solid var(--text)",
-  }),
-  dropdownIndicator: (provided: any) => ({
-    ...provided,
-    padding: "2px",
-    color: "var(--text)",
-  }),
-  indicatorSeparator: (provided: any) => ({
-    ...provided,
-    backgroundColor: "var(--text)",
-  }),
-  menu: (provided: any) => ({
-    ...provided,
-    maxWidth: "15rem",
-    top: "2rem",
-  }),
-};
-
 function Availability({
   availability,
   hidden,
@@ -73,7 +41,17 @@ function Availability({
   isEdit,
   setNewAvailability,
 }: AvailabilityType) {
+  const [selected, setSelected] = useState(1);
+
   if (hidden) return null;
+
+  const handleSelected = (
+    event: React.MouseEvent<HTMLElement>,
+    newSelected: number
+  ) => {
+    setSelected(newSelected);
+    setNewAvailability?.(newSelected.toString());
+  };
 
   const tables = ["Occupato", "Disponibile", "Prenotato"];
   const products = ["Finito", "Disponibile"];
@@ -109,14 +87,18 @@ function Availability({
       i += 1;
     });
     return (
-      <Select
-        options={options}
-        styles={selectCustomStyles}
-        defaultValue={sesso !== undefined ? options[sesso] : options[1]}
-        onChange={(option) => {
-          setNewAvailability?.(option!.value.toString());
-        }}
-      />
+      <ToggleButtonGroup
+        value={selected}
+        exclusive
+        sx={{ marginBottom: "1rem;" }}
+        onChange={handleSelected}
+      >
+        {options.map((option) => (
+          <ToggleButton key={option.value} value={option.value}>
+            {option.label}
+          </ToggleButton>
+        ))}
+      </ToggleButtonGroup>
     );
   }
 
