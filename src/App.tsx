@@ -14,14 +14,20 @@ import Homepage from "./pages/Homepage";
 import NotFound from "./pages/NotFound";
 import AdminLayout from "./components/admin/AdminLayout/AdminLayout";
 import NewSession from "./components/customers/NewSession";
+import ManageOrders from "./components/admin/ManageOrders";
+import RequireNotAuth from "./components/auth/RequireNotAuth";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+
+        <Route element={<RequireNotAuth redirectTo="/admin/dashboard" />}>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+
         <Route path="/emailsent" element={<EmailSent />} />
         <Route
           path="/validateaccount/:confirmCode"
@@ -40,6 +46,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="products" element={<ManageProducts />} />
             <Route path="assign_tables" element={<ManageTables />} />
+            <Route path="orders" element={<ManageOrders />} />
           </Route>
         </Route>
 
