@@ -12,9 +12,8 @@ export interface ProductType extends NewProductType {
   hiddenEdit?: boolean;
 }
 
-export interface OrderType {
-  id: number;
-  notes: string;
+export interface ProductCountType extends ProductType {
+  count: number;
 }
 
 export interface CredentialsType {
@@ -59,3 +58,15 @@ export type TableType = {
 };
 
 export interface NewTableType extends Omit<TableType, "id"> {}
+
+export interface NewOrderType {
+  product_id: number;
+  notes: string;
+}
+
+export interface OrderType {
+  id: number;
+  notes: string;
+  product: ProductType;
+  isCompleted: number;
+}

@@ -12,6 +12,7 @@ ReactModal.defaultStyles = {
     margin: "auto",
     border: "none",
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center ",
     outline: "none",
