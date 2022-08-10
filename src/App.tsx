@@ -16,6 +16,7 @@ import AdminLayout from "./components/admin/AdminLayout/AdminLayout";
 import NewSession from "./components/customers/NewSession";
 import ManageOrders from "./components/admin/ManageOrders";
 import RequireNotAuth from "./components/auth/RequireNotAuth";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
@@ -40,8 +41,9 @@ function App() {
 
         <Route path="/o/:tirt" element={<NewSession />} />
         <Route path="/clubmenu" element={<ClubMenu />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
 
-        <Route element={<RequireAuth redirectTo="/login" />}>
+        <Route element={<RequireAuth redirectTo="/login" allowedRoles={[0]} />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="products" element={<ManageProducts />} />
