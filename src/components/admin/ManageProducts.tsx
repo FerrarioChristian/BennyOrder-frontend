@@ -16,7 +16,7 @@ function ManageProducts() {
 
   return (
     <>
-      <Title>Gestione Prodotti</Title>
+      <Title>Gestione Menu</Title>
       <HeaderLine />
       <Button color="var(--primary)" onClick={toggleIsOpen}>
         <AddIcon />
