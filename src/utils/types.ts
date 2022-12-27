@@ -69,4 +69,5 @@ export interface OrderType {
   notes: string;
   product: ProductType;
   isCompleted: number;
+  entries?: number;
 }

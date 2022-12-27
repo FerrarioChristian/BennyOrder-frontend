@@ -12,7 +12,7 @@ export const CardInput = styled.input`
 
 export const CardGridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(31rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   grid-gap: 1.5rem;
   margin-top: 1.5rem;
 `;
