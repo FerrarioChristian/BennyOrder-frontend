@@ -1,7 +1,7 @@
 image: ubuntu
 
 stages:
-  - pre-build
+  - build
 
 before_script:
   - apt-get update -qq
@@ -11,10 +11,10 @@ before_script:
   - mkdir -p ~/.ssh
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
-pre-build:
+build:
   variables:
     COMMIT_TITLE: $CI_COMMIT_TITLE
-  stage: clone-build-delploy-log
+  stage: build
   only:
     refs:
       - main
