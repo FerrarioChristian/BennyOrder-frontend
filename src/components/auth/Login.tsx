@@ -72,7 +72,7 @@ function Login() {
             type="text"
             label="Email"
             ref={email}
-            autocomplete="username"
+            autocomplete="email"
           />
           <FormInput
             placeholder="Password"
