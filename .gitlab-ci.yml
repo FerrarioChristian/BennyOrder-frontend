@@ -19,4 +19,4 @@ build:
     refs:
       - main
   script:
-    - ssh devel@bennyorder.com "if [ ! -d \"/tmp/frontend\" ]; then git clone git@gitlab.com:bennyorder/developing/frontend.git; fi; cd /tmp/frontend && rm -rf /tmp/frontend/build && git pull && yarn install && yarn build && cp -R /tmp/frontend/build/* /var/www/bennyorder && echo '[$(date)] $COMMIT_TITLE' >> /var/log/gitlab_deploy.log"
+    - ssh devel@bennyorder.com "cd /tmp && if [ ! -d \"/tmp/frontend\" ]; then git clone git@gitlab.com:bennyorder/developing/frontend.git; fi; cd /tmp/frontend && rm -rf /tmp/frontend/build && git pull && yarn install && yarn build && cp -R /tmp/frontend/build/* /var/www/bennyorder && echo '[$(date)] $COMMIT_TITLE' >> /var/log/gitlab_deploy.log"
