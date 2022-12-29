@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { useListOrders } from "../../utils/apiCalls/orders";
 import { OrderType } from "../../utils/types";
 import Card from "../generic/Card/Card";
@@ -13,33 +14,40 @@ interface TablesOrders {
 function ManageOrders() {
   const { data, isSuccess } = useListOrders();
 
-  function groupOrdersById(object: any) {
-    const groupedTables: any = [];
+  function groupOrders(tables: any) {
+    const result: any = [];
 
-    object.forEach((table: any) => {
-      const groupedOrders: any = {};
-      table.orders.forEach((order: any) => {
-        if (!groupedOrders[order.id]) {
-          groupedOrders[order.id] = {
-            entries: 1,
-            id: order.id,
-            notes: order.notes,
-            product: order.product,
-            is_completed: order.is_completed,
-          };
-        } else {
-          groupedOrders[order.id].entries += 1;
-        }
-      });
-
-      groupedTables.push({
+    // Iterate over the tables
+    for (const table of tables) {
+      const tableResult: any = {
         table_id: table.table_id,
         table_name: table.table_name,
-        orders: Object.values(groupedOrders),
-      });
-    });
+        orders: [],
+      };
 
-    return groupedTables;
+      // Iterate over the orders in the table
+      for (const order of table.orders) {
+        // Check if an order with the same product, notes, and is_completed already exists in the result orders array
+        const existingOrder = tableResult.orders.find(
+          (o: any) =>
+            o.product.id === order.product.id &&
+            o.notes === order.notes &&
+            o.is_completed === order.is_completed
+        );
+
+        // If it exists, increment the entries count
+        if (existingOrder) {
+          existingOrder.entries += 1;
+        } else {
+          // If it doesn't exist, add a new order with an entries count of 1
+          tableResult.orders.push({ ...order, entries: 1 });
+        }
+      }
+
+      result.push(tableResult);
+    }
+
+    return result;
   }
 
   if (isSuccess) {
@@ -48,7 +56,7 @@ function ManageOrders() {
         <Title>Gestione Ordini</Title>
         <HeaderLine />
         <CardGridContainer>
-          {groupOrdersById(data?.data).map((tableOrders: TablesOrders) => (
+          {groupOrders(data?.data).map((tableOrders: TablesOrders) => (
             <Card
               title={`Tavolo ${tableOrders.table_name}`}
               isEdit={false}
@@ -57,7 +65,7 @@ function ManageOrders() {
               {tableOrders.orders.map((order: OrderType) => (
                 <div key={order.id}>
                   <p>
-                    {order.entries} x {order.product}
+                    {order.entries} x {order.product.name}
                   </p>
                   <p>{order.notes}</p>
                 </div>
