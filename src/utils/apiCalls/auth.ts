@@ -42,5 +42,6 @@ const getUserInfo = () =>
 export const useGetUserInfo = () => {
   return useQuery("getUserInfo", getUserInfo, {
     retry: false,
+    refetchOnWindowFocus: false,
   });
 };
