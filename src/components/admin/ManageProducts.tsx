@@ -23,7 +23,6 @@ function ManageProducts() {
         Nuovo
       </Button>
       <Modal isOpen={isOpen} onRequestClose={() => toggleIsOpen()}>
-        <Title>Nuovo Prodotto</Title>
         <ProductForm product={newProductData} close={toggleIsOpen} mode="new" />
       </Modal>
       <CardGridContainer>
